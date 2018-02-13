@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /* Example of the controller for the individual scenes. For now, i attached it to the UI
  * element of the StartScene, but it could (should?) be a separate object. 
@@ -13,6 +14,9 @@ public class StartSceneController : MonoBehaviour {
 	// Variable to hold a reference to the animator controller and to the StateBehaviour
 	Animator anim;
 	StartStateBehaviour behaviour;
+	public Text Highscore;
+	public Text StartGame;
+	bool highscoreNext = true;
 	// Here we get the reference to the Animator component. It's inside the "SceneController" object
 	// in the PersistentScene, and it's tagged "GameController"
 	void Awake () {
@@ -31,7 +35,19 @@ public class StartSceneController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (InputHandle.Up || InputHandle.Down) {
+			if (highscoreNext) {
+				Highscore.color = Color.white;
+				StartGame.color = Color.cyan;
+			}
+			else {
+				Highscore.color = Color.cyan;
+				StartGame.color = Color.white;
+			}
+			highscoreNext = !highscoreNext;
+			int next = highscoreNext ? 0 : 1;
+			anim.SetInteger ("ChooseNextState", next);
+		}
 	}
 
 	public void Test() {
