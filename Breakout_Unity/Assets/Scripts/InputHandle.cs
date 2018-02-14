@@ -31,14 +31,14 @@ public static class InputHandle
 
 	public static bool Enter
 	{
-		get { return Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter); }
+		get { return Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter); }
 		private set { }
 	}
 
 
     public static bool Pause
     {
-        get { return Input.GetKey(KeyCode.Space); }
+        get { return Input.GetKeyDown(KeyCode.Space); }
         private set { }
     }
 }

@@ -10,48 +10,43 @@ using UnityEngine.UI;
  * the Animator Controller */
 
 
-public class StartSceneController : MonoBehaviour {
-	// Variable to hold a reference to the animator controller and to the StateBehaviour
-	Animator anim;
-	StartStateBehaviour behaviour;
-	public Text Highscore;
-	public Text StartGame;
-	bool highscoreNext = true;
-	// Here we get the reference to the Animator component. It's inside the "SceneController" object
-	// in the PersistentScene, and it's tagged "GameController"
-	void Awake () {
-		GameObject obj = GameObject.FindGameObjectWithTag ("GameController");
-		anim = obj.GetComponent<Animator> ();
-	}
+public class StartSceneController : MonoBehaviour
+{
+    // Variable to hold a reference to the animator controller and to the StateBehaviour
+    Animator anim;
+    public Text Highscore;
+    public Text StartGame;
 
-	void Start() {
-		// Tutorial says the behaviours should be acquired in Start, not Awake. We get the behaviour
-		// asset and it has the "controller" variable, which is of the type of this class. Assigning
-		// the variable to "this" allows the behaviour to hold a reference to this class, so we can
-		// call funtions from the class
-		behaviour = anim.GetBehaviour<StartStateBehaviour> ();
-		behaviour.controller = this;
-	}
+    public Text[] data;
+
+    CircularMenuHandler menu;
+
+    void Awake()
+    {
+        GameObject obj = GameObject.FindGameObjectWithTag("GameController");
+        anim = obj.GetComponent<Animator>();
+        menu = new CircularMenuHandler(data, Color.cyan, Color.white);
+    }
 	
 	// Update is called once per frame
-	void Update () {
-		if (InputHandle.Up || InputHandle.Down) {
-			if (highscoreNext) {
-				Highscore.color = Color.white;
-				StartGame.color = Color.cyan;
-			}
-			else {
-				Highscore.color = Color.cyan;
-				StartGame.color = Color.white;
-			}
-			highscoreNext = !highscoreNext;
-			int next = highscoreNext ? 0 : 1;
-			anim.SetInteger ("ChooseNextState", next);
-		}
-	}
+	void Update()
+    {
 
-	public void Test() {
-		// What it says on the tin :p 
-		Debug.Log ("This is called from Behaviour");
+        bool up = InputHandle.Up;
+        bool down = InputHandle.Down;
+
+        if (up)
+        {            
+            menu.HighlightPrev();
+        }
+        else if (down)
+        {
+            menu.HighlightNext();
+        }
+
+        if (up || down)
+        {
+            anim.SetInteger("ChooseNextState", menu.CurrentIndex());
+        }
 	}
 }
