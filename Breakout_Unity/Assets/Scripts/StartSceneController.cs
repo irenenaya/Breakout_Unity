@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using MenuHandlers;
+
 
 /* Example of the controller for the individual scenes. For now, i attached it to the UI
  * element of the StartScene, but it could (should?) be a separate object. 
@@ -25,7 +25,12 @@ public class StartSceneController : MonoBehaviour
     {
         GameObject obj = GameObject.FindGameObjectWithTag("GameController");
         anim = obj.GetComponent<Animator>();
-        menu = new CircularMenuHandler(data, Color.cyan, Color.white);
+
+        // callbacks that change color of menu items, pass to constructor
+        SetItemCB changeToCyan = x => { x.color = Color.cyan; };
+        SetItemCB changeToWhite = x => { x.color = Color.white; };
+
+        menu = new CircularMenuHandler(data, changeToCyan, changeToWhite);
     }
 	
 	// Update is called once per frame
