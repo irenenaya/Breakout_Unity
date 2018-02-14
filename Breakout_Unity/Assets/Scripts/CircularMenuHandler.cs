@@ -11,13 +11,10 @@ namespace MenuHandlers
     {
         public Text[] menuItems;
 
-
         CircularIterator current;
 
         SetItemCB SetSelected;
         SetItemCB SetDeselected;
-        
-
 
 
         public CircularMenuHandler(Text[] items, Color curr, Color others)
@@ -41,7 +38,7 @@ namespace MenuHandlers
         }
 
 
-        public CircularMenuHandler(Text[] items, SetItemCB others, SetItemCB curr)
+        public CircularMenuHandler(Text[] items, SetItemCB curr, SetItemCB others)
         {
             menuItems = items;
             current = new CircularIterator(menuItems);
