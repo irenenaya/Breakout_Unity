@@ -25,12 +25,14 @@ public class PaddleSelectScene : MonoBehaviour {
 				++index;
 			paddle.sprite = paddles [index];
 			rightArrow.color = index == paddles.Length - 1 ? Color.gray : Color.white;
+			leftArrow.color = Color.white;
 		}
 		else if (InputHandle.Left) {
 			if (index > 0)
 				--index;
 			paddle.sprite = paddles [index];
 			leftArrow.color = index == 0 ? Color.gray : Color.white;
+			rightArrow.color = Color.white;
 		}
 	}
 }
