@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/StartScene.unity
     guid: 49c9510519d374d5fad8a702da73c9c3
+  - enabled: 1
+    path: Assets/_Scenes/PaddleSelectScene.unity
+    guid: bfd562731c84e43518bf4f873c7dccea

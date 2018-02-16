@@ -16,6 +16,18 @@ public static class InputHandle
 		private set { }
 	}
 
+	public static bool Left
+	{
+		get { return Input.GetKeyDown (KeyCode.LeftArrow);}
+		private set { }
+	}
+
+	public static bool Right 
+	{
+		get { return Input.GetKeyDown (KeyCode.RightArrow);}
+		private set { }
+	}
+
 	public static bool Up 
 	{
 		get { return Input.GetKeyDown (KeyCode.UpArrow); }

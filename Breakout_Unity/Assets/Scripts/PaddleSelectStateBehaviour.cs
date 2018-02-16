@@ -2,19 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartStateBehaviour : GeneralStateBehaviour {
+public class PaddleSelectStateBehaviour : GeneralStateBehaviour {
 
-	// Reference to the StartSceneController class which belongs to the Scene. Initialized in
-	// the Start() function of the StartSceneController. 
-	//public StartSceneController controller;
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-
-	// Calling function from the StartSceneController from the StateBehaviour. 
-	// Works fine. This means that we can fairly easily pass things from the state machine to the
-	// individual scenes. 
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-
-
+		Debug.Log ("CONT: " + controller);
+		controller.LoadNextScene (SceneConstants.PADDLESELECT);
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
