@@ -371,6 +371,7 @@ MonoBehaviour:
   paddle: {fileID: 37290594}
   leftArrow: {fileID: 171675889}
   rightArrow: {fileID: 469779219}
+  testing: {fileID: 114369231161118834, guid: bef523a33dc2c4fe2b08432cc4ef2ecb, type: 2}
 --- !u!1 &469779217
 GameObject:
   m_ObjectHideFlags: 0
