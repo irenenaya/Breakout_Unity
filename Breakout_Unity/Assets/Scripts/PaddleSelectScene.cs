@@ -26,6 +26,7 @@ public class PaddleSelectScene : MonoBehaviour {
 			paddle.sprite = paddles [index];
 			rightArrow.color = index == paddles.Length - 1 ? Color.gray : Color.white;
 			leftArrow.color = Color.white;
+
 		}
 		else if (InputHandle.Left) {
 			if (index > 0)

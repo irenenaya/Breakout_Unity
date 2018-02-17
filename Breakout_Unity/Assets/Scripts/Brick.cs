@@ -25,7 +25,7 @@ public class Brick : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (index > 0) {
+		if (index >= 0) {
 			renderer.sprite = sprites [--index];
 		}
 		else {

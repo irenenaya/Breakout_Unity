@@ -4,6 +4,8 @@ using UnityEngine;
 
 	static public class SceneConstants {
 		public const string PADDLESELECT = "PaddleSelectScene";
+		public const string PLAY = "PlayScene";
+
 	}
 
 
