@@ -36,6 +36,16 @@ public class Ball : MonoBehaviour
         rigidbody.velocity = new Vector2(x, y);
     }
 
+    void SetVelocityMagnitude(float magnitude)
+    {
+        rigidbody.velocity = rigidbody.velocity.normalized * magnitude;
+    }
+
+    void MultiplyVelocity(float mult)
+    {
+        rigidbody.velocity *= mult;
+    }
+
 	// Update is called once per frame
 	void Update()
     {
