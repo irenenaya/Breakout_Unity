@@ -18,12 +18,20 @@ public class Ball : MonoBehaviour
         renderer = gameObject.GetComponent<SpriteRenderer>();
         renderer.sprite = sprites[Random.Range(0, sprites.Length)];
 	}
-	
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    // use to set velocity, for example initial velocity
     void SetVelocity(Vector2 vel)
     {
         rigidbody.velocity = vel;
     }
 
+    // add angle in degrees, changes velocity direction but keeps magnitude
     void AddAngle(float deltaAngle)
     {
         Vector2 velocity = rigidbody.velocity;
@@ -41,14 +49,9 @@ public class Ball : MonoBehaviour
         rigidbody.velocity = rigidbody.velocity.normalized * magnitude;
     }
 
+    // simple change in velocity, multiplies velocity by constant factor
     void MultiplyVelocity(float mult)
     {
         rigidbody.velocity *= mult;
     }
-
-	// Update is called once per frame
-	void Update()
-    {
-
-	}
 }
