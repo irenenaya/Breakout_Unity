@@ -7,11 +7,12 @@ public class Brick : MonoBehaviour {
 	public Sprite[] sprites;
 	SpriteRenderer renderer;
 	int index;
+	Animator anim;
 
 	// Use this for initialization
 	void Awake () {
 		renderer = GetComponent<SpriteRenderer> ();
-
+		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 	}
 
 	public void SetTier (int tier) {
@@ -29,6 +30,8 @@ public class Brick : MonoBehaviour {
 			renderer.sprite = sprites [--index];
 		}
 		else {
+			int temp = anim.GetInteger ("Bricks");
+			anim.SetInteger ("Bricks", --temp);
 			Destroy (gameObject);
 		}
 	}

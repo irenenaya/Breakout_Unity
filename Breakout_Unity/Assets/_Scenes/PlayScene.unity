@@ -138,6 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brick: {fileID: 114369231161118834, guid: bef523a33dc2c4fe2b08432cc4ef2ecb, type: 2}
+  paddle: {fileID: 114410389702862876, guid: 10387242b1cf047f2a3379f53ec3790f, type: 2}
+  ball: {fileID: 114794745150696330, guid: f9c5d6742402703428e433d82115f8ed, type: 2}
   screenWidth: 18
   screenHeight: 11
 --- !u!4 &52577495

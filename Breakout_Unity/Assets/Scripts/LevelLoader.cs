@@ -5,15 +5,19 @@ using UnityEngine;
 public class LevelLoader : MonoBehaviour
 {
     public Brick brick;
-
+	public Paddle paddle;
+	public Ball ball;
     public float screenWidth;
     public float screenHeight;
     
-
+	Animator stateMachine;
 	// Use this for initialization
 	void Start()
     {
+		stateMachine = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 		CreateMap ();
+		Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
+		Instantiate (ball, new Vector2 (0, -3.2f), Quaternion.identity);
 	}
     
 
@@ -38,7 +42,9 @@ public class LevelLoader : MonoBehaviour
         brickInstance.SetTier(tier);
     }
 
-    void CreateMap()
+    
+
+	void CreateMap()
     {
         Vector2 brickSize = ObjectSize(brick.gameObject);
 
@@ -59,7 +65,9 @@ public class LevelLoader : MonoBehaviour
         float offsetX = (screenWidth - gridSize.x) / 2.0f;
 		float offsetY = (screenHeight - gridSize.y) / 8.0f;
         
-        for (int i = 0; i < numRows; ++i)
+		int numBricks = 0;
+        
+		for (int i = 0; i < numRows; ++i)
         {
             for (int j = 0; j < numCols; ++j)
             {
@@ -68,10 +76,11 @@ public class LevelLoader : MonoBehaviour
 				float x = topLeft.x + offsetX + brickSize.x / 2 + brickSize.x * j;
 				float y = topLeft.y - offsetY - brickSize.y / 2 - brickSize.y * i;
                 CreateBrick(new Vector2(x, y), 1);
+				++numBricks;
             }
         }
 
-
+		stateMachine.SetInteger ("Bricks", numBricks);
 
     }
 }
