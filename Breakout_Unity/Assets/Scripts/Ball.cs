@@ -24,6 +24,18 @@ public class Ball : MonoBehaviour
         rigidbody.velocity = vel;
     }
 
+    void AddAngle(float deltaAngle)
+    {
+        Vector2 velocity = rigidbody.velocity;
+        float absVelocity = velocity.magnitude;
+
+        float angleRad = Mathf.Tan(velocity.y / velocity.x) + deltaAngle * Mathf.Deg2Rad;
+        float x = absVelocity * Mathf.Acos(angleRad);
+        float y = absVelocity * Mathf.Asin(angleRad);
+
+        rigidbody.velocity = new Vector2(x, y);
+    }
+
 	// Update is called once per frame
 	void Update()
     {
