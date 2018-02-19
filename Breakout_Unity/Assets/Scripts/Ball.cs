@@ -10,6 +10,9 @@ public class Ball : MonoBehaviour
     new CircleCollider2D collider;
     new SpriteRenderer renderer;
 
+	ServeStateBehaviour behaviour;
+	Animator anim;
+
     // Use this for initialization
     void Awake()
     {
@@ -17,6 +20,13 @@ public class Ball : MonoBehaviour
         collider = gameObject.GetComponent<CircleCollider2D>();
         renderer = gameObject.GetComponent<SpriteRenderer>();
         renderer.sprite = sprites[Random.Range(0, sprites.Length)];
+		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
+	}
+
+	void Start()
+	{
+		behaviour = anim.GetBehaviour<ServeStateBehaviour> ();
+		behaviour.ballController = this;
 	}
 
     // Update is called once per frame
@@ -26,21 +36,25 @@ public class Ball : MonoBehaviour
     }
 
     // use to set velocity, for example initial velocity
-    void SetVelocity(Vector2 vel)
+    public void SetVelocity(Vector2 vel)
     {
         rigidbody.velocity = vel;
     }
 
     // add angle in degrees, changes velocity direction but keeps magnitude
-    void AddAngle(float deltaAngle)
+    public void AddAngle(float deltaAngle)
     {
         Vector2 velocity = rigidbody.velocity;
         float absVelocity = velocity.magnitude;
 
-        float angleRad = Mathf.Tan(velocity.y / velocity.x) + deltaAngle * Mathf.Deg2Rad;
-        float x = absVelocity * Mathf.Acos(angleRad);
-        float y = absVelocity * Mathf.Asin(angleRad);
-
+		float angleRad = Mathf.Acos(velocity.x / absVelocity) - deltaAngle * Mathf.Deg2Rad;
+        float x = absVelocity * Mathf.Cos(angleRad);
+        float y = absVelocity * Mathf.Sin(angleRad);
+		Debug.Log ("ABSVEL: " + absVelocity);
+		Debug.Log ("ANGLERAD: " + angleRad);
+		Debug.Log ("ACOS: " + Mathf.Cos (angleRad));
+		Debug.Log ("ASIN: " + Mathf.Sin (angleRad));
+		Debug.Log ("X: " + x + "Y: " + y);
         rigidbody.velocity = new Vector2(x, y);
     }
 

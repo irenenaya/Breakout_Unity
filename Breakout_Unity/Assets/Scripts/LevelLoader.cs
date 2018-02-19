@@ -63,7 +63,7 @@ public class LevelLoader : MonoBehaviour
 		// Added offsetY. The divisor can be changed depending on how high up we want the bricks
 		// 8 looks ok but we can change it
         float offsetX = (screenWidth - gridSize.x) / 2.0f;
-		float offsetY = (screenHeight - gridSize.y) / 8.0f;
+		float offsetY = screenHeight / 9.0f;
         
 		int numBricks = 0;
         
@@ -81,6 +81,7 @@ public class LevelLoader : MonoBehaviour
         }
 
 		stateMachine.SetInteger ("Bricks", numBricks);
+		stateMachine.SetInteger ("Lives", GameParameters.lives);
 
     }
 }
