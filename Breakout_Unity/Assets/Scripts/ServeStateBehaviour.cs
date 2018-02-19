@@ -5,6 +5,7 @@ using UnityEngine;
 public class ServeStateBehaviour : GeneralStateBehaviour {
 
 	public Ball ballController;
+	public PlayUI playUIController;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
@@ -21,6 +22,7 @@ public class ServeStateBehaviour : GeneralStateBehaviour {
     {
 		ballController.SetVelocity(new Vector2(0, 3));
 		ballController.AddAngle(Random.Range(-80.0f, 80.0f));
+		playUIController.HideUI ();
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

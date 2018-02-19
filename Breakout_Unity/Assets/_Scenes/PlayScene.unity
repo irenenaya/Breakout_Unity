@@ -88,7 +88,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -110,8 +109,6 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-    debug:
-      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &52577493
 GameObject:
@@ -200,3 +197,25 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8f8dd1d21f2224f9789bf6dfd309adbf, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &624215180 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1717627024742158, guid: 8f8dd1d21f2224f9789bf6dfd309adbf,
+    type: 2}
+  m_PrefabInternal: {fileID: 624215179}
+--- !u!114 &624215181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 624215180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de8f1ec8816e04001a0b0fe69601e306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts: {fileID: 624215182}
+--- !u!1 &624215182 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1781052414683964, guid: 8f8dd1d21f2224f9789bf6dfd309adbf,
+    type: 2}
+  m_PrefabInternal: {fileID: 624215179}
