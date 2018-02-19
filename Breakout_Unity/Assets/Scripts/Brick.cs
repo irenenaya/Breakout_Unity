@@ -24,14 +24,18 @@ public class Brick : MonoBehaviour {
 	void Update () {
 		
 	}
-
+	// On Collision, change sprite or remove brick. Also, increase score. 
+	// TODO: Make the Score Great Again :p
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (index > 0) {
 			renderer.sprite = sprites [--index];
+			GameParameters.score += (index + 1) * 10;
+
 		}
 		else {
 			int temp = anim.GetInteger ("Bricks");
 			anim.SetInteger ("Bricks", --temp);
+			GameParameters.score += 200;
 			Destroy (gameObject);
 		}
 	}

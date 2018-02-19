@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayUI : MonoBehaviour {
 
 	public GameObject texts;
+	public Text score;
 
 	ServeStateBehaviour behaviour;
 	LoadLevelStateBehaviour loadBehaviour;
@@ -20,7 +22,7 @@ public class PlayUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		score.text = "Score: " + GameParameters.score;
 	}
 
 	public void HideUI() {

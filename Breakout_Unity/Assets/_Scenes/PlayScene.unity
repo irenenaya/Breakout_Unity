@@ -214,8 +214,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texts: {fileID: 624215182}
+  score: {fileID: 624215183}
 --- !u!1 &624215182 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1781052414683964, guid: 8f8dd1d21f2224f9789bf6dfd309adbf,
     type: 2}
   m_PrefabInternal: {fileID: 624215179}
+--- !u!114 &624215183 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114020452250831634, guid: 8f8dd1d21f2224f9789bf6dfd309adbf,
+    type: 2}
+  m_PrefabInternal: {fileID: 624215179}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
