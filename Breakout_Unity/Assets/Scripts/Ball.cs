@@ -20,7 +20,7 @@ public class Ball : MonoBehaviour
         collider = gameObject.GetComponent<CircleCollider2D>();
         renderer = gameObject.GetComponent<SpriteRenderer>();
         renderer.sprite = sprites[Random.Range(0, sprites.Length)];
-		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
+		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator>();
 	}
 
 	void Start()
@@ -47,14 +47,10 @@ public class Ball : MonoBehaviour
         Vector2 velocity = rigidbody.velocity;
         float absVelocity = velocity.magnitude;
 
-		float angleRad = Mathf.Acos(velocity.x / absVelocity) - deltaAngle * Mathf.Deg2Rad;
-        float x = absVelocity * Mathf.Cos(angleRad);
-        float y = absVelocity * Mathf.Sin(angleRad);
-		Debug.Log ("ABSVEL: " + absVelocity);
-		Debug.Log ("ANGLERAD: " + angleRad);
-		Debug.Log ("ACOS: " + Mathf.Cos (angleRad));
-		Debug.Log ("ASIN: " + Mathf.Sin (angleRad));
-		Debug.Log ("X: " + x + "Y: " + y);
+		float angleRad = Mathf.Acos(velocity.y / absVelocity) + deltaAngle * Mathf.Deg2Rad;
+        float x = absVelocity * Mathf.Sin(angleRad);
+        float y = absVelocity * Mathf.Cos(angleRad);
+
         rigidbody.velocity = new Vector2(x, y);
     }
 
