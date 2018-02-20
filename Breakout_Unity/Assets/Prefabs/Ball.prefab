@@ -97,6 +97,10 @@ MonoBehaviour:
   - {fileID: 21300008, guid: 156541c98a625064f8f6b3249f014bb0, type: 3}
   - {fileID: 21300010, guid: 156541c98a625064f8f6b3249f014bb0, type: 3}
   - {fileID: 21300012, guid: 156541c98a625064f8f6b3249f014bb0, type: 3}
+  speed: 8
+  axisDeadZone: 0.1
+  leftLimit: -7.5
+  rightLimit: 7.5
 --- !u!212 &212321786039411210
 SpriteRenderer:
   m_ObjectHideFlags: 1
