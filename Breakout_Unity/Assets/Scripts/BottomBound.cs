@@ -5,9 +5,11 @@ using UnityEngine;
 public class BottomBound : MonoBehaviour {
 
 	Animator anim;
+	AudioSource audio;
 	// Use this for initialization
 	void Start () {
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
+		audio = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -19,6 +21,7 @@ public class BottomBound : MonoBehaviour {
 	{
 		anim.SetTrigger ("LifeLost");
 		anim.SetInteger("Lives", --GameParameters.lives);
+		audio.Play ();
 	}
 
 }

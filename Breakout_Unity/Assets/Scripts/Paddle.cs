@@ -15,6 +15,7 @@ public class Paddle : MonoBehaviour {
 	}
 	Vector2 newPos;
 	Animator anim;
+	AudioSource audio;
 	ServeStateBehaviour behaviour;
 	SpriteRenderer rend;
 	BoxCollider2D coll;
@@ -25,6 +26,7 @@ public class Paddle : MonoBehaviour {
 		rend = GetComponent<SpriteRenderer> ();
 		rend.sprite = sprites [GameParameters.paddleIndex];
 		newPos.y = -4;
+		audio = GetComponent<AudioSource> ();
 	}
 
 	void Start() {
@@ -44,5 +46,9 @@ public class Paddle : MonoBehaviour {
             newPos.x = Mathf.Clamp(newPos.x, leftLimit, rightLimit);
             transform.SetPositionAndRotation(newPos, Quaternion.identity);
         }	
+	}
+
+	void OnCollisionEnter2D(Collision2D coll) {
+		audio.Play ();
 	}
 }

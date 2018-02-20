@@ -8,11 +8,13 @@ public class Brick : MonoBehaviour {
 	SpriteRenderer renderer;
 	int index;
 	Animator anim;
+	AudioSource audio;
 
 	// Use this for initialization
 	void Awake () {
 		renderer = GetComponent<SpriteRenderer> ();
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
+		audio = GetComponent<AudioSource> ();
 	}
 
 	public void SetTier (int tier) {
@@ -27,16 +29,27 @@ public class Brick : MonoBehaviour {
 	// On Collision, change sprite or remove brick. Also, increase score. 
 	// TODO: Make the Score Great Again :p
 	void OnCollisionEnter2D(Collision2D coll) {
+		
 		if (index > 0) {
 			renderer.sprite = sprites [--index];
 			GameParameters.score += (index + 1) * 10;
-
+			audio.Play ();
 		}
 		else {
 			int temp = anim.GetInteger ("Bricks");
 			anim.SetInteger ("Bricks", --temp);
 			GameParameters.score += 200;
-			Destroy (gameObject);
+			//Destroy (gameObject);
+			// TODO : Figure out a way to do this correctly!!!! 
+			renderer.enabled = false;
+			StartCoroutine("PlaySoundAndDestroy");
 		}
+
+	}
+
+	IEnumerator PlaySoundAndDestroy() {
+		audio.Play ();
+		yield return new WaitForSeconds (audio.clip.length);
+		Destroy (gameObject);
 	}
 }
