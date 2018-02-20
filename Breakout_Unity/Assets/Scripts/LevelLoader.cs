@@ -17,7 +17,7 @@ public class LevelLoader : MonoBehaviour
 		stateMachine = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 		CreateMap ();
 		Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
-		Instantiate (ball, new Vector2 (0, -3.2f), Quaternion.identity);
+		Instantiate (ball, new Vector2 (0, SceneConstants.BALLY), Quaternion.identity);
 	}
     
 

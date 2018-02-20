@@ -15,9 +15,10 @@ public class BottomBound : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter2D(Collision2D coll)
+	void OnTriggerEnter2D(Collider2D coll)
 	{
 		anim.SetTrigger ("LifeLost");
-		--GameParameters.lives;
+		anim.SetInteger("Lives", --GameParameters.lives);
 	}
+
 }

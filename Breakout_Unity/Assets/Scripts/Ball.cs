@@ -5,11 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public Sprite[] sprites;
-	public float speed;
-	Vector2 newPos;
-	public float axisDeadZone = 0.1f;
-	public float leftLimit;
-	public float rightLimit;
+
     new Rigidbody2D rigidbody;
     new CircleCollider2D collider;
     new SpriteRenderer renderer;
@@ -31,7 +27,7 @@ public class Ball : MonoBehaviour
 	{
 		behaviour = anim.GetBehaviour<ServeStateBehaviour> ();
 		behaviour.ballController = this;
-		newPos.y = transform.position.y;
+
 	}
 
     // Update is called once per frame
@@ -70,17 +66,12 @@ public class Ball : MonoBehaviour
         rigidbody.velocity *= mult;
     }
 
-	public void SetPosition()
+	public void SetPosition(Vector2 pos)
 	{
-		float move = InputHandle.Horizontal;
-
-		if (Mathf.Abs(move) > axisDeadZone)
-		{
-			float step = move * speed * Time.deltaTime;
-			newPos.x = transform.position.x + step;
-			newPos.x = Mathf.Clamp(newPos.x, leftLimit, rightLimit);
-			transform.SetPositionAndRotation(newPos, Quaternion.identity);
-		}	
+		Vector2 temp;
+		temp.x = pos.x;
+		temp.y = SceneConstants.BALLY;
+		transform.SetPositionAndRotation(temp, Quaternion.identity);
 	}
 
 }

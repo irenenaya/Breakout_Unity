@@ -9,15 +9,27 @@ public class Paddle : MonoBehaviour {
 	public float leftLimit;
 	public float rightLimit;
     public float axisDeadZone = 0.1f;
+	public Vector2 position {
+		get { return transform.position; }
+		private set { }
+	}
 	Vector2 newPos;
+	Animator anim;
+	ServeStateBehaviour behaviour;
 	SpriteRenderer rend;
 	BoxCollider2D coll;
 	// Use this for initialization
 	void Awake () {
+		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 		coll = GetComponent<BoxCollider2D> ();
 		rend = GetComponent<SpriteRenderer> ();
 		rend.sprite = sprites [GameParameters.paddleIndex];
 		newPos.y = -4;
+	}
+
+	void Start() {
+		behaviour = anim.GetBehaviour<ServeStateBehaviour> ();
+		behaviour.paddleController = this;
 	}
 	
 	// Update is called once per frame
