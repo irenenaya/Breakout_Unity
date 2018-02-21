@@ -44,7 +44,7 @@ public class Brick : MonoBehaviour {
 			GameParameters.score += 200;
             Destroy (gameObject);
 		}
-        fxSpawner.PlaceAt(new Vector2(transform.position.x, transform.position.y));
+        fxSpawner.RunEffectAt(new Vector2(transform.position.x, transform.position.y));
     }
 
 }

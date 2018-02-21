@@ -21,11 +21,10 @@ public class EffectSpawner : MonoBehaviour
 	}
 
 
-    public void PlaceAt(Vector2 pos)
+    public void RunEffectAt(Vector2 pos)
     {
         EffectWrapper effect = queue.Dequeue();
         effect.Play(pos);
-        // ret.SetActive(true);
         queue.Enqueue(effect);
     }
 
