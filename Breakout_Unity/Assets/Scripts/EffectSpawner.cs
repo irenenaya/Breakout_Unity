@@ -7,7 +7,7 @@ public class EffectSpawner : MonoBehaviour
     public int queueSize;
     public GameObject effectObject;
 
-    private Queue<GameObject> queue = new Queue<GameObject>();
+    private Queue<EffectWrapper> queue = new Queue<EffectWrapper>();
 	
     // Use this for initialization
 	void Start()
@@ -15,20 +15,39 @@ public class EffectSpawner : MonoBehaviour
 
         for (int i = 0; i < queueSize; ++i)
         {
-            GameObject obj = Instantiate(effectObject);
-            // obj.SetActive(false);
-            queue.Enqueue(obj);
-
+            EffectWrapper effect = new EffectWrapper(Instantiate(effectObject));
+            queue.Enqueue(effect);
         }
 	}
 
 
     public void PlaceAt(Vector2 pos)
     {
-        GameObject ret = queue.Dequeue();
-        ret.transform.position = pos;
-        ret.SetActive(true);
-        ret.GetComponent<AudioSource>().Play();
-        queue.Enqueue(ret);
+        EffectWrapper effect = queue.Dequeue();
+        effect.Play(pos);
+        // ret.SetActive(true);
+        queue.Enqueue(effect);
+    }
+
+
+    public class EffectWrapper
+    {
+        public GameObject gameObject;
+        private AudioSource sound;
+        private ParticleSystem particles;
+
+        public EffectWrapper(GameObject obj)
+        {
+            gameObject = obj;
+            sound = obj.GetComponent<AudioSource>();
+            particles = obj.GetComponent<ParticleSystem>();
+        }
+
+        public void Play(Vector2 pos)
+        {
+            gameObject.transform.SetPositionAndRotation(pos, Quaternion.identity);
+            sound.Play();
+            particles.Play();
+        }
     }
 }
