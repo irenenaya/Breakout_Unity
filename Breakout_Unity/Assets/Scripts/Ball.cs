@@ -27,13 +27,18 @@ public class Ball : MonoBehaviour
 	{
 		behaviour = anim.GetBehaviour<ServeStateBehaviour> ();
 		behaviour.ballController = this;
-
 	}
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Boundaries")) AddAngle(Random.Range(-5.0f, 5.0f));
+        else AddAngle(Random.Range(-10.0f, 10.0f));
     }
 
     // use to set velocity, for example initial velocity
@@ -47,11 +52,9 @@ public class Ball : MonoBehaviour
     {
         Vector2 velocity = rigidbody.velocity;
         float absVelocity = velocity.magnitude;
-
-		float angleRad = Mathf.Acos(velocity.y / absVelocity) + deltaAngle * Mathf.Deg2Rad;
+        float angleRad = (Vector2.SignedAngle(velocity, Vector2.up) + deltaAngle) * Mathf.Deg2Rad;
         float x = absVelocity * Mathf.Sin(angleRad);
         float y = absVelocity * Mathf.Cos(angleRad);
-
         rigidbody.velocity = new Vector2(x, y);
     }
 
@@ -73,5 +76,4 @@ public class Ball : MonoBehaviour
 		temp.y = SceneConstants.BALLY;
 		transform.SetPositionAndRotation(temp, Quaternion.identity);
 	}
-
 }
