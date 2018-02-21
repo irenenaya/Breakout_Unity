@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     new SpriteRenderer renderer;
 
 	ServeStateBehaviour behaviour;
+	VictoryStateBehaviour victBehaviour;
 	Animator anim;
 
     // Use this for initialization
@@ -27,6 +28,8 @@ public class Ball : MonoBehaviour
 	{
 		behaviour = anim.GetBehaviour<ServeStateBehaviour> ();
 		behaviour.ballController = this;
+		victBehaviour = anim.GetBehaviour<VictoryStateBehaviour> ();
+		victBehaviour.ballController = this;
 	}
 
     // Update is called once per frame

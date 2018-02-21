@@ -16,6 +16,7 @@ public class PlayUI : MonoBehaviour {
 	Animator anim;
 	// Use this for initialization
 	void Start () {
+		
 		level.text = "Level " + GameParameters.level;
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 		behaviour = anim.GetBehaviour<ServeStateBehaviour> ();

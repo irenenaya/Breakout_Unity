@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VictoryStateBehaviour : GeneralStateBehaviour {
-
+	public Ball ballController;
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	//override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+	// TODO : Implement UI
+	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+		ballController.SetVelocity (new Vector2 (0, 0));
+		ballController.SetPosition (new Vector2 (0, 0));
+		GameParameters.level++;
+	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
@@ -16,7 +19,8 @@ public class VictoryStateBehaviour : GeneralStateBehaviour {
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		GameParameters.level++;
+		
+
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
