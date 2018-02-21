@@ -53,4 +53,10 @@ public static class InputHandle
         get { return Input.GetKeyDown(KeyCode.Space); }
         private set { }
     }
+
+	public static bool Esc
+	{
+		get { return Input.GetKeyDown (KeyCode.Escape);}
+		private set { }
+	}
 }

@@ -39,6 +39,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.collider.CompareTag("Boundaries")) AddAngle(Random.Range(-5.0f, 5.0f));
         else AddAngle(Random.Range(-10.0f, 10.0f));
+
     }
 
     // use to set velocity, for example initial velocity
@@ -48,6 +49,8 @@ public class Ball : MonoBehaviour
     }
 
     // add angle in degrees, changes velocity direction but keeps magnitude
+	// TODO: Should maybe be clamped? If the angle is shallow enough, the ball will bounce in the
+	// same direction as it was coming. 
     public void AddAngle(float deltaAngle)
     {
         Vector2 velocity = rigidbody.velocity;

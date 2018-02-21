@@ -9,6 +9,7 @@ public class Brick : MonoBehaviour {
 	int index;
 	Animator anim;
     EffectSpawner fxSpawner;
+
     // AudioSource audio;
 
     // Use this for initialization
@@ -35,26 +36,15 @@ public class Brick : MonoBehaviour {
 		if (index > 0) {
 			renderer.sprite = sprites [--index];
 			GameParameters.score += (index + 1) * 10;
-            // audio.Play ();     
+                
         }
 		else {
 			int temp = anim.GetInteger ("Bricks");
 			anim.SetInteger ("Bricks", --temp);
 			GameParameters.score += 200;
             Destroy (gameObject);
-			// TODO : Figure out a way to do this correctly!!!! 
-			// renderer.enabled = false;
-			// StartCoroutine("PlaySoundAndDestroy");
 		}
-
         fxSpawner.PlaceAt(new Vector2(transform.position.x, transform.position.y));
     }
 
-    /*
-	IEnumerator PlaySoundAndDestroy() {
-		// audio.Play ();
-		// yield return new WaitForSeconds (audio.clip.length);
-		Destroy (gameObject);
-	}
-    */
 }

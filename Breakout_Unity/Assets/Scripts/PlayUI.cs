@@ -7,6 +7,7 @@ public class PlayUI : MonoBehaviour {
 
 	public GameObject texts;
 	public Text score;
+	public Text level;
 	public Image[] hearts;
 	public Sprite[] heartSprites;
 
@@ -15,6 +16,7 @@ public class PlayUI : MonoBehaviour {
 	Animator anim;
 	// Use this for initialization
 	void Start () {
+		level.text = "Level " + GameParameters.level;
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 		behaviour = anim.GetBehaviour<ServeStateBehaviour> ();
 		loadBehaviour = anim.GetBehaviour<LoadLevelStateBehaviour> ();

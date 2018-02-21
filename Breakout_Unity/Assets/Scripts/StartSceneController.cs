@@ -31,6 +31,7 @@ public class StartSceneController : MonoBehaviour
         SetItemCB changeToWhite = x => { x.color = Color.white; };
 
         menu = new CircularMenuHandler(data, changeToCyan, changeToWhite);
+		anim.SetInteger("ChooseNextState", menu.CurrentIndex());
     }
 	
 	// Update is called once per frame

@@ -8,18 +8,23 @@ public class SceneController : MonoBehaviour {
 	GeneralStateBehaviour[] behaviour;
 
 	IEnumerator Start () {
+		
 		anim = GetComponent<Animator> ();
 	//	behaviour = anim.GetBehaviour<GeneralStateBehaviour> ();
 		behaviour = anim.GetBehaviours<GeneralStateBehaviour> ();
 		for (int i = 0 ; i < behaviour.Length; ++i)
 			behaviour[i].controller = this;
 		yield return StartCoroutine (LoadSceneAndSetActive ("StartScene"));
+
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (InputHandle.Enter) {
 			anim.SetTrigger ("EnterPressed");
+		}
+		if (InputHandle.Esc) {
+			anim.SetTrigger ("EscPressed");
 		}
 	}
 
@@ -35,10 +40,22 @@ public class SceneController : MonoBehaviour {
 		yield return StartCoroutine (LoadSceneAndSetActive (sceneName));
 	}
 
+	private IEnumerator UnloadOnly(string sceneName) {
+		yield return SceneManager.UnloadSceneAsync (sceneName);
+	}
+
 	public void LoadNextScene(string scene) {
-		// TODO : Uncomment this line when we have more scenes
-		// TODO : Key/value pairs matching names of states and scenes
 		StartCoroutine (UnloadAndLoadScene (scene));
+
+	}
+
+	public void UnloadScene(string scene) {
+		StartCoroutine (UnloadOnly (scene));
+	}
+
+	public void activateObject(string obj, bool active) {
+		GameObject temp = GameObject.FindGameObjectWithTag (obj);
+		temp.transform.GetChild (0).gameObject.SetActive (active);
 
 	}
 }
