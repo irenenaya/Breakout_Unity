@@ -16,9 +16,8 @@ public class StartStateBehaviour : GeneralStateBehaviour {
     {
         // TODO figure out where to put this, is it okay here?
         // initializing global game state before the start
-        GameParameters.lives = 3;
-        animator.SetBool("LifeLost", false);
-        animator.SetInteger("Score", 0);
+        animator.SetInteger("Lives", 3);
+		GameParameters.score = 0;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

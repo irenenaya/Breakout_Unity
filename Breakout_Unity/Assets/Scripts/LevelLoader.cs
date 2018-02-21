@@ -81,7 +81,6 @@ public class LevelLoader : MonoBehaviour
         }
 
 		stateMachine.SetInteger ("Bricks", numBricks);
-		stateMachine.SetInteger ("Lives", GameParameters.lives);
 
     }
 }

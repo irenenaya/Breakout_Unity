@@ -26,7 +26,7 @@ public class PlayUI : MonoBehaviour {
 	void Update () {
 		score.text = "Score: " + GameParameters.score;
 		for (int i = 0; i < 3; ++i) {
-			if (i < GameParameters.lives)
+			if (i < anim.GetInteger("Lives"))
 				hearts [i].sprite = heartSprites [0];
 			else
 				hearts [i].sprite = heartSprites [1];

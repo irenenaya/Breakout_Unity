@@ -20,7 +20,7 @@ public class BottomBound : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D coll)
 	{
 		anim.SetTrigger ("LifeLost");
-		anim.SetInteger("Lives", --GameParameters.lives);
+		anim.SetInteger("Lives", anim.GetInteger("Lives") - 1);
 		audio.Play ();
 	}
 

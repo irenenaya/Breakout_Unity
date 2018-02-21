@@ -10,6 +10,6 @@ static public class SceneConstants {
 
 static public class GameParameters {
 	public static int paddleIndex = 0;
-	public static int lives = 3;
+	//public static int lives = 3;
 	public static int score = 0;
 }
