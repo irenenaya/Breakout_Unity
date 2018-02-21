@@ -27,7 +27,7 @@ public class EffectSpawner : MonoBehaviour
     {
         GameObject ret = queue.Dequeue();
         ret.transform.position = pos;
-        // ret.SetActive(true);
+        ret.SetActive(true);
         ret.GetComponent<AudioSource>().Play();
         queue.Enqueue(ret);
     }
