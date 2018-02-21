@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ServeStateBehaviour : GeneralStateBehaviour {
 
+    public float speed = 3.0f;
+    public float halfAngle = 80.0f;
+
 	public Ball ballController;
 	public PlayUI playUIController;
 	public Paddle paddleController;
@@ -22,8 +25,8 @@ public class ServeStateBehaviour : GeneralStateBehaviour {
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-		ballController.SetVelocity(new Vector2(0, 3));
-		ballController.AddAngle(Random.Range(-80.0f, 80.0f));
+		ballController.SetVelocity(new Vector2(0, speed));
+		ballController.AddAngle(Random.Range(-halfAngle, halfAngle));
 		playUIController.HideUI ();
 
 	}

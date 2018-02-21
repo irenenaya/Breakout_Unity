@@ -81,7 +81,7 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 244163863011914814}
   m_UserColorIndex: 0
-  m_Mute: 0
+  m_Mute: 1
   m_Solo: 0
   m_BypassEffects: 0
 --- !u!243 &243645252928920114
@@ -89,7 +89,7 @@ AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Effects
+  m_Name: Sounds
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: e9e6f72f7d1a942fc811657d88894786
   m_Children: []
