@@ -21,10 +21,11 @@ public class EffectSpawner : MonoBehaviour
 	}
 
 
-    public void RunEffectAt(Vector2 pos)
+	public void RunEffectAt(Vector2 pos, Color col = default(Color))
     {
         EffectWrapper effect = queue.Dequeue();
-        effect.Play(pos);
+        effect.Play(pos, col);
+		Debug.Log ("COLOR: " + col);
         queue.Enqueue(effect);
     }
 
@@ -34,18 +35,21 @@ public class EffectSpawner : MonoBehaviour
         public GameObject gameObject;
         private AudioSource sound;
         private ParticleSystem particles;
+		private ParticleSystem.MainModule _main;
 
         public EffectWrapper(GameObject obj)
         {
             gameObject = obj;
             sound = obj.GetComponent<AudioSource>();
             particles = obj.GetComponent<ParticleSystem>();
+			_main = particles.main;
         }
 
-        public void Play(Vector2 pos)
+		public void Play(Vector2 pos, Color col = default(Color))
         {
             gameObject.transform.SetPositionAndRotation(pos, Quaternion.identity);
             sound.Play();
+			_main.startColor = col;
             particles.Play();
         }
     }

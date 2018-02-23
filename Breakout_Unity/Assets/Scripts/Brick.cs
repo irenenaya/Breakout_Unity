@@ -9,6 +9,7 @@ public class Brick : MonoBehaviour {
 	int index;
 	Animator anim;
     EffectSpawner fxSpawner;
+	Color[] particleColors = { Color.blue, Color.green, Color.red, Color.magenta, Color.yellow };
 
     // AudioSource audio;
 
@@ -32,11 +33,10 @@ public class Brick : MonoBehaviour {
 	// On Collision, change sprite or remove brick. Also, increase score. 
 	// TODO: Make the Score Great Again :p
 	void OnCollisionEnter2D(Collision2D coll) {
-		
-		if (index > 0) {
+		int ind = index;
+		if (index > 0) {			
 			renderer.sprite = sprites [--index];
-			GameParameters.score += (index + 1) * 10;
-                
+			GameParameters.score += (index + 1) * 10;                
         }
 		else {
 			int temp = anim.GetInteger ("Bricks");
@@ -44,7 +44,8 @@ public class Brick : MonoBehaviour {
 			GameParameters.score += 200;
             Destroy (gameObject);
 		}
-        fxSpawner.RunEffectAt(new Vector2(transform.position.x, transform.position.y));
+        fxSpawner.RunEffectAt(new Vector2(transform.position.x, transform.position.y), 
+			particleColors[ind % 5]);		
     }
 
 }
