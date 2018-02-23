@@ -19,30 +19,31 @@ public class HighScoreHandler : MonoBehaviour
 	// Use this for initialization
 	void Start()
     {
-        LoadData(localPath, fileName);
-        DisplayData = priorityQueue.Peek(10);
+        LoadData();
+        int displayAmount = priorityQueue.Size < 10 ? priorityQueue.Size : 10;
+        DisplayData = priorityQueue.Peek(displayAmount);
     }
 
 
     /**
-     * Loads data from path/filename into priorityQueue
+     * Loads data from localPath/fileName into priorityQueue
      * Assumes single word followed by a single integer on each line of the file
      */
-    void LoadData(string path, string filename)
+    void LoadData()
     {
-        if (!Directory.Exists(path))
+        if (!Directory.Exists(localPath))
         {
-            Directory.CreateDirectory(path);
-            return; // if we're here the directory didn't exist so the file certainly won't
+            // if we're here the directory didn't exist so the file certainly won't
+            return; 
         }
         
-        if (!File.Exists(path + '/' + filename))
+        if (!File.Exists(localPath + '/' + fileName))
         {
             return;
         }
 
         // read the file into a string array
-        string[] lines = System.IO.File.ReadAllLines(path + '/' + filename);
+        string[] lines = System.IO.File.ReadAllLines(localPath + '/' + fileName);
 
         // fill priority queue with scoreboard entries from each line of the file
         foreach (string line in lines)
@@ -50,6 +51,39 @@ public class HighScoreHandler : MonoBehaviour
             string[] nameScore = line.Split();
             priorityQueue.Push(new ScoreboardEntry(nameScore[0], int.Parse(nameScore[1])));
         }   
+    }
+
+
+    void SaveData()
+    {
+        if (!Directory.Exists(localPath))
+        {
+            Directory.CreateDirectory(localPath);
+        }
+
+        if (File.Exists(localPath + '/' + fileName))
+        {
+            File.Delete(localPath + '/' + fileName);
+        }
+
+        File.Create(localPath + '/' + fileName);
+
+        // TODO perhaps use PopAll instead?
+        ScoreboardEntry[] scores = priorityQueue.PeekAll();
+        string[] data = new string[scores.Length];
+
+        for (int i = 0; i < scores.Length; ++i)
+        {
+            data[i] = scores[i].name + ' ' + scores[i].score;
+        }
+
+        File.WriteAllLines(localPath + '/' + fileName, data);
+    }
+
+
+    void AddScore(string name, int score)
+    {
+        priorityQueue.Push(new ScoreboardEntry(name, score));
     }
 
 
