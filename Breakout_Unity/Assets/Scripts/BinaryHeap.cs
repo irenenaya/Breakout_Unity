@@ -21,13 +21,13 @@ namespace DataStructures
 {
     public delegate int Compare(IComparable x, IComparable y);
 
-    public class BinaryHeap<T> where T:IComparable
+    public class BinaryHeap<T> where T : IComparable
     {
         Compare comp;   // comparison function, pass delegate to constructor to use
         List<T> data = new List<T>();
 
         public int Size { get { return data.Count; } private set { } }
-                
+
 
         public BinaryHeap() { comp = (x, y) => { return x.CompareTo(y); }; }
 
@@ -59,6 +59,12 @@ namespace DataStructures
         }
 
 
+        public void Push(T[] xs)
+        {
+            foreach (T x in xs) Push(x);
+        }
+
+
         /**
          * removes and returns the top element from the heap, reordering to maintain consistency
          */
@@ -87,6 +93,24 @@ namespace DataStructures
             return ret;
         }
 
+
+        public T[] Pop(int n)
+        {
+            T[] ret = new T[n];
+            for (int i = 0; i < n; ++i)
+            {
+                ret[i] = Pop();
+            }
+            return ret;
+        }
+
+
+        public T[] PopAll()
+        {
+            return Pop(Size);
+        }
+
+
         /**
          * get top element without removing it
          */
@@ -98,9 +122,42 @@ namespace DataStructures
 
 
         /**
+         * gets n elements without removing them (puts the array back before returning)
+         */
+        public T[] Peek(int n)
+        {
+            T[] ret = new T[n];
+            for (int i = 0; i < n; ++i)
+            {
+                ret[i] = Pop();
+            }
+
+            Push(ret);
+            return ret;
+        }
+
+
+        /**
+         * returns the contents as array without popping (puts array back before returning).
+         */
+        public T[] PeekAll()
+        {
+            int n = Size;
+            T[] ret = new T[n];
+            for (int i = 0; i < n; ++i)
+            {
+                ret[i] = Pop();
+            }
+            Push(ret);
+
+            return ret;
+        }
+
+
+        /**
          * -------- INTERNAL HELPER FUNCTIONS ---------
          */
-         
+
         int ParentIndex(int i)
         {
             return (i + 1) / 2 - 1;
