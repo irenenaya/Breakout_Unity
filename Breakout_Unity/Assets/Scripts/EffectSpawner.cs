@@ -25,7 +25,7 @@ public class EffectSpawner : MonoBehaviour
     {
         EffectWrapper effect = queue.Dequeue();
         effect.Play(pos, col);
-		Debug.Log ("COLOR: " + col);
+
         queue.Enqueue(effect);
     }
 

@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class VictoryStateBehaviour : GeneralStateBehaviour {
 	public Ball ballController;
+	public PlayUI playUIController;
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	// TODO : Implement UI
+
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+		playUIController.showUI ();
+		playUIController.setVictoryText ();
+
 		ballController.SetVelocity (new Vector2 (0, 0));
 		ballController.SetPosition (new Vector2 (0, 0));
 		GameParameters.level++;

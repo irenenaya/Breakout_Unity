@@ -13,6 +13,7 @@ public class PlayUI : MonoBehaviour {
 
 	ServeStateBehaviour behaviour;
 	LoadLevelStateBehaviour loadBehaviour;
+	VictoryStateBehaviour victoryBehaviour;
 	Animator anim;
 	// Use this for initialization
 	void Start () {
@@ -21,8 +22,10 @@ public class PlayUI : MonoBehaviour {
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 		behaviour = anim.GetBehaviour<ServeStateBehaviour> ();
 		loadBehaviour = anim.GetBehaviour<LoadLevelStateBehaviour> ();
+		victoryBehaviour = anim.GetBehaviour<VictoryStateBehaviour> ();
 		behaviour.playUIController = this;
 		loadBehaviour.playUIController = this;
+		victoryBehaviour.playUIController = this;
 	}
 	
 	// Update is called once per frame
@@ -42,5 +45,9 @@ public class PlayUI : MonoBehaviour {
 
 	public void showUI() {
 		texts.SetActive (true);
+	}
+
+	public void setVictoryText() {
+		level.text = "Level " + GameParameters.level + " Completed!";
 	}
 }

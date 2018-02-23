@@ -48,8 +48,9 @@ public class LevelLoader : MonoBehaviour
     {
         Vector2 brickSize = ObjectSize(brick.gameObject);
 
-        int numRows = Random.Range(1, 6);
+		int numRows = Random.Range(1, Mathf.Min(GameParameters.level + 1,  6));
         int numCols = Random.Range(7, 14);
+
         numCols = numCols % 2 == 0 ? numCols + 1 : numCols;
 
         // find the size of the grid
@@ -69,13 +70,15 @@ public class LevelLoader : MonoBehaviour
         
 		for (int i = 0; i < numRows; ++i)
         {
-            for (int j = 0; j < numCols; ++j)
+			int skip = Random.Range (1, 3);
+			int brickColors = Random.Range (0, 4);
+            for (int j = 0; j < numCols; j = j + skip)
             {
 				// added topLeft.x and topLeft.y to the equation. 
 				// subtracted for the Y because each brick is at a lower y 
 				float x = topLeft.x + offsetX + brickSize.x / 2 + brickSize.x * j;
 				float y = topLeft.y - offsetY - brickSize.y / 2 - brickSize.y * i;
-                CreateBrick(new Vector2(x, y), 1);
+				CreateBrick(new Vector2(x, y), brickColors * GameParameters.level + (i * (skip %2)));
 				++numBricks;
             }
         }
