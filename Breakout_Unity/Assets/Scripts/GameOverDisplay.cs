@@ -10,7 +10,7 @@ public class GameOverDisplay : MonoBehaviour {
 		
 
 	}
-
+	// Can't use Start because the object exists always, gets activated and deactivated. 
 	void OnEnable() {
 		text = GetComponent<Text> ();
 		text.text = "Final Score: " + GameParameters.score;

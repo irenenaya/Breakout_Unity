@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class EnterHighscoreStateBehaviour : GeneralStateBehaviour {
-
+	// reference to the display UI
 	public EnterInitialsDisplay display;
 	HighscoreStateBehaviour behaviour;
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -18,6 +18,10 @@ public class EnterHighscoreStateBehaviour : GeneralStateBehaviour {
 	//}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+	/* It gets called when the user presses Enter after having entered their initials.
+	 * Here we retrieve the initials from the display, and we get the score and add the score to the 
+	 * handler
+	 */
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		
 		controller.activateObject ("EnterHighscore", false);
@@ -25,7 +29,7 @@ public class EnterHighscoreStateBehaviour : GeneralStateBehaviour {
 		string name = initials [0].text + initials [1].text + initials [2].text; 
 		HighScoreHandler handler = controller.GetComponent<HighScoreHandler> ();
 		handler.AddScore (name, GameParameters.score);
-		Debug.Log ("DISPLAYDATA IN BEHAVIOUR: " + handler.DisplayData.Length);
+		// get a reference to the next behaviour. Explained in HighscoreStateBehaviour
 		behaviour = animator.GetBehaviour<HighscoreStateBehaviour> ();
 		behaviour.showHighscores ();
 	}
