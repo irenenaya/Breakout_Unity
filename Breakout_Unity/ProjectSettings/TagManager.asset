@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Boundaries
   - Highscores
+  - GameOver
   layers:
   - Default
   - TransparentFX
