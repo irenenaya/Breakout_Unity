@@ -88,7 +88,7 @@ public class HighScoreHandler : MonoBehaviour
     {
         priorityQueue.Push(new ScoreboardEntry(name, score));
         int displayAmount = priorityQueue.Size < 10 ? priorityQueue.Size : 10;
-        if (displayAmount >= 10 && score > DisplayData[9].score)
+        if (priorityQueue.Size >= 10 && score > DisplayData[9].score)
         {
             DisplayData = priorityQueue.Peek(displayAmount);
         }
