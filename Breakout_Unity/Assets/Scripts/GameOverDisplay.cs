@@ -4,12 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameOverDisplay : MonoBehaviour {
-
+	Text text;
 	// Use this for initialization
 	void Start () {
-		Text text = GetComponent<Text> ();
+		
+
+	}
+
+	void OnEnable() {
+		text = GetComponent<Text> ();
 		text.text = "Final Score: " + GameParameters.score;
 	}
+
 	
 	// Update is called once per frame
 	void Update () {

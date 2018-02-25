@@ -1,19 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+public class EnterHighscoreStateBehaviour : GeneralStateBehaviour {
 
-public class HighscoreStateBehaviour : GeneralStateBehaviour {
-
+	public EnterInitialsDisplay display;
+	HighscoreStateBehaviour behaviour;
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		controller.UnloadScene (SceneConstants.START);
-		//controller.activateObject ("Highscores", true);
-	}
-
-	public void showHighscores() 
-	{
-		controller.activateObject("Highscores", true);
+		controller.activateObject ("EnterHighscore", true);
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,8 +19,15 @@ public class HighscoreStateBehaviour : GeneralStateBehaviour {
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		controller.activateObject ("Highscores", false);
-		controller.LoadNextScene (SceneConstants.START);
+		
+		controller.activateObject ("EnterHighscore", false);
+		Text[] initials = display.getInitials ();
+		string name = initials [0].text + initials [1].text + initials [2].text; 
+		HighScoreHandler handler = controller.GetComponent<HighScoreHandler> ();
+		handler.AddScore (name, GameParameters.score);
+		Debug.Log ("DISPLAYDATA IN BEHAVIOUR: " + handler.DisplayData.Length);
+		behaviour = animator.GetBehaviour<HighscoreStateBehaviour> ();
+		behaviour.showHighscores ();
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
