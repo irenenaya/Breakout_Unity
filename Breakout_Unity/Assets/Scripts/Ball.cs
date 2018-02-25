@@ -40,8 +40,8 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Boundaries")) AddAngle(Random.Range(-5.0f, 5.0f));
-        else AddAngle(Random.Range(-10.0f, 10.0f));
+        if (collision.collider.CompareTag("Boundaries")) AddAngleConserveQuadrant(Random.Range(-5.0f, 5.0f));
+        else AddAngleConserveQuadrant(Random.Range(-10.0f, 10.0f));
 
     }
 
@@ -61,6 +61,23 @@ public class Ball : MonoBehaviour
         float angleRad = (Vector2.SignedAngle(velocity, Vector2.up) + deltaAngle) * Mathf.Deg2Rad;
         float x = absVelocity * Mathf.Sin(angleRad);
         float y = absVelocity * Mathf.Cos(angleRad);
+        rigidbody.velocity = new Vector2(x, y);
+    }
+
+    // add angle in degrees, changes velocity direction but keeps magnitude allowing the ball
+    // to travel in the same direction
+    public void AddAngleConserveQuadrant(float deltaAngle)
+    {
+        Vector2 velocity = rigidbody.velocity;
+        float absVelocity = velocity.magnitude;      
+        float angleRad = (Vector2.SignedAngle(velocity, Vector2.up) + deltaAngle) * Mathf.Deg2Rad;
+        float x = absVelocity * Mathf.Sin(angleRad);
+        float y = absVelocity * Mathf.Cos(angleRad);
+
+        // conserve quadrant
+        x = x > 0.0f == velocity.x > 0.0f ? x : -x;
+        y = y > 0.0f == velocity.y > 0.0f ? y : -y;
+
         rigidbody.velocity = new Vector2(x, y);
     }
 
