@@ -10,7 +10,7 @@ public class SceneController : MonoBehaviour {
 	IEnumerator Start () {
 		
 		anim = GetComponent<Animator> ();
-	//	behaviour = anim.GetBehaviour<GeneralStateBehaviour> ();
+	
 		behaviour = anim.GetBehaviours<GeneralStateBehaviour> ();
 		for (int i = 0 ; i < behaviour.Length; ++i)
 			behaviour[i].controller = this;
