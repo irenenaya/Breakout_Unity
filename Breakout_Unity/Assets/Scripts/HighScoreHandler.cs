@@ -29,7 +29,7 @@ public class HighScoreHandler : MonoBehaviour
      * Loads data from localPath/fileName into priorityQueue
      * Assumes single word followed by a single integer on each line of the file
      */
-    void LoadData()
+    public void LoadData()
     {
         if (!Directory.Exists(localPath))
         {
@@ -50,23 +50,26 @@ public class HighScoreHandler : MonoBehaviour
         {
             string[] nameScore = line.Split();
             priorityQueue.Push(new ScoreboardEntry(nameScore[0], int.Parse(nameScore[1])));
-        }   
+        }
+
+
     }
 
 
-    void SaveData()
+    public void SaveData()
     {
         if (!Directory.Exists(localPath))
         {
             Directory.CreateDirectory(localPath);
         }
 
+        /*
         if (File.Exists(localPath + '/' + fileName))
         {
             File.Delete(localPath + '/' + fileName);
         }
-
-        File.Create(localPath + '/' + fileName);
+        */
+        // File.Create(localPath + '/' + fileName);
 
         // TODO perhaps use PopAll instead?
         ScoreboardEntry[] scores = priorityQueue.PeekAll();
@@ -81,7 +84,7 @@ public class HighScoreHandler : MonoBehaviour
     }
 
 
-    void AddScore(string name, int score)
+    public void AddScore(string name, int score)
     {
         priorityQueue.Push(new ScoreboardEntry(name, score));
     }
