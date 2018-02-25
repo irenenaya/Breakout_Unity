@@ -46,8 +46,8 @@ public class Ball : MonoBehaviour
         // We need actual direction of paddle, InputHandle.Horizontal shows movement even when paddle stuck at boundary
         else if (collision.collider.CompareTag("Player"))
         {
-            Debug.Log("paddle velocity: " + InputHandle.Horizontal);
-            AddAngleConserveQuadrant(20.0f * Mathf.Clamp(InputHandle.Horizontal, -0.5f, 0.5f));
+            // TODO get paddle velocity, not input
+            AddAngleConserveY(20.0f * Mathf.Clamp(InputHandle.Horizontal, -0.5f, 0.5f));
         }
         else AddAngleConserveQuadrant(Random.Range(-10.0f, 10.0f));
 
@@ -88,6 +88,19 @@ public class Ball : MonoBehaviour
 
         rigidbody.velocity = new Vector2(x, y);
     }
+
+
+    public void AddAngleConserveY(float deltaAngle)
+    {
+        Vector2 velocity = rigidbody.velocity;
+        float absVelocity = velocity.magnitude;
+        float angleRad = (Vector2.SignedAngle(velocity, Vector2.up) + deltaAngle) * Mathf.Deg2Rad;
+        float x = absVelocity * Mathf.Sin(angleRad);
+        float y = absVelocity * Mathf.Cos(angleRad);
+        y = y > 0.0f == velocity.y > 0.0f ? y : -y;
+        rigidbody.velocity = new Vector2(x, y);
+    }
+
 
     void SetVelocityMagnitude(float magnitude)
     {
