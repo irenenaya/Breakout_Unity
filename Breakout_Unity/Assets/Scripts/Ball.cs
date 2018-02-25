@@ -43,6 +43,7 @@ public class Ball : MonoBehaviour
         
         if (collision.collider.CompareTag("Boundaries")) AddAngleConserveQuadrant(Random.Range(-5.0f, 5.0f));
         // TODO figure out what to do about this
+        // We need actual direction of paddle, InputHandle.Horizontal shows movement even when paddle stuck at boundary
         else if (collision.collider.CompareTag("Player"))
         {
             Debug.Log("paddle velocity: " + InputHandle.Horizontal);
