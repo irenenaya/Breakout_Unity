@@ -40,7 +40,14 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        
         if (collision.collider.CompareTag("Boundaries")) AddAngleConserveQuadrant(Random.Range(-5.0f, 5.0f));
+        // TODO figure out what to do about this
+        else if (collision.collider.CompareTag("Player"))
+        {
+            Debug.Log("paddle velocity: " + InputHandle.Horizontal);
+            AddAngleConserveQuadrant(20.0f * Mathf.Clamp(InputHandle.Horizontal, -0.5f, 0.5f));
+        }
         else AddAngleConserveQuadrant(Random.Range(-10.0f, 10.0f));
 
     }
