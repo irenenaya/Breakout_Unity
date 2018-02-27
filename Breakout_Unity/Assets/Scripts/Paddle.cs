@@ -56,7 +56,7 @@ public class Paddle : MonoBehaviour {
             newPos = oldPos;
         }
 
-        velocity = (newPos - oldPos) * Time.deltaTime;
+        velocity = (newPos - oldPos) / Time.deltaTime;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {

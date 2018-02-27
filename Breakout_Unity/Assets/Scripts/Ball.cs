@@ -45,8 +45,8 @@ public class Ball : MonoBehaviour
         else if (collision.collider.CompareTag("Player"))
         {
             // TODO get paddle velocity, not input
-            AddAngleConserveYDirection(20.0f * Mathf.Clamp(paddle.velocity.x * 1000, -1.0f, 1.0f));
-            Debug.Log(paddle.velocity.x * 1000);
+            AddAngleConserveYDirection(2.0f * paddle.velocity.x );
+            Debug.Log(paddle.velocity.x);
         }
         else AddAngleConserveQuadrant(Random.Range(-10.0f, 10.0f));
 
