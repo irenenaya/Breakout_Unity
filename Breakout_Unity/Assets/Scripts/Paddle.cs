@@ -13,12 +13,17 @@ public class Paddle : MonoBehaviour {
 		get { return transform.position; }
 		private set { }
 	}
+
+    public Vector2 velocity { get; private set; }
+
 	Vector2 newPos;
 	Animator anim;
 	AudioSource audio;
 	ServeStateBehaviour behaviour;
 	SpriteRenderer rend;
 	BoxCollider2D coll;
+    Vector2 oldPos;
+
 	// Use this for initialization
 	void Awake () {
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
@@ -36,16 +41,22 @@ public class Paddle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        oldPos = new Vector2(transform.position.x, transform.position.y);
         float move = InputHandle.Horizontal;
 
         if (Mathf.Abs(move) > axisDeadZone)
         {
             float step = move * speed * Time.deltaTime;
-            newPos.x = transform.position.x + step;
+            newPos.x = oldPos.x + step;
             newPos.x = Mathf.Clamp(newPos.x, leftLimit, rightLimit);
             transform.SetPositionAndRotation(newPos, Quaternion.identity);
-        }	
+        }
+        else
+        {
+            newPos = oldPos;
+        }
+
+        velocity = (newPos - oldPos) * Time.deltaTime;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {

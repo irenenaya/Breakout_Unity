@@ -14,6 +14,8 @@ public class Ball : MonoBehaviour
 	VictoryStateBehaviour victBehaviour;
 	Animator anim;
 
+    Paddle paddle;
+
     // Use this for initialization
     void Awake()
     {
@@ -30,24 +32,20 @@ public class Ball : MonoBehaviour
 		behaviour.ballController = this;
 		victBehaviour = anim.GetBehaviour<VictoryStateBehaviour> ();
 		victBehaviour.ballController = this;
+        paddle = GameObject.FindGameObjectWithTag("Player").GetComponent<Paddle>();
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        
         if (collision.collider.CompareTag("Boundaries")) AddAngleConserveQuadrant(Random.Range(-5.0f, 5.0f));
         // TODO figure out what to do about this
         // We need actual direction of paddle, InputHandle.Horizontal shows movement even when paddle stuck at boundary
         else if (collision.collider.CompareTag("Player"))
         {
             // TODO get paddle velocity, not input
-            AddAngleConserveY(20.0f * Mathf.Clamp(InputHandle.Horizontal, -0.5f, 0.5f));
+            AddAngleConserveYDirection(20.0f * Mathf.Clamp(paddle.velocity.x * 1000, -1.0f, 1.0f));
+            Debug.Log(paddle.velocity.x * 1000);
         }
         else AddAngleConserveQuadrant(Random.Range(-10.0f, 10.0f));
 
@@ -90,7 +88,7 @@ public class Ball : MonoBehaviour
     }
 
 
-    public void AddAngleConserveY(float deltaAngle)
+    public void AddAngleConserveYDirection(float deltaAngle)
     {
         Vector2 velocity = rigidbody.velocity;
         float absVelocity = velocity.magnitude;
