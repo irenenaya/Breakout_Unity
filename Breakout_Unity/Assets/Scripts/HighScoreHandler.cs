@@ -114,7 +114,9 @@ public class HighScoreHandler : MonoBehaviour
             ScoreboardEntry other = obj as ScoreboardEntry;
             if (other == null)
                 throw new ArgumentException("ScoreboardEntry.CompareTo - argument not ScoreboardEntry!");
-            return score.CompareTo(other.score);
+            //return score.CompareTo(other.score);
+			// this is the way to get the pq sort highest to lowest
+			return other.score.CompareTo(score);
         }
     }
 }
