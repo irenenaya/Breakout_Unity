@@ -8,7 +8,7 @@ public class SceneController : MonoBehaviour {
 	GeneralStateBehaviour[] behaviour;
 
 	IEnumerator Start () {
-		
+		Screen.SetResolution (432, 243, false);
 		anim = GetComponent<Animator> ();
 	
 		behaviour = anim.GetBehaviours<GeneralStateBehaviour> ();
