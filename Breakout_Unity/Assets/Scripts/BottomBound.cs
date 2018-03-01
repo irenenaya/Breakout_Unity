@@ -19,9 +19,11 @@ public class BottomBound : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll)
 	{
-		anim.SetTrigger ("LifeLost");
-		anim.SetInteger("Lives", anim.GetInteger("Lives") - 1);
-		audio.Play ();
+		if (coll.gameObject.tag == "Ball") {
+			anim.SetTrigger ("LifeLost");
+			anim.SetInteger ("Lives", anim.GetInteger ("Lives") - 1);
+			audio.Play ();
+		}
 	}
 
 }

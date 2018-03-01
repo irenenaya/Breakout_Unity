@@ -182,6 +182,7 @@ MonoBehaviour:
   - {fileID: 21300030, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
   - {fileID: 21300038, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
   - {fileID: 21300046, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+  powerup: {fileID: 114234518237393204, guid: 584510465e4b346b28e8b5a5ad90c2ff, type: 2}
 --- !u!212 &212193784848305084
 SpriteRenderer:
   m_ObjectHideFlags: 1
