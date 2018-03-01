@@ -50,6 +50,7 @@ public class LevelLoader : MonoBehaviour
 
 		int numRows = Random.Range(1, Mathf.Min(GameParameters.level + 1,  6));
         int numCols = Random.Range(7, 14);
+		int keyBrick = Random.Range (0, numCols + numRows);
 
         numCols = numCols % 2 == 0 ? numCols + 1 : numCols;
 
@@ -78,7 +79,11 @@ public class LevelLoader : MonoBehaviour
 				// subtracted for the Y because each brick is at a lower y 
 				float x = topLeft.x + offsetX + brickSize.x / 2 + brickSize.x * j;
 				float y = topLeft.y - offsetY - brickSize.y / 2 - brickSize.y * i;
-				CreateBrick(new Vector2(x, y), brickColors * GameParameters.level + (i * (skip %2)));
+				if (i + j == keyBrick) {
+					CreateBrick (new Vector2 (x, y), 20);
+				} else {
+					CreateBrick (new Vector2 (x, y), brickColors * GameParameters.level + (i * (skip % 2)));
+				}
 				++numBricks;
             }
         }

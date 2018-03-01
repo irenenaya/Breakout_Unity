@@ -32,7 +32,7 @@ public class HighscoreStateBehaviour : GeneralStateBehaviour {
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		controller.activateObject ("Highscores", false);
-		controller.LoadNextScene (SceneConstants.START);
+		//controller.LoadNextScene (SceneConstants.START);
 		animator.ResetTrigger ("EnterPressed");
 	}
 

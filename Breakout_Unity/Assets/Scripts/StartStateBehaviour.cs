@@ -14,6 +14,7 @@ public class StartStateBehaviour : GeneralStateBehaviour {
 	// individual scenes. 
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+		controller.LoadNextScene (SceneConstants.START);
         // TODO figure out where to put this, is it okay here?
         // initializing global game state before the start
         animator.SetInteger("Lives", 3);

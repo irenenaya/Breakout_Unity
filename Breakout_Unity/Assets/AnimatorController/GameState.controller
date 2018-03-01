@@ -155,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41abe46ec72d44655b5783d5e71314e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  display: {fileID: 0}
 --- !u!114 &114984999897211630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,6 +234,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: Highscorer
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: EnterPressed
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102085211588268288}

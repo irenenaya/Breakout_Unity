@@ -8,6 +8,7 @@ public class Brick : MonoBehaviour {
 	SpriteRenderer renderer;
 	int index;
 	Animator anim;
+	bool breakable = true;
     EffectSpawner fxSpawner;
 	Color[] particleColors = { Color.blue, Color.green, Color.red, Color.magenta, Color.yellow };
 
@@ -24,6 +25,8 @@ public class Brick : MonoBehaviour {
 	public void SetTier (int tier) {
 		index = tier;
 		renderer.sprite = sprites [index];
+		if (index == sprites.Length - 1)
+			breakable = false;
 	}
 	
 	// Update is called once per frame
@@ -32,8 +35,12 @@ public class Brick : MonoBehaviour {
 	}
 	// On Collision, change sprite or remove brick. Also, increase score. 
 	// TODO: Make the Score Great Again :p
-	void OnCollisionEnter2D(Collision2D coll) {
+	void OnCollisionEnter2D(Collision2D coll) {		
 		int ind = index;
+		fxSpawner.RunEffectAt(new Vector2(transform.position.x, transform.position.y), 
+			particleColors[ind % 5]);	
+		if (!breakable)
+			return;
 		if (index > 0) {			
 			renderer.sprite = sprites [--index];
 			GameParameters.score += (index + 1) * 10;                
@@ -44,8 +51,7 @@ public class Brick : MonoBehaviour {
 			GameParameters.score += 200;
             Destroy (gameObject);
 		}
-        fxSpawner.RunEffectAt(new Vector2(transform.position.x, transform.position.y), 
-			particleColors[ind % 5]);		
+        	
     }
 
 }

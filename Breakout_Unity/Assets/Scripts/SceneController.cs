@@ -7,14 +7,14 @@ public class SceneController : MonoBehaviour {
 	Animator anim;
 	GeneralStateBehaviour[] behaviour;
 
-	IEnumerator Start () {
+	void Start () {
 		Screen.SetResolution (432, 243, false);
 		anim = GetComponent<Animator> ();
 	
 		behaviour = anim.GetBehaviours<GeneralStateBehaviour> ();
 		for (int i = 0 ; i < behaviour.Length; ++i)
 			behaviour[i].controller = this;
-		yield return StartCoroutine (LoadSceneAndSetActive ("StartScene"));
+	//	yield return StartCoroutine (LoadSceneAndSetActive ("StartScene"));
 
 	}
 
