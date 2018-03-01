@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour
 	ServeStateBehaviour behaviour;
 	VictoryStateBehaviour victBehaviour;
 	Animator anim;
+	AudioSource sounds;
 
     Paddle paddle;
 
@@ -22,6 +23,7 @@ public class Ball : MonoBehaviour
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         collider = gameObject.GetComponent<CircleCollider2D>();
         renderer = gameObject.GetComponent<SpriteRenderer>();
+		sounds = GetComponent<AudioSource> ();
         renderer.sprite = sprites[Random.Range(0, sprites.Length)];
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator>();
 	}
@@ -38,27 +40,25 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Boundaries"))
-        {
-            AddAngleConserveQuadrant(Random.Range(-5.0f, 5.0f));
+		if (collision.collider.CompareTag ("Boundaries")) {
+			sounds.Play ();
+			AddAngleConserveQuadrant (Random.Range (-5.0f, 5.0f));
     
-            // a hack to prevent shallow bounces from boundaries
-            // Debug.Log("angle from x pre: " + Mathf.Asin(rigidbody.velocity.y / rigidbody.velocity.magnitude) * Mathf.Rad2Deg);
-            Vector2 velocity = rigidbody.velocity;
-            if (Mathf.Abs(Mathf.Asin(velocity.y / velocity.magnitude)) * Mathf.Rad2Deg < 15.0f)
-            {
-                AddAngle(Random.Range(5.0f, 10.0f) * -Mathf.Sign(velocity.y) * Mathf.Sign(velocity.x));
-                // Debug.Log("angle from x: " + Mathf.Asin(rigidbody.velocity.y / rigidbody.velocity.magnitude) * Mathf.Rad2Deg);
-            }
-        }
-        else if (collision.collider.CompareTag("Player"))
-        {
-            // TODO get paddle velocity, not input
-            AddAngleConserveYDirection(2.0f * paddle.velocity.x );
-            // Debug.Log(paddle.velocity.x);
-        }
-        else AddAngleConserveQuadrant(Random.Range(-10.0f, 10.0f));
-       
+			// a hack to prevent shallow bounces from boundaries
+			// Debug.Log("angle from x pre: " + Mathf.Asin(rigidbody.velocity.y / rigidbody.velocity.magnitude) * Mathf.Rad2Deg);
+			Vector2 velocity = rigidbody.velocity;
+			if (Mathf.Abs (Mathf.Asin (velocity.y / velocity.magnitude)) * Mathf.Rad2Deg < 15.0f) {
+				AddAngle (Random.Range (5.0f, 10.0f) * -Mathf.Sign (velocity.y) * Mathf.Sign (velocity.x));
+				// Debug.Log("angle from x: " + Mathf.Asin(rigidbody.velocity.y / rigidbody.velocity.magnitude) * Mathf.Rad2Deg);
+			}
+		} else if (collision.collider.CompareTag ("Player")) {
+			// TODO get paddle velocity, not input
+			AddAngleConserveYDirection (2.0f * paddle.velocity.x);
+			// Debug.Log(paddle.velocity.x);
+		} else {
+			AddAngleConserveQuadrant (Random.Range (-10.0f, 10.0f));
+
+		}
     }
 
     // use to set velocity, for example initial velocity
