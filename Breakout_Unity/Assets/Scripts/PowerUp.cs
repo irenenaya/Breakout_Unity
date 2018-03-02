@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PowerUp : MonoBehaviour {
 
 	public Sprite[] sprites;
 	SpriteRenderer rend;
 	Brick brick;
+	UnityAction[] actions = new UnityAction[1];
 	string[] type = { PowerUpConstants.EXTRA_LIFE, PowerUpConstants.ENLARGE_PADDLE, PowerUpConstants.SHRINK_PADDLE,
 		PowerUpConstants.KEY
 	};
@@ -15,6 +17,7 @@ public class PowerUp : MonoBehaviour {
 		rend = GetComponent<SpriteRenderer> ();
 		Rigidbody2D rigby = GetComponent<Rigidbody2D> ();
 		rigby.velocity = new Vector2 (0, -0.2f);
+		actions [0] = breakBrick;
 	}
 	
 	// Update is called once per frame
@@ -30,10 +33,13 @@ public class PowerUp : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
-			brick.changeBreakable ();
-		}
-		if (other.gameObject.tag == "Boundaries") {
+			//brick.changeBreakable ();
+			actions[0]();
 			Destroy (gameObject);
 		}
+	}
+
+	void breakBrick() {
+		brick.changeBreakable ();
 	}
 }
