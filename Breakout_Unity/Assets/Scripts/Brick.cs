@@ -10,7 +10,7 @@ public class Brick : MonoBehaviour {
 	Animator anim;
 	bool breakable = true;
     EffectSpawner fxSpawner;
-	public PowerUp powerup;
+	PowerUp powerup;
 	Color[] particleColors = { Color.blue, Color.green, Color.red, Color.magenta, Color.yellow };
 
     // AudioSource audio;
@@ -51,16 +51,14 @@ public class Brick : MonoBehaviour {
 		fxSpawner.RunEffectAt(new Vector2(transform.position.x, transform.position.y), 
 			particleColors[ind % 5]);	
 		if (!breakable) {
-			powerup = Instantiate (powerup, new Vector2 (transform.position.x, transform.position.y), Quaternion.identity);
-			powerup.setSprite ((int)PowerUpConstants.KEY);
-			powerup.setBrick (gameObject.transform);
+			powerup.gameObject.SetActive (true);
 			return;
 		}
 			
 		if (index > 0) {			
 			renderer.sprite = sprites [--index];
 			GameParameters.score += (index + 1) * 10;
-			Debug.Log ("BRICK : PW " + powerup);
+			//Debug.Log ("BRICK : PW " + powerup);
 			if (powerup != null) 
 				powerup.gameObject.SetActive (true);
         }

@@ -83,12 +83,17 @@ public class LevelLoader : MonoBehaviour
 				float x = topLeft.x + offsetX + brickSize.x / 2 + brickSize.x * j;
 				float y = topLeft.y - offsetY - brickSize.y / 2 - brickSize.y * i;
 				if (i + j == keyBrick) {
-					CreateBrick (new Vector2 (x, y), 20);
+					Brick br = CreateBrick (new Vector2 (x, y), 20);
+					PowerUp p = Instantiate (powerup, new Vector2 (x, y), Quaternion.identity);
+					p.setSprite ((int)PowerUpConstants.KEY);
+					p.setBrick (br.transform);
+					br.setPowerup (p);
+					p.gameObject.SetActive (false);
 				} else {
 					Brick br = CreateBrick (new Vector2 (x, y), brickColors * GameParameters.level + (i * (skip % 2)));
 					if (Random.Range(0, 8) == 0) {
 						PowerUp p = Instantiate (powerup, new Vector2 (x, y), Quaternion.identity);
-						int spriteInd = Random.Range (0, 2);
+						int spriteInd = Random.Range (0, 3);
 						p.setSprite (spriteInd);
 						br.setPowerup (p);
 						p.gameObject.SetActive (false);
