@@ -62,4 +62,12 @@ public class Paddle : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll) {
 		audio.Play ();
 	}
+
+	public void IncreaseSize() {
+		Debug.Log ("Size Up");
+	}
+
+	public void DecreaseSize() {
+		Debug.Log ("Size Down");
+	}
 }

@@ -9,15 +9,8 @@ static public class SceneConstants {
 	public const float BALLY = -3.2f;
 	}
 
-static public class PowerUpConstants {
-	public const string KEY = "Key";
-	public const string GREEN_X = "Green_X";
-	public const string RED_X = "Red_X";
-	public const string EXTRA_LIFE = "Extra_Life";
-	public const string ENLARGE_PADDLE = "Enlarge_Paddle";
-	public const string SHRINK_PADDLE = "Shrink_Paddle";
+enum PowerUpConstants { EXTRA_LIFE, ENLARGE_PADDLE, SHRINK_PADDLE, KEY } ;
 
-}
 
 static public class GameParameters {
 	public static int paddleIndex = 0;

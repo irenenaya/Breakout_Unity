@@ -36,8 +36,13 @@ public class Brick : MonoBehaviour {
 	}
 
 	public void changeBreakable() {
-		renderer.sprite = sprites [--index];
+		index = index - Random.Range (1, 12);
+		renderer.sprite = sprites [index];
 		breakable = true;
+	}
+
+	public void setPowerup(PowerUp p) {
+		powerup = p;
 	}
 	// On Collision, change sprite or remove brick. Also, increase score. 
 	// TODO: Make the Score Great Again :p
@@ -47,7 +52,7 @@ public class Brick : MonoBehaviour {
 			particleColors[ind % 5]);	
 		if (!breakable) {
 			powerup = Instantiate (powerup, new Vector2 (transform.position.x, transform.position.y), Quaternion.identity);
-			powerup.setSprite (PowerUpConstants.KEY);
+			powerup.setSprite ((int)PowerUpConstants.KEY);
 			powerup.setBrick (gameObject.transform);
 			return;
 		}
@@ -55,7 +60,9 @@ public class Brick : MonoBehaviour {
 		if (index > 0) {			
 			renderer.sprite = sprites [--index];
 			GameParameters.score += (index + 1) * 10;
-
+			Debug.Log ("BRICK : PW " + powerup);
+			if (powerup != null) 
+				powerup.gameObject.SetActive (true);
         }
 		else {
 			int temp = anim.GetInteger ("Bricks");

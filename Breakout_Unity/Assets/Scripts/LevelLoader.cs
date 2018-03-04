@@ -6,6 +6,7 @@ public class LevelLoader : MonoBehaviour
 {
     public Brick brick;
 	public Paddle paddle;
+	public PowerUp powerup;
 	public Ball ball;
     public float screenWidth;
     public float screenHeight;
@@ -15,9 +16,10 @@ public class LevelLoader : MonoBehaviour
 	void Start()
     {
 		stateMachine = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
-		CreateMap ();
+
 		Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
 		Instantiate (ball, new Vector2 (0, SceneConstants.BALLY), Quaternion.identity);
+		CreateMap ();
 	}
     
 
@@ -35,11 +37,12 @@ public class LevelLoader : MonoBehaviour
         return new Vector2(brickSize.x * cols, brickSize.y * rows);
     }
 
-    void CreateBrick(Vector2 coords, int tier)
+    Brick CreateBrick(Vector2 coords, int tier)
     {
         Brick brickInstance = Instantiate(brick);
         brickInstance.transform.SetPositionAndRotation(coords, new Quaternion());
         brickInstance.SetTier(tier);
+		return brickInstance;
     }
 
     
@@ -82,7 +85,17 @@ public class LevelLoader : MonoBehaviour
 				if (i + j == keyBrick) {
 					CreateBrick (new Vector2 (x, y), 20);
 				} else {
-					CreateBrick (new Vector2 (x, y), brickColors * GameParameters.level + (i * (skip % 2)));
+					Brick br = CreateBrick (new Vector2 (x, y), brickColors * GameParameters.level + (i * (skip % 2)));
+					if (Random.Range(0, 8) == 0) {
+						PowerUp p = Instantiate (powerup, new Vector2 (x, y), Quaternion.identity);
+						int spriteInd = Random.Range (0, 2);
+						p.setSprite (spriteInd);
+						br.setPowerup (p);
+						p.gameObject.SetActive (false);
+
+						Debug.Log ("Powerup Added " + spriteInd);
+					}
+
 				}
 				++numBricks;
             }

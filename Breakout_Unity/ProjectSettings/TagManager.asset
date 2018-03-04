@@ -8,6 +8,7 @@ TagManager:
   - Highscores
   - GameOver
   - EnterHighscore
+  - Ball
   layers:
   - Default
   - TransparentFX
