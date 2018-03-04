@@ -19,7 +19,7 @@ public class PowerUp : MonoBehaviour {
 	void Awake () {
 		rend = GetComponent<SpriteRenderer> ();
 		Rigidbody2D rigby = GetComponent<Rigidbody2D> ();
-		rigby.velocity = new Vector2 (0, -0.05f);
+		rigby.velocity = new Vector2 (0, -1.5f);
 		paddle = GameObject.FindGameObjectWithTag ("Player").GetComponent<Paddle> ();
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 		actions [0] = increaseLives;
