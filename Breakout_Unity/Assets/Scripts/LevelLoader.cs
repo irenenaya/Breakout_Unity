@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelLoader : MonoBehaviour
 {
     public Brick brick;
-	public Paddle paddle;
+	Paddle paddle;
 	public PowerUp powerup;
 	public Ball ball;
     public float screenWidth;
@@ -17,7 +17,7 @@ public class LevelLoader : MonoBehaviour
     {
 		stateMachine = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 
-		Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
+		//Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
 		Instantiate (ball, new Vector2 (0, SceneConstants.BALLY), Quaternion.identity);
 		CreateMap ();
 	}

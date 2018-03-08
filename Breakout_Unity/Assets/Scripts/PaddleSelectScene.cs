@@ -16,7 +16,7 @@ public class PaddleSelectScene : MonoBehaviour {
 	void Start () {
 		GameObject obj = GameObject.FindGameObjectWithTag("GameController");
 		anim = obj.GetComponent<Animator>();
-		GameParameters.paddleIndex = index + 4;
+		GameParameters.paddleIndex = index;
 	}
 	
 	// Update is called once per frame
@@ -25,7 +25,7 @@ public class PaddleSelectScene : MonoBehaviour {
 			if (index < paddles.Length - 1)
 				++index;
 			paddle.sprite = paddles [index];
-			GameParameters.paddleIndex = index + 4;
+			GameParameters.paddleIndex = index;
 			rightArrow.color = index == paddles.Length - 1 ? Color.gray : Color.white;
 			leftArrow.color = Color.white;
 
@@ -34,7 +34,7 @@ public class PaddleSelectScene : MonoBehaviour {
 			if (index > 0)
 				--index;
 			paddle.sprite = paddles [index];
-			GameParameters.paddleIndex = index + 4;
+			GameParameters.paddleIndex = index;
 			leftArrow.color = index == 0 ? Color.gray : Color.white;
 			rightArrow.color = Color.white;
 		}

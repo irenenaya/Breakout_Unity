@@ -48,6 +48,9 @@ public class Paddle : MonoBehaviour {
 		coll = GetComponent<BoxCollider2D> ();
 		rend = GetComponent<SpriteRenderer> ();
 		rend.sprite = paddleSprites[GameParameters.paddleIndex][spriteIndex];
+	//	Debug.Log("IND: " + GameParameters.paddleIndex);
+	//	Debug.Log ("SPRITEIND: " + spriteIndex);
+		//rend.sprite = paddleSprites [GameParameters.paddleIndex].sprites [spriteIndex];
 		newPos.y = -4;
 		audio = GetComponent<AudioSource> ();
 	}
@@ -84,11 +87,13 @@ public class Paddle : MonoBehaviour {
 	public void IncreaseSize()
     {
 		Debug.Log ("Size Up");
-        if (spriteIndex < paddleSprites[GameParameters.paddleIndex].Length)
+        if (spriteIndex < paddleSprites[GameParameters.paddleIndex].Length-1)
         {
             ++spriteIndex;
             rend.sprite = paddleSprites[GameParameters.paddleIndex][spriteIndex];
             coll.size = new Vector2(coll.size.x + 0.32f, coll.size.y); 
+			leftLimit += .16f * transform.localScale.x;
+			rightLimit -= .16f * transform.localScale.x;
         }
 	}
 
@@ -100,6 +105,8 @@ public class Paddle : MonoBehaviour {
             --spriteIndex;
             rend.sprite = paddleSprites[GameParameters.paddleIndex][spriteIndex];
             coll.size = new Vector2(coll.size.x - 0.32f, coll.size.y);
+			leftLimit -= .16f * transform.localScale.x;
+			rightLimit += .16f * transform.localScale.x;
         }
     }
 }
