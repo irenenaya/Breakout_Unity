@@ -4,7 +4,25 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour {
 
-	public Sprite[] sprites;
+    [System.Serializable]
+    public class ColourPaddle
+    {
+        public Sprite[] sprites;
+        public Sprite this[int i]
+        {
+            get { return sprites[i]; }
+            set { sprites[i] = value; }
+        }
+
+        public int Length
+        {
+            get { return sprites.Length; }
+            private set { }
+        }
+    }
+
+    public ColourPaddle[] paddleSprites;
+    public int spriteIndex = 1;
 	public float speed;
 	public float leftLimit;
 	public float rightLimit;
@@ -29,7 +47,7 @@ public class Paddle : MonoBehaviour {
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 		coll = GetComponent<BoxCollider2D> ();
 		rend = GetComponent<SpriteRenderer> ();
-		rend.sprite = sprites [GameParameters.paddleIndex];
+		rend.sprite = paddleSprites[GameParameters.paddleIndex][spriteIndex];
 		newPos.y = -4;
 		audio = GetComponent<AudioSource> ();
 	}
@@ -63,11 +81,25 @@ public class Paddle : MonoBehaviour {
 		audio.Play ();
 	}
 
-	public void IncreaseSize() {
+	public void IncreaseSize()
+    {
 		Debug.Log ("Size Up");
+        if (spriteIndex < paddleSprites[GameParameters.paddleIndex].Length)
+        {
+            ++spriteIndex;
+            rend.sprite = paddleSprites[GameParameters.paddleIndex][spriteIndex];
+            coll.size = new Vector2(coll.size.x + 0.32f, coll.size.y); 
+        }
 	}
 
-	public void DecreaseSize() {
+	public void DecreaseSize()
+    {
 		Debug.Log ("Size Down");
-	}
+        if (spriteIndex > 0)
+        {
+            --spriteIndex;
+            rend.sprite = paddleSprites[GameParameters.paddleIndex][spriteIndex];
+            coll.size = new Vector2(coll.size.x - 0.32f, coll.size.y);
+        }
+    }
 }

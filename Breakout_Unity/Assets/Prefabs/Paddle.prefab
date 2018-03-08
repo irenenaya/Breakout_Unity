@@ -160,23 +160,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94bb220ea5c9a40af909b076616b8e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300048, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300056, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300064, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300072, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300050, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300058, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300066, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300074, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300052, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300060, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300068, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300076, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300054, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300062, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300070, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
-  - {fileID: 21300078, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+  paddleSprites:
+  - sprites:
+    - {fileID: 21300048, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300050, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300052, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300054, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+  - sprites:
+    - {fileID: 21300056, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300058, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300060, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300062, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+  - sprites:
+    - {fileID: 21300064, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300066, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300068, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300070, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+  - sprites:
+    - {fileID: 21300072, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300074, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300076, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+    - {fileID: 21300078, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
+  spriteIndex: 1
   speed: 8
   leftLimit: -7.5
   rightLimit: 7.5
@@ -190,6 +195,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -205,6 +211,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
