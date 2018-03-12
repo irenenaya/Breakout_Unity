@@ -6,6 +6,7 @@ static public class SceneConstants {
 	public const string PADDLESELECT = "PaddleSelectScene";
 	public const string PLAY = "PlayScene";
 	public const string START = "StartScene";
+	public const string GAME = "GameScene";
 	public const float BALLY = -3.2f;
 	}
 

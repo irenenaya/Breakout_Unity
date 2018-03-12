@@ -18,17 +18,6 @@ public class PowerUp : MonoBehaviour {
 	};*/
 	// Use this for initialization
 	void Awake () {
-		//Debug.Log("IN AWAKE");
-	/*	rend = GetComponent<SpriteRenderer> ();
-		rigby = GetComponent<Rigidbody2D> ();
-		rigby.velocity = new Vector2 (0, -1.5f);
-		paddle = GameObject.FindGameObjectWithTag ("Player").GetComponent<Paddle> ();
-		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
-		actions [0] = increaseLives;
-		actions [1] = enlargePaddle;
-		actions [2] = shrinkPaddle;
-		actions [3] = breakBrick;
-		Debug.Log ("EXIT AWAKE: " + rigby.velocity.y);*/
 	}
 	
 	// Update is called once per frame

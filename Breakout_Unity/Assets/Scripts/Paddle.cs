@@ -48,9 +48,6 @@ public class Paddle : MonoBehaviour {
 		coll = GetComponent<BoxCollider2D> ();
 		rend = GetComponent<SpriteRenderer> ();
 		rend.sprite = paddleSprites[GameParameters.paddleIndex][spriteIndex];
-	//	Debug.Log("IND: " + GameParameters.paddleIndex);
-	//	Debug.Log ("SPRITEIND: " + spriteIndex);
-		//rend.sprite = paddleSprites [GameParameters.paddleIndex].sprites [spriteIndex];
 		newPos.y = -4;
 		audio = GetComponent<AudioSource> ();
 	}

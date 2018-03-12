@@ -19,6 +19,7 @@ public class StartStateBehaviour : GeneralStateBehaviour {
         // initializing global game state before the start
         animator.SetInteger("Lives", 3);
 		GameParameters.score = 0;
+		GameParameters.level = 1;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

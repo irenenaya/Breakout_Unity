@@ -35,7 +35,7 @@ public class SceneController : MonoBehaviour {
 		SceneManager.SetActiveScene (newlyLoadedScene);
 	}
 
-	private IEnumerator UnloadAndLoadScene(string sceneName) {
+	private IEnumerator UnloadAndLoadScene(string sceneName) {		
 		yield return SceneManager.UnloadSceneAsync (SceneManager.GetActiveScene ().buildIndex);
 		yield return StartCoroutine (LoadSceneAndSetActive (sceneName));
 	}

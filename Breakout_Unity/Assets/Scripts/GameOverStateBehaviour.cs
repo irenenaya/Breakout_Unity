@@ -9,6 +9,7 @@ public class GameOverStateBehaviour : GeneralStateBehaviour {
 		HighScoreHandler handler = controller.GetComponent<HighScoreHandler> ();
 		animator.SetBool ("Highscorer", handler.DisplayData.Length < 10 || handler.DisplayData [9].score < GameParameters.score);
 		controller.UnloadScene (SceneConstants.PLAY);
+		controller.UnloadScene (SceneConstants.GAME);
 		controller.activateObject ("GameOver", true);
 	}
 
