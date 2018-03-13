@@ -38,7 +38,6 @@ public class PowerUp : MonoBehaviour {
 		actions [1] = enlargePaddle;
 		actions [2] = shrinkPaddle;
 		actions [3] = breakBrick;
-		Debug.Log ("ENABLED: " + rigby.velocity.y);
 	}
 
 	public void setSprite (int type) {
@@ -48,10 +47,16 @@ public class PowerUp : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "Player") {
-			//brick.changeBreakable ();
+		if (other.gameObject.tag == "Player") {			
 			actions[index]();
 			Destroy (gameObject);
+		}
+		else if (other.gameObject.tag == "BottomBound") {
+			if (index == (int)PowerUpConstants.KEY) {
+				transform.SetPositionAndRotation (brick.transform.position, Quaternion.identity);
+				gameObject.SetActive (false);
+			} else
+				Destroy (gameObject);
 		}
 	}
 
