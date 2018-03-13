@@ -30,9 +30,11 @@ public class SceneController : MonoBehaviour {
 
 	private IEnumerator LoadSceneAndSetActive (string sceneName)
 	{
+		Debug.Log ("ABOUT TO LOAD: " + sceneName);
 		yield return SceneManager.LoadSceneAsync (sceneName, LoadSceneMode.Additive);
 		Scene newlyLoadedScene = SceneManager.GetSceneAt (SceneManager.sceneCount - 1);
 		SceneManager.SetActiveScene (newlyLoadedScene);
+		Debug.Log ("ACTIVE: " + newlyLoadedScene.name + " LOADED: " + sceneName);
 	}
 
 	private IEnumerator UnloadAndLoadScene(string sceneName) {		
@@ -50,7 +52,13 @@ public class SceneController : MonoBehaviour {
 	}
 
 	public void UnloadScene(string scene) {
-		StartCoroutine (UnloadOnly (scene));
+		if (SceneManager.GetSceneByName(scene).IsValid())
+			StartCoroutine (UnloadOnly (scene));
+	}
+
+	public void AddScene(string scene) {
+		Debug.Log ("IN ADD SCENE");
+		StartCoroutine (LoadSceneAndSetActive (scene));
 	}
 
 	public void activateObject(string obj, bool active) {
