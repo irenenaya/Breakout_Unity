@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
 {
     public Sprite[] sprites;
 
-    new Rigidbody2D rigidbody;
+    Rigidbody2D rigidbod;
     new CircleCollider2D collider;
     new SpriteRenderer renderer;
 
@@ -20,12 +20,13 @@ public class Ball : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        rigidbody = gameObject.GetComponent<Rigidbody2D>();
+        rigidbod = gameObject.GetComponent<Rigidbody2D>();
         collider = gameObject.GetComponent<CircleCollider2D>();
         renderer = gameObject.GetComponent<SpriteRenderer>();
 		sounds = GetComponent<AudioSource> ();
         renderer.sprite = sprites[Random.Range(0, sprites.Length)];
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator>();
+		//anim.SetInteger ("BallsCount", anim.GetInteger ("BallsCount") + 1);
 	}
 
 	void Start()
@@ -46,7 +47,7 @@ public class Ball : MonoBehaviour
     
 			// a hack to prevent shallow bounces from boundaries
 			// Debug.Log("angle from x pre: " + Mathf.Asin(rigidbody.velocity.y / rigidbody.velocity.magnitude) * Mathf.Rad2Deg);
-			Vector2 velocity = rigidbody.velocity;
+			Vector2 velocity = rigidbod.velocity;
 			if (Mathf.Abs (Mathf.Asin (velocity.y / velocity.magnitude)) * Mathf.Rad2Deg < 15.0f) {
 				AddAngle (Random.Range (5.0f, 10.0f) * -Mathf.Sign (velocity.y) * Mathf.Sign (velocity.x));
 				// Debug.Log("angle from x: " + Mathf.Asin(rigidbody.velocity.y / rigidbody.velocity.magnitude) * Mathf.Rad2Deg);
@@ -64,7 +65,7 @@ public class Ball : MonoBehaviour
     // use to set velocity, for example initial velocity
     public void SetVelocity(Vector2 vel)
     {
-        rigidbody.velocity = vel;
+        rigidbod.velocity = vel;
     }
 
     // add angle in degrees, changes velocity direction but keeps magnitude
@@ -72,19 +73,19 @@ public class Ball : MonoBehaviour
 	// same direction as it was coming. 
     public void AddAngle(float deltaAngle)
     {
-        Vector2 velocity = rigidbody.velocity;
+        Vector2 velocity = rigidbod.velocity;
         float absVelocity = velocity.magnitude;
         float angleRad = (Vector2.SignedAngle(velocity, Vector2.up) + deltaAngle) * Mathf.Deg2Rad;
         float x = absVelocity * Mathf.Sin(angleRad);
         float y = absVelocity * Mathf.Cos(angleRad);
-        rigidbody.velocity = new Vector2(x, y);
+        rigidbod.velocity = new Vector2(x, y);
     }
 
     // add angle in degrees, changes velocity direction but keeps magnitude allowing the ball
     // to travel in the same direction
     public void AddAngleConserveQuadrant(float deltaAngle)
     {
-        Vector2 velocity = rigidbody.velocity;
+        Vector2 velocity = rigidbod.velocity;
         float absVelocity = velocity.magnitude;      
         float angleRad = (Vector2.SignedAngle(velocity, Vector2.up) + deltaAngle) * Mathf.Deg2Rad;
         float x = absVelocity * Mathf.Sin(angleRad);
@@ -94,31 +95,31 @@ public class Ball : MonoBehaviour
         x = x > 0.0f == velocity.x > 0.0f ? x : -x;
         y = y > 0.0f == velocity.y > 0.0f ? y : -y;
 
-        rigidbody.velocity = new Vector2(x, y);
+        rigidbod.velocity = new Vector2(x, y);
     }
 
 
     public void AddAngleConserveYDirection(float deltaAngle)
     {
-        Vector2 velocity = rigidbody.velocity;
+        Vector2 velocity = rigidbod.velocity;
         float absVelocity = velocity.magnitude;
         float angleRad = (Vector2.SignedAngle(velocity, Vector2.up) + deltaAngle) * Mathf.Deg2Rad;
         float x = absVelocity * Mathf.Sin(angleRad);
         float y = absVelocity * Mathf.Cos(angleRad);
         y = y > 0.0f == velocity.y > 0.0f ? y : -y;
-        rigidbody.velocity = new Vector2(x, y);
+        rigidbod.velocity = new Vector2(x, y);
     }
 
 
     void SetVelocityMagnitude(float magnitude)
     {
-        rigidbody.velocity = rigidbody.velocity.normalized * magnitude;
+        rigidbod.velocity = rigidbod.velocity.normalized * magnitude;
     }
 
     // simple change in velocity, multiplies velocity by constant factor
     void MultiplyVelocity(float mult)
     {
-        rigidbody.velocity *= mult;
+        rigidbod.velocity *= mult;
     }
 
 	public void SetPosition(Vector2 pos)
@@ -127,5 +128,11 @@ public class Ball : MonoBehaviour
 		temp.x = pos.x;
 		temp.y = SceneConstants.BALLY;
 		transform.SetPositionAndRotation(temp, Quaternion.identity);
+	}
+
+	void Update () {
+		if (InputHandle.Pause) {
+			SetVelocity (new Vector2 (0, 0));
+		}
 	}
 }

@@ -93,7 +93,9 @@ MonoBehaviour:
   - {fileID: 21300004, guid: db9fb2b8ad7ab4726ac9ffbaf8f42e82, type: 3}
   - {fileID: 21300008, guid: db9fb2b8ad7ab4726ac9ffbaf8f42e82, type: 3}
   - {fileID: 21300010, guid: db9fb2b8ad7ab4726ac9ffbaf8f42e82, type: 3}
+  - {fileID: 21300016, guid: db9fb2b8ad7ab4726ac9ffbaf8f42e82, type: 3}
   - {fileID: 21300018, guid: db9fb2b8ad7ab4726ac9ffbaf8f42e82, type: 3}
+  ball: {fileID: 114794745150696330, guid: f9c5d6742402703428e433d82115f8ed, type: 2}
 --- !u!212 &212481294304486564
 SpriteRenderer:
   m_ObjectHideFlags: 1

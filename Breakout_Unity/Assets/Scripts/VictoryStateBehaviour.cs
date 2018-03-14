@@ -14,6 +14,7 @@ public class VictoryStateBehaviour : GeneralStateBehaviour {
 
 		ballController.SetVelocity (new Vector2 (0, 0));
 		ballController.SetPosition (new Vector2 (0, 0));
+		animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") - 1);
 		GameParameters.level++;
 	}
 

@@ -6,12 +6,13 @@ using UnityEngine.Events;
 public class PowerUp : MonoBehaviour {
 
 	public Sprite[] sprites;
+	public Ball ball;
 	SpriteRenderer rend;
 	Brick brick;
 	Paddle paddle;
 	Animator anim;
 	Rigidbody2D rigby;
-	UnityAction[] actions = new UnityAction[4];
+	UnityAction[] actions = new UnityAction[5];
 	int index;
 	/*string[] type = { PowerUpConstants.EXTRA_LIFE, PowerUpConstants.ENLARGE_PADDLE, PowerUpConstants.SHRINK_PADDLE,
 		PowerUpConstants.KEY
@@ -37,7 +38,8 @@ public class PowerUp : MonoBehaviour {
 		actions [0] = increaseLives;
 		actions [1] = enlargePaddle;
 		actions [2] = shrinkPaddle;
-		actions [3] = breakBrick;
+		actions [4] = breakBrick;
+		actions [3] = addBall;
 	}
 
 	public void setSprite (int type) {
@@ -60,6 +62,10 @@ public class PowerUp : MonoBehaviour {
 		}
 	}
 
+/* ----------------------------------------------------------------------------------------------
+ * Actions
+ * ----------------------------------------------------------------------------------------------*/
+
 	void breakBrick() {
 		brick.changeBreakable ();
 	}
@@ -75,5 +81,11 @@ public class PowerUp : MonoBehaviour {
 
 	void enlargePaddle() {
 		paddle.IncreaseSize ();
+	}
+
+	void addBall() {
+		Ball b = Instantiate (ball, new Vector2 (0, SceneConstants.BALLY), Quaternion.identity);
+		anim.SetInteger ("BallsCount", anim.GetInteger ("BallsCount") + 1);
+		b.SetVelocity (new Vector2(0, 5.0f));
 	}
 }

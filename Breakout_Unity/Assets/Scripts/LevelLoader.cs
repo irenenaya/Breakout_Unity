@@ -93,7 +93,7 @@ public class LevelLoader : MonoBehaviour
 					Brick br = CreateBrick (new Vector2 (x, y), brickColors * GameParameters.level + (i * (skip % 2)));
 					if (Random.Range(0, 8) == 0) {
 						PowerUp p = Instantiate (powerup, new Vector2 (x, y), Quaternion.identity);
-						int spriteInd = Random.Range (0, 3);
+						int spriteInd = Random.Range (0, 4);
 						p.setSprite (spriteInd);
 						br.setPowerup (p);
 						p.gameObject.SetActive (false);

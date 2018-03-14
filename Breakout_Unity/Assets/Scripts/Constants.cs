@@ -10,7 +10,7 @@ static public class SceneConstants {
 	public const float BALLY = -3.2f;
 	}
 
-enum PowerUpConstants { EXTRA_LIFE, ENLARGE_PADDLE, SHRINK_PADDLE, KEY } ;
+enum PowerUpConstants { EXTRA_LIFE, ENLARGE_PADDLE, SHRINK_PADDLE,EXTRA_BALL ,KEY  } ;
 
 
 static public class GameParameters {

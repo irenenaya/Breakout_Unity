@@ -20,8 +20,15 @@ public class BottomBound : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D coll)
 	{
 		if (coll.gameObject.tag == "Ball") {
-			anim.SetTrigger ("LifeLost");
-			anim.SetInteger ("Lives", anim.GetInteger ("Lives") - 1);
+			//anim.SetTrigger ("LifeLost");
+			anim.SetInteger("BallsCount", anim.GetInteger("BallsCount") - 1);
+			if (anim.GetInteger("BallsCount") == 0) {
+				anim.SetInteger ("Lives", anim.GetInteger ("Lives") - 1);
+			}
+			else {
+				Destroy (coll.gameObject);
+			}
+
 			audio.Play ();
 		}
 	}

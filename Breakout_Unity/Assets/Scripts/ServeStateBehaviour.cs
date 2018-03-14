@@ -15,6 +15,7 @@ public class ServeStateBehaviour : GeneralStateBehaviour {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		ballController.SetPosition (paddleController.position);
 		ballController.SetVelocity (new Vector2 (0, 0));
+		animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") + 1);
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
