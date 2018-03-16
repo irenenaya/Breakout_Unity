@@ -17,8 +17,8 @@ public class LevelLoader : MonoBehaviour
     {
 		stateMachine = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
 
-		//Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
-		Instantiate (ball, new Vector2 (0, SceneConstants.BALLY), Quaternion.identity);
+		// Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
+		// Instantiate (ball, new Vector2 (0, SceneConstants.BALLY), Quaternion.identity);
 		CreateMap ();
 	}
     
@@ -91,10 +91,10 @@ public class LevelLoader : MonoBehaviour
 					p.gameObject.SetActive (false);
 				} else {
 					Brick br = CreateBrick (new Vector2 (x, y), brickColors * GameParameters.level + (i * (skip % 2)));
-					if (Random.Range(0, 8) == 0) {
+					if (Random.Range(0, 4) == 0) {
 						PowerUp p = Instantiate (powerup, new Vector2 (x, y), Quaternion.identity);
 						int spriteInd = Random.Range (0, 4);
-						p.setSprite (spriteInd);
+						p.setSprite (3);
 						br.setPowerup (p);
 						p.gameObject.SetActive (false);
 

@@ -7,13 +7,16 @@ public class ServeStateBehaviour : GeneralStateBehaviour {
     public float speed = 3.0f;
     public float halfAngle = 80.0f;
 
-	public Ball ballController;
+    public Ball ballPrefab;
+
+	Ball ballController;
 	public PlayUI playUIController;
 	public Paddle paddleController;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		ballController.SetPosition (paddleController.position);
+        ballController = Instantiate(ballPrefab, new Vector2(0, SceneConstants.BALLY), Quaternion.identity);
+        ballController.SetPosition (paddleController.position);
 		ballController.SetVelocity (new Vector2 (0, 0));
 		animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") + 1);
 	}
@@ -26,6 +29,7 @@ public class ServeStateBehaviour : GeneralStateBehaviour {
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
 		ballController.SetVelocity(new Vector2(0, speed));
 		ballController.AddAngle(Random.Range(-halfAngle, halfAngle));
 		playUIController.HideUI ();

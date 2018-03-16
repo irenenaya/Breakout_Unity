@@ -31,10 +31,10 @@ public class Ball : MonoBehaviour
 
 	void Start()
 	{
-		behaviour = anim.GetBehaviour<ServeStateBehaviour> ();
-		behaviour.ballController = this;
-		victBehaviour = anim.GetBehaviour<VictoryStateBehaviour> ();
-		victBehaviour.ballController = this;
+		// behaviour = anim.GetBehaviour<ServeStateBehaviour> ();
+		// behaviour.ballController = this;
+		// victBehaviour = anim.GetBehaviour<VictoryStateBehaviour> ();
+		// victBehaviour.ballController = this;
         paddle = GameObject.FindGameObjectWithTag("Player").GetComponent<Paddle>();
 	}
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VictoryStateBehaviour : GeneralStateBehaviour {
-	public Ball ballController;
+	// public Ball ballController;
 	public PlayUI playUIController;
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -12,8 +12,12 @@ public class VictoryStateBehaviour : GeneralStateBehaviour {
 		playUIController.showUI ();
 		playUIController.setVictoryText ();
 
-		ballController.SetVelocity (new Vector2 (0, 0));
-		ballController.SetPosition (new Vector2 (0, 0));
+        // remove all balls in level
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+        foreach (var ball in balls) Destroy(ball);
+
+		// ballController.SetVelocity (new Vector2 (0, 0));
+		// ballController.SetPosition (new Vector2 (0, 0));
 		animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") - 1);
 		GameParameters.level++;
 	}

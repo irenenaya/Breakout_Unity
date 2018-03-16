@@ -25,10 +25,8 @@ public class BottomBound : MonoBehaviour {
 			if (anim.GetInteger("BallsCount") == 0) {
 				anim.SetInteger ("Lives", anim.GetInteger ("Lives") - 1);
 			}
-			else {
-				Destroy (coll.gameObject);
-			}
 
+			Destroy (coll.gameObject);
 			audio.Play ();
 		}
 	}
