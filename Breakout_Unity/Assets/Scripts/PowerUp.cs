@@ -54,12 +54,23 @@ public class PowerUp : MonoBehaviour {
 			Destroy (gameObject);
 		}
 		else if (other.gameObject.tag == "BottomBound") {
-			if (index == (int)PowerUpConstants.KEY) {
+			/*if (index == (int)PowerUpConstants.KEY) {
 				transform.SetPositionAndRotation (brick.transform.position, Quaternion.identity);
 				gameObject.SetActive (false);
 			} else
 				Destroy (gameObject);
+				*/
+			cleanUp ();
 		}
+			
+	}
+
+	public void cleanUp() {
+		if (index == (int)PowerUpConstants.KEY) {
+			transform.SetPositionAndRotation (brick.transform.position, Quaternion.identity);
+			gameObject.SetActive (false);
+		} else
+			Destroy (gameObject);
 	}
 
 /* ----------------------------------------------------------------------------------------------
@@ -88,4 +99,6 @@ public class PowerUp : MonoBehaviour {
 		anim.SetInteger ("BallsCount", anim.GetInteger ("BallsCount") + 1);
 		b.SetVelocity (new Vector2(0, 5.0f));
 	}
+
+
 }

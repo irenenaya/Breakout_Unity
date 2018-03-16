@@ -9,7 +9,7 @@ public class PauseStateBehaviour : GeneralStateBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Time.timeScale = 0.0f;
-		controller.activateObject ("Pause", true);
+		controller.activateObject ("PauseUI", true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -22,7 +22,7 @@ public class PauseStateBehaviour : GeneralStateBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Time.timeScale = 1.0f;
-		controller.activateObject ("Pause", false);
+		controller.activateObject ("PauseUI", false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

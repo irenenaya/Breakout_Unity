@@ -15,7 +15,7 @@ public class VictoryStateBehaviour : GeneralStateBehaviour {
         // remove all balls in level
         GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
         foreach (var ball in balls) Destroy(ball);
-
+		removePowerUps ();
 		// ballController.SetVelocity (new Vector2 (0, 0));
 		// ballController.SetPosition (new Vector2 (0, 0));
 		animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") - 1);
