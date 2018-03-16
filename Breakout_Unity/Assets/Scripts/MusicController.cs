@@ -13,6 +13,6 @@ public class MusicController : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
     {
-        if (InputHandle.Pause) music.pitch *= 0.67f;
+        if (InputHandle.Pause) music.pitch *= 0.95f;
 	}
 }
