@@ -131,8 +131,8 @@ public class Ball : MonoBehaviour
 	}
 
 	void Update () {
-		if (InputHandle.Pause) {
-			SetVelocity (new Vector2 (0, 0));
-		}
+		//if (InputHandle.Pause) {
+		//	SetVelocity (new Vector2 (0, 0));
+		//}
 	}
 }

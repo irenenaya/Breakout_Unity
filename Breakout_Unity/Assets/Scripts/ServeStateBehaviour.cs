@@ -9,29 +9,29 @@ public class ServeStateBehaviour : GeneralStateBehaviour {
 
     public Ball ballPrefab;
 
-	Ball ballController;
+	Ball ball;
 	public PlayUI playUIController;
 	public Paddle paddleController;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        ballController = Instantiate(ballPrefab, new Vector2(0, SceneConstants.BALLY), Quaternion.identity);
-        ballController.SetPosition (paddleController.position);
-		ballController.SetVelocity (new Vector2 (0, 0));
+        ball = Instantiate(ballPrefab, new Vector2(0, SceneConstants.BALLY), Quaternion.identity);
+        ball.SetPosition (paddleController.position);
+		ball.SetVelocity (new Vector2 (0, 0));
 		animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") + 1);
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		ballController.SetPosition (paddleController.position);
+		ball.SetPosition (paddleController.position);
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-		ballController.SetVelocity(new Vector2(0, speed));
-		ballController.AddAngle(Random.Range(-halfAngle, halfAngle));
+		ball.SetVelocity(new Vector2(0, speed));
+		ball.AddAngle(Random.Range(-halfAngle, halfAngle));
 		playUIController.HideUI ();
 
 	}
