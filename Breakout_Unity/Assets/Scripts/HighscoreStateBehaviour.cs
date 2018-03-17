@@ -8,6 +8,7 @@ public class HighscoreStateBehaviour : GeneralStateBehaviour {
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+		base.OnStateEnter (animator, stateInfo, layerIndex);
 		// TODO: This one gives error when we're not coming from Start scene. Works ok, though
 		if (SceneManager.GetSceneAt(SceneManager.sceneCount - 1).Equals(SceneManager.GetSceneByName(SceneConstants.START))) {
 			controller.UnloadScene (SceneConstants.START);
@@ -33,7 +34,7 @@ public class HighscoreStateBehaviour : GeneralStateBehaviour {
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		controller.activateObject ("Highscores", false);
 		//controller.LoadNextScene (SceneConstants.START);
-		animator.ResetTrigger ("EnterPressed");
+		//animator.ResetTrigger ("EnterPressed");
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

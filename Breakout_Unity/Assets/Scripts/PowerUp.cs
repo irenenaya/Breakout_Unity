@@ -54,12 +54,6 @@ public class PowerUp : MonoBehaviour {
 			Destroy (gameObject);
 		}
 		else if (other.gameObject.tag == "BottomBound") {
-			/*if (index == (int)PowerUpConstants.KEY) {
-				transform.SetPositionAndRotation (brick.transform.position, Quaternion.identity);
-				gameObject.SetActive (false);
-			} else
-				Destroy (gameObject);
-				*/
 			cleanUp ();
 		}
 			

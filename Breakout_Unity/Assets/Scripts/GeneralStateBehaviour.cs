@@ -13,4 +13,16 @@ public class GeneralStateBehaviour : StateMachineBehaviour {
 			p.cleanUp ();
 		}
 	}
+	public override void OnStateEnter (Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	{
+		AnimatorControllerParameter[] pars = animator.parameters;
+		foreach (var p in pars) {
+			if (p.type == AnimatorControllerParameterType.Trigger) {
+				animator.ResetTrigger (p.name);
+			}
+		}
+	}
+/*	protected void cleanTriggers() {
+
+	}*/
 }

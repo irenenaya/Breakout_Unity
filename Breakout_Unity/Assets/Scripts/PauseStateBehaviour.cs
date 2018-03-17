@@ -8,6 +8,7 @@ public class PauseStateBehaviour : GeneralStateBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+		base.OnStateEnter (animator, stateInfo, layerIndex);
         Time.timeScale = 0.0f;
 		controller.activateObject ("PauseUI", true);
     }
