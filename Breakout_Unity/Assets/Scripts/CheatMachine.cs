@@ -38,15 +38,18 @@ public class CheatMachine : MonoBehaviour {
         {
             cheatCode += Input.inputString;
 
-            // Debug.Log(cheatCode);
-
-            foreach (var code in slowMusic)
-            {
-                if (cheatCode == code)
-                {
-                    GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<MusicController>().PitchTransition(0.5f, 2.0f);
-                }
-            }
+			CompareCode (cheatCode, slowMusic);
         }
+	}
+
+	void CompareCode(string cheat, string[] codes)
+	{
+		foreach (var code in codes)
+		{
+			if (cheat == code)
+			{
+				GameObject.Find("BackgroundMusic").GetComponent<MusicController>().PitchTransition(0.5f, 2.0f);
+			}
+		}
 	}
 }

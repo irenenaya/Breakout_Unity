@@ -16,6 +16,7 @@ public class PauseStateBehaviour : GeneralStateBehaviour
         backgroundMusic.PitchTransition(0.0f, 0.5f);
         Time.timeScale = 0.0f;
 		controller.activateObject ("PauseUI", true);
+		GameObject.Find ("CheatMachine").GetComponent<CheatMachine> ().enabled = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -30,6 +31,7 @@ public class PauseStateBehaviour : GeneralStateBehaviour
         Time.timeScale = 1.0f;
         backgroundMusic.PitchTransition(originalPitch, 0.5f);
         controller.activateObject ("PauseUI", false);
+		GameObject.Find ("CheatMachine").GetComponent<CheatMachine> ().enabled = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

@@ -13,6 +13,7 @@ public class GeneralStateBehaviour : StateMachineBehaviour {
 			p.cleanUp ();
 		}
 	}
+
 	public override void OnStateEnter (Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		AnimatorControllerParameter[] pars = animator.parameters;
