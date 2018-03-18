@@ -12,6 +12,7 @@ TagManager:
   - BottomBound
   - PauseUI
   - PowerUp
+  - BackgroundMusic
   layers:
   - Default
   - TransparentFX

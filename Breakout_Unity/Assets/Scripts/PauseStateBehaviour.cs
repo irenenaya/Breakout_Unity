@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PauseStateBehaviour : GeneralStateBehaviour
 {
+    MusicController backgroundMusic;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-		base.OnStateEnter (animator, stateInfo, layerIndex);
+		base.OnStateEnter(animator, stateInfo, layerIndex);
+        backgroundMusic = GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<MusicController>();
+        backgroundMusic.PitchTransition(0.0f, 0.5f);
         Time.timeScale = 0.0f;
 		controller.activateObject ("PauseUI", true);
     }
@@ -23,7 +26,8 @@ public class PauseStateBehaviour : GeneralStateBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Time.timeScale = 1.0f;
-		controller.activateObject ("PauseUI", false);
+        backgroundMusic.PitchTransition(1.0f, 0.5f);
+        controller.activateObject ("PauseUI", false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
