@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicController : MonoBehaviour {
     AudioSource music;
-    bool lerping = false;
+    bool pitchTransitioning = false;
 
 	void Awake()
     {
@@ -14,14 +14,46 @@ public class MusicController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Update");
         // if (InputHandle.Pause) music.pitch *= 0.95f;
-        if (lerping || Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            lerping = true;
-            //TransitionPitch(1.0f, 0.0f, 2f);
-            music.pitch = Mathf.Lerp(1f, 0f, Time.unscaledDeltaTime);
-
+            PitchTransition(1.5f, 2f);
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            PitchTransition(0.5f, 2f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            PitchTransition(1.0f, 2f);
+        }
+
     }
+
+    void PitchTransition(float target, float duration)
+    {
+        if (pitchTransitioning) StopAllCoroutines();
+        StartCoroutine(PitchTransitionCoroutine(target, duration));
+    }
+
+    IEnumerator PitchTransitionCoroutine(float target, float duration)
+    {
+        pitchTransitioning = true;
+        float step = Time.deltaTime / duration;
+
+        float from = music.pitch;
+        float currStep = step;
+
+        while (Mathf.Abs(music.pitch - target) > 0.0f)
+        {
+            music.pitch = Mathf.Lerp(from, target, currStep);
+            currStep += step;
+            yield return null;
+        }
+
+        pitchTransitioning = false;
+    }
+
 }
