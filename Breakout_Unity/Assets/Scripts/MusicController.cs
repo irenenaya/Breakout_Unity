@@ -6,6 +6,12 @@ public class MusicController : MonoBehaviour {
     AudioSource music;
     IEnumerator pitchTransitionCoroutine;
 
+    public float pitch
+    {
+        get { return music.pitch; }
+        private set { }
+    }
+
 	void Awake()
     {
         music = GetComponent<AudioSource>();
@@ -14,6 +20,7 @@ public class MusicController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        /*
         // if (InputHandle.Pause) music.pitch *= 0.95f;
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -29,7 +36,7 @@ public class MusicController : MonoBehaviour {
         {
             PitchTransition(1.0f, 2f);
         }
-
+        */
     }
 
     public void PitchTransition(float target, float duration)

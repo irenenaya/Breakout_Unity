@@ -5,12 +5,14 @@ using UnityEngine;
 public class PauseStateBehaviour : GeneralStateBehaviour
 {
     MusicController backgroundMusic;
+    float originalPitch;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 		base.OnStateEnter(animator, stateInfo, layerIndex);
         backgroundMusic = GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<MusicController>();
+        originalPitch = backgroundMusic.pitch;
         backgroundMusic.PitchTransition(0.0f, 0.5f);
         Time.timeScale = 0.0f;
 		controller.activateObject ("PauseUI", true);
@@ -26,7 +28,7 @@ public class PauseStateBehaviour : GeneralStateBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Time.timeScale = 1.0f;
-        backgroundMusic.PitchTransition(1.0f, 0.5f);
+        backgroundMusic.PitchTransition(originalPitch, 0.5f);
         controller.activateObject ("PauseUI", false);
     }
 
