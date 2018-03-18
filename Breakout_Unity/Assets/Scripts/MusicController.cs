@@ -5,11 +5,18 @@ using UnityEngine;
 public class MusicController : MonoBehaviour {
     AudioSource music;
     IEnumerator pitchTransitionCoroutine;
+    IEnumerator volumeTransitionCoroutine;
 
     public float pitch
     {
         get { return music.pitch; }
-        private set { }
+        set { music.pitch = value; }
+    }
+
+    public float volume
+    {
+        get { return music.volume; }
+        set { music.volume = value; }
     }
 
 	void Awake()
@@ -52,12 +59,36 @@ public class MusicController : MonoBehaviour {
     IEnumerator PitchTransitionCoroutine(float target, float duration)
     {
         float from = music.pitch;
-        float invDuration = 1 / duration;
+        float invDuration = 1.0f / duration;
         float currStep = Time.unscaledDeltaTime * invDuration;
 
         while (Mathf.Abs(music.pitch - target) > 0.0f)
         {
             music.pitch = Mathf.Lerp(from, target, currStep);
+            currStep += Time.unscaledDeltaTime * invDuration;
+            yield return null;
+        }
+    }
+
+    public void VolumeTransition(float target, float duration)
+    {
+        if (volumeTransitionCoroutine != null)
+        {
+            StopCoroutine(volumeTransitionCoroutine);
+        }
+        volumeTransitionCoroutine = VolumeTransitionCoroutine(target, duration);
+        StartCoroutine(volumeTransitionCoroutine);
+    }
+
+    IEnumerator VolumeTransitionCoroutine(float target, float duration)
+    {
+        float from = music.volume;
+        float invDuration = 1.0f / duration;
+        float currStep = Time.unscaledDeltaTime * invDuration;
+
+        while (Mathf.Abs(music.volume - target) > 0.0f)
+        {
+            music.volume = Mathf.Lerp(from, target, currStep);
             currStep += Time.unscaledDeltaTime * invDuration;
             yield return null;
         }
