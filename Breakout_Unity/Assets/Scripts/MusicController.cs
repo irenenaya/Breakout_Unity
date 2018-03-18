@@ -45,14 +45,13 @@ public class MusicController : MonoBehaviour {
     IEnumerator PitchTransitionCoroutine(float target, float duration)
     {
         float from = music.pitch;
-        float currStep = Time.deltaTime / duration;
-
         float invDuration = 1 / duration;
+        float currStep = Time.unscaledDeltaTime * invDuration;
 
         while (Mathf.Abs(music.pitch - target) > 0.0f)
         {
             music.pitch = Mathf.Lerp(from, target, currStep);
-            currStep += Time.deltaTime * invDuration;
+            currStep += Time.unscaledDeltaTime * invDuration;
             yield return null;
         }
     }
