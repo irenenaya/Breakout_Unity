@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicController : MonoBehaviour {
     AudioSource music;
-    bool pitchTransitioning = false;
+    IEnumerator pitchTransitionCoroutine;
 
 	void Awake()
     {
@@ -32,28 +32,31 @@ public class MusicController : MonoBehaviour {
 
     }
 
-    void PitchTransition(float target, float duration)
+    public void PitchTransition(float target, float duration)
     {
-        if (pitchTransitioning) StopAllCoroutines();
-        StartCoroutine(PitchTransitionCoroutine(target, duration));
+        if (pitchTransitionCoroutine != null)
+        {
+            StopCoroutine(pitchTransitionCoroutine);
+        }
+        pitchTransitionCoroutine = PitchTransitionCoroutine(target, duration);
+        StartCoroutine(pitchTransitionCoroutine);
     }
 
     IEnumerator PitchTransitionCoroutine(float target, float duration)
     {
-        pitchTransitioning = true;
-        float step = Time.deltaTime / duration;
-
         float from = music.pitch;
-        float currStep = step;
+        float currStep = Time.deltaTime / duration;
+
+        float invDuration = 1 / duration;
 
         while (Mathf.Abs(music.pitch - target) > 0.0f)
         {
             music.pitch = Mathf.Lerp(from, target, currStep);
-            currStep += step;
+            currStep += Time.deltaTime * invDuration;
             yield return null;
         }
 
-        pitchTransitioning = false;
+        pitchTransitionCoroutine = null;
     }
 
 }
