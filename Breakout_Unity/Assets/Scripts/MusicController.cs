@@ -55,8 +55,6 @@ public class MusicController : MonoBehaviour {
             currStep += Time.deltaTime * invDuration;
             yield return null;
         }
-
-        pitchTransitionCoroutine = null;
     }
 
 }
