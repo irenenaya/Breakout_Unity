@@ -51,14 +51,17 @@ public class LevelLoader : MonoBehaviour
     {
         Vector2 brickSize = ObjectSize(brick.gameObject);
 
-		int numRows = Random.Range(1, Mathf.Min(GameParameters.level + 1,  6));
-        int numCols = Random.Range(7, 14);
-		int keyBrick = Random.Range (0, numCols + numRows);
+/*		int numRows = Random.Range(1, Mathf.Min(GameParameters.level + 1,  6));
+        int numCols = Random.Range(7, 14);*/
+		/*int keyBrick = Random.Range (0, numCols + numRows);*/
 
-        numCols = numCols % 2 == 0 ? numCols + 1 : numCols;
-
+   /*     numCols = numCols % 2 == 0 ? numCols + 1 : numCols;*/
+		LevelMapFactory.LevelMap levelMap = LevelMapFactory.Generate (GameParameters.level);
+		int[][] map = levelMap.map;
+		int numRows = map.Length;
+		int numCols = map [0].Length;
         // find the size of the grid
-        Vector2 gridSize = GridSize(brickSize, numRows, numCols);
+		Vector2 gridSize = GridSize(brickSize, numRows, numCols);
 
         // find top left corner of our screen
 		// left is negative, top is positive. I flipped the signs here
@@ -74,13 +77,20 @@ public class LevelLoader : MonoBehaviour
         
 		for (int i = 0; i < numRows; ++i)
         {
-			int skip = Random.Range (1, 3);
-			int brickColors = Random.Range (0, 4);
-            for (int j = 0; j < numCols; j = j + skip)
+			/*int skip = Random.Range (1, 3);
+			int brickColors = Random.Range (0, 4);*/
+            for (int j = 0; j < numCols; j = ++j )
             {
 				// added topLeft.x and topLeft.y to the equation. 
 				// subtracted for the Y because each brick is at a lower y 
-				float x = topLeft.x + offsetX + brickSize.x / 2 + brickSize.x * j;
+				if (map[i][j] != 0) {
+					float x = topLeft.x + offsetX + brickSize.x / 2 + brickSize.x * j;
+					float y = topLeft.y - offsetY - brickSize.y / 2 - brickSize.y * i;
+
+					CreateBrick (new Vector2 (x, y), map [i] [j]);
+					++numBricks;
+				}
+/*				float x = topLeft.x + offsetX + brickSize.x / 2 + brickSize.x * j;
 				float y = topLeft.y - offsetY - brickSize.y / 2 - brickSize.y * i;
 				if (i + j == keyBrick) {
 					Brick br = CreateBrick (new Vector2 (x, y), 20);
@@ -90,7 +100,7 @@ public class LevelLoader : MonoBehaviour
 					br.setPowerup (p);
 					p.gameObject.SetActive (false);
 				} else {
-					Brick br = CreateBrick (new Vector2 (x, y), brickColors * GameParameters.level + (i * (skip % 2)));
+					Brick br = CreateBrick (new Vector2 (x, y), brickColors * GameParameters.level + (j %2));
 					if (Random.Range(0, 4) == 0) {
 						PowerUp p = Instantiate (powerup, new Vector2 (x, y), Quaternion.identity);
 						int spriteInd = Random.Range (0, 4);
@@ -102,7 +112,7 @@ public class LevelLoader : MonoBehaviour
 					}
 
 				}
-				++numBricks;
+				++numBricks;*/
             }
         }
 

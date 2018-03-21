@@ -24,7 +24,7 @@ public class Brick : MonoBehaviour {
 	}
 
 	public void SetTier (int tier) {
-		index = tier;
+		index = tier-1;
 		renderer.sprite = sprites [index];
 		if (index == sprites.Length - 1)
 			breakable = false;
