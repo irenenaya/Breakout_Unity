@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PowerUp : MonoBehaviour {
-    // TODO - BUG! not sure if this is where to handle it, but lost a life (two balls in game at the time)
-    // while key was falling, game got stuck
-
-
+public class PowerUp : MonoBehaviour
+{
 	public Sprite[] sprites;
 	public Ball ball;
 	SpriteRenderer rend;

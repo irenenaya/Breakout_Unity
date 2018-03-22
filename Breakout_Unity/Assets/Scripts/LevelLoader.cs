@@ -57,9 +57,12 @@ public class LevelLoader : MonoBehaviour
 
    /*     numCols = numCols % 2 == 0 ? numCols + 1 : numCols;*/
 		LevelMapFactory.LevelMap levelMap = LevelMapFactory.Generate (GameParameters.level);
-		int[][] map = levelMap.map;
+		int[][] map = levelMap.bricks;
+        int[][] powerups = levelMap.powerups;
+
 		int numRows = map.Length;
-		int numCols = map [0].Length;
+		int numCols = map[0].Length;
+
         // find the size of the grid
 		Vector2 gridSize = GridSize(brickSize, numRows, numCols);
 

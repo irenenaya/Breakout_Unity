@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DataStructures;
 
 public static class LevelMapFactory  {
 
@@ -39,18 +40,21 @@ public static class LevelMapFactory  {
 
 	public class LevelMap
 	{
-		public int[][] map { get; private set;}
-		int _rows;
+		public int[][] bricks { get; private set;}
+        public int[][] powerups { get; private set; }
+        int _rows;
 		int _cols;
 
 		public LevelMap(int rows, int cols)
 		{
 			_rows = rows;
 			_cols = cols;
-			map = new int[rows][];
+			bricks = new int[rows][];
+            powerups = new int[rows][];
 			for (int i = 0; i < rows; ++i)
 			{
-				map[i] = new int[cols];
+				bricks[i] = new int[cols];
+                powerups[i] = new int[cols];
 			}
 		}
 		// initialize map with minTier value at random locations. It initializes the map mirrored across the Y
@@ -64,13 +68,13 @@ public static class LevelMapFactory  {
 				int col = Random.Range(0, _cols/2 +1);
 				// if this cell hasn't been initialized set the value to it and to its mirror (via a 
 				// very properly named function :p )
-				if (map[row][col] == 0){
-					map [row] [col] = value;
+				if (this.bricks[row][col] == 0){
+					this.bricks [row] [col] = value;
 					--bricks;
 					soat -= value;
-					int col2 = Frodo (col);
+					int col2 = Frodo(col);
 					if (col2 != col) {
-						map[row] [col2] = value;
+						this.bricks[row] [col2] = value;
 						--bricks;
 						soat -= value;
 					}
@@ -84,9 +88,9 @@ public static class LevelMapFactory  {
 			while(soat > 0) {
 				int row = Random.Range(0, _rows);
 				int col = Random.Range(0, _cols/2 +1);
-				if (map[row][col] !=0 && map[row][col] < maxTier) {
-					++map [row] [col];
-					++map [row] [Frodo (col)];
+				if (bricks[row][col] !=0 && bricks[row][col] < maxTier) {
+					++bricks [row] [col];
+					++bricks [row] [Frodo (col)];
 					soat -= 2;
 				}
 			}
@@ -96,6 +100,80 @@ public static class LevelMapFactory  {
 		{
 			return (COLS / 2 - coll) + COLS / 2;
 		}
+
+
+        public void PlacePowerups(int n)
+        {
+            // int[] powerUps = CreatePowerups(n, 0, 5);
+            int nrBricks = CountBricks();
+
+            int[] brickIndices = new int[nrBricks];
+            for (int i = 0; i < nrBricks; ++i)
+            {
+                brickIndices[i] = i;
+            }
+
+            BinaryHeap<int> powerupBricks = new BinaryHeap<int>();
+            powerupBricks.Push(RandomSelectFrom(brickIndices, n));
+
+            int counter = 0;
+            for (int i = 0; i < _rows; ++i)
+            {
+                for (int j = 0; j < _cols; ++j)
+                {
+                    if (bricks[i][j] != 0)
+                    {
+                        if (powerupBricks.Peek() == counter)
+                        {
+                            bricks[i][j] = Random.Range(1, 5);
+                        }
+                        ++counter;
+                    }
+                }
+            }
+        }
+
+        int[] CreatePowerups(int n, int minVal, int maxVal)
+        {
+            int[] ret = new int[n];
+            for (int i = 0; i < n; ++i)
+            {
+                ret[i] = Random.Range(minVal, maxVal);
+            }
+            return ret;
+        }
+
+        int CountBricks()
+        {
+            int ret = 0;
+            for (int i = 0; i < _rows; ++i)
+            {
+                for (int j = 0; j < _cols; ++j)
+                {
+                    if (bricks[i][j] != 0) ++ret;
+                }
+            }
+            return ret;
+        }
+
+        int[] RandomSelectFrom(int[] data, int n)
+        {
+            List<int> indices = new List<int>(n);
+            for (int i = 0; i < data.Length; ++i)
+            {
+                indices.Add(i);
+            }
+
+            int[] ret = new int[n];
+            for (int i = 0; i < n; ++i)
+            {
+                int x = Random.Range(0, indices.Count);
+                ret[i] = data[indices[x]];
+                indices.Remove(indices[x]);
+            }
+
+            return ret;
+        }
+
 	}
-	
 }
