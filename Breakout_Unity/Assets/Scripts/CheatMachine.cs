@@ -57,6 +57,7 @@ public class CheatMachine : MonoBehaviour
                 music.PitchTransition(0.75f, 2.0f);
                 music.VolumeTransition(0.5f, 2.0f);
             }
+			 
         }
 	}
 
