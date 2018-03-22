@@ -126,9 +126,10 @@ public static class LevelMapFactory  {
                 {
                     if (bricks[i][j] != 0)
                     {
-                        if (powerupBricks.Peek() == counter)
+                        if (!powerupBricks.IsEmpty() && powerupBricks.Peek() == counter)
                         {
 							powerups[i][j] = Random.Range(1, 5);
+                            powerupBricks.Pop();
                         }
                         ++counter;
                     }
@@ -175,6 +176,7 @@ public static class LevelMapFactory  {
                 indices.Remove(indices[x]);
             }
 
+            foreach (var i in ret) Debug.Log(i);
             return ret;
         }
 
