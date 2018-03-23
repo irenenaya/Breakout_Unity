@@ -182,7 +182,7 @@ MonoBehaviour:
     - {fileID: 21300076, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
     - {fileID: 21300078, guid: ecea9b746535d41f4935ffa9a9522946, type: 3}
   spriteIndex: 1
-  speed: 8
+  speed: 10
   leftLimit: -7.5
   rightLimit: 7.5
   axisDeadZone: 0.1
@@ -195,7 +195,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -211,7 +210,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

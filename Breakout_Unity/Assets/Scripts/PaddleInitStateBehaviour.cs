@@ -14,6 +14,7 @@ public class PaddleInitStateBehaviour : GeneralStateBehaviour {
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		if(SceneManager.GetSceneByName(SceneConstants.GAME).IsValid()) {
+			Debug.Log ("GSLOADED");
 			animator.SetTrigger ("GameSceneLoaded");
 		}
 	}

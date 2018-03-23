@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ServeStateBehaviour : GeneralStateBehaviour {
-
-    public float speed = 3.0f;
-    public float halfAngle = 80.0f;
-
+	
     public Ball ballPrefab;
 
 	Ball ball;
@@ -32,8 +29,7 @@ public class ServeStateBehaviour : GeneralStateBehaviour {
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-		ball.SetVelocity(new Vector2(0, speed));
-		ball.AddAngle(Random.Range(-halfAngle, halfAngle));
+		ball.Serve ();
 		playUIController.HideUI ();
 
 	}

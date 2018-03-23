@@ -12,6 +12,7 @@ public static class LevelMapFactory  {
 	const int COLS = 11;
 
 	static public LevelMap Generate(int level) {
+		Debug.Log ("GENERATE");
 		// Sum of all Tiers == level * a mutuplajr
 		int soat = level * TIER_MULT;
 		// minimum Tier for this level. For now, level / 2
@@ -30,7 +31,7 @@ public static class LevelMapFactory  {
 		int rows = Random.Range (minRows, Mathf.Min (level, MAX_ROWS));
 		// actual amount of bricks to fit. Random between the minimum and the total size of the grid with 
 		// this amount of rows. 
-		int bricks = minBricks < maxBricks ?  Random.Range (minBricks + Mathf.Min (maxBricks, rows * COLS) / 3, Mathf.Min (maxBricks, rows * COLS)) : minBricks ;
+		int bricks = minBricks < maxBricks ?  Random.Range ((minBricks + Mathf.Min (maxBricks, rows * COLS)) / 2, Mathf.Min (maxBricks, rows * COLS)) : minBricks ;
 
 		LevelMap lm = new LevelMap (rows, COLS);
 		int remainingPoints = lm.InitMap (minTier, bricks, soat);

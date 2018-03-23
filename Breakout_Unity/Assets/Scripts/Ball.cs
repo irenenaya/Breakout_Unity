@@ -6,6 +6,9 @@ public class Ball : MonoBehaviour
 {
     public Sprite[] sprites;
 
+	public float speed = 5.0f;
+	public float halfAngle = 45.0f;
+
     Rigidbody2D rigidbod;
     new CircleCollider2D collider;
     new SpriteRenderer renderer;
@@ -110,6 +113,11 @@ public class Ball : MonoBehaviour
         rigidbod.velocity = new Vector2(x, y);
     }
 
+	public void Serve() 
+	{
+		SetVelocity(new Vector2(0, speed + GameParameters.level / 10.0f));
+		AddAngle(Random.Range(-halfAngle, halfAngle));
+	}
 
     void SetVelocityMagnitude(float magnitude)
     {

@@ -36,7 +36,7 @@ public class Brick : MonoBehaviour {
 	}
 
 	public void changeBreakable() {
-		index = GameParameters.level + 1;
+		index = Mathf.Min(GameParameters.level + 1 , 19);
 		renderer.sprite = sprites [index];
 		breakable = true;
 	}

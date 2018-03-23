@@ -238,8 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
-  speed: 5
-  halfAngle: 45
   ballPrefab: {fileID: 114794745150696330, guid: f9c5d6742402703428e433d82115f8ed,
     type: 2}
   playUIController: {fileID: 0}
