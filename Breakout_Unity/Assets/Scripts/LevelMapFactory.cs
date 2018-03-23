@@ -6,8 +6,8 @@ using DataStructures;
 public static class LevelMapFactory  {
 
 	//Random rnd = new Random ();
-	const int MAX_TIER = 19;
-	const int TIER_MULT = 10;
+	const int MAX_TIER = 20;
+	const int TIER_MULT = 13;
 	const int MAX_ROWS = 6;
 	const int COLS = 11;
 
@@ -15,7 +15,7 @@ public static class LevelMapFactory  {
 		// Sum of all Tiers == level * a mutuplajr
 		int soat = level * TIER_MULT;
 		// minimum Tier for this level. For now, level / 2
-		int minTier = (int)Mathf.Ceil(level / 2.0f);
+		int minTier = Mathf.Min((int)Mathf.Ceil(level / 2.0f), MAX_TIER / 2);
 		// maximum Tier for this level. Either the current level or MAX_TIER if level is >
 		int maxTier = Mathf.Min (level, MAX_TIER);
 		// minimum possible number of bricks so we can fit all the soat points. 
@@ -30,13 +30,13 @@ public static class LevelMapFactory  {
 		int rows = Random.Range (minRows, Mathf.Min (level, MAX_ROWS));
 		// actual amount of bricks to fit. Random between the minimum and the total size of the grid with 
 		// this amount of rows. 
-		int bricks = Random.Range ((minBricks + Mathf.Min (maxBricks, rows * COLS)) / 2, Mathf.Min (maxBricks, rows * COLS));
+		int bricks = minBricks < maxBricks ?  Random.Range (minBricks + Mathf.Min (maxBricks, rows * COLS) / 3, Mathf.Min (maxBricks, rows * COLS)) : minBricks ;
 
 		LevelMap lm = new LevelMap (rows, COLS);
 		int remainingPoints = lm.InitMap (minTier, bricks, soat);
 		lm.completeMap (remainingPoints, maxTier);
 
-		lm.PlacePowerups (5);
+		lm.PlacePowerups (Mathf.Min(level / 2 , bricks));
 		Debug.Log (lm.powerups);
 		return lm;
 	}
@@ -128,7 +128,7 @@ public static class LevelMapFactory  {
                     {
                         if (!powerupBricks.IsEmpty() && powerupBricks.Peek() == counter)
                         {
-							powerups[i][j] = Random.Range(1, 5);
+							powerups[i][j] = Random.Range(1, 6);
                             powerupBricks.Pop();
                         }
                         ++counter;
