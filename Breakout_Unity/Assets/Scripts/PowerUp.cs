@@ -91,6 +91,7 @@ public class PowerUp : MonoBehaviour
 	void addBall() {
 		Ball b = Instantiate (ball, new Vector2 (0, SceneConstants.BALLY), Quaternion.identity);
 		anim.SetInteger ("BallsCount", anim.GetInteger ("BallsCount") + 1);
+		b.SetPosition (paddle.transform.position);
 		b.Serve ();
 	}
 
