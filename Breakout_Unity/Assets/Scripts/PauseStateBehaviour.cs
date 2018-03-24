@@ -12,7 +12,7 @@ public class PauseStateBehaviour : GeneralStateBehaviour
     {
 		base.OnStateEnter(animator, stateInfo, layerIndex);
         backgroundMusic = GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<MusicController>();
-        originalPitch = backgroundMusic.pitch;
+        originalPitch = backgroundMusic.preTransitionPitch;
         backgroundMusic.PitchTransition(0.0f, 0.5f);
         Time.timeScale = 0.0f;
 		controller.activateObject ("PauseUI", true);
@@ -31,7 +31,7 @@ public class PauseStateBehaviour : GeneralStateBehaviour
         Time.timeScale = 1.0f;
         backgroundMusic.PitchTransition(originalPitch, 0.5f);
         controller.activateObject ("PauseUI", false);
-		GameObject.Find ("CheatMachine").GetComponent<CheatMachine> ().enabled = true;
+		GameObject.Find ("CheatMachine").GetComponent<CheatMachine>().enabled = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
