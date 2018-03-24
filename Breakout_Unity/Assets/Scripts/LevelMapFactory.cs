@@ -37,7 +37,7 @@ public static class LevelMapFactory  {
 		int remainingPoints = lm.InitMap (minTier, bricks, soat);
 		lm.completeMap (remainingPoints, maxTier);
 
-		lm.PlacePowerups (Mathf.Min(level / 2 , bricks));
+		lm.PlacePowerups (Mathf.Min(level * 2 , bricks));
 		Debug.Log (lm.powerups);
 		return lm;
 	}
@@ -129,8 +129,9 @@ public static class LevelMapFactory  {
                     {
                         if (!powerupBricks.IsEmpty() && powerupBricks.Peek() == counter)
                         {
-							powerups[i][j] = Random.Range(1, 6);
-                            powerupBricks.Pop();
+							//powerups[i][j] = Random.Range(1, 6);
+							powerups[i][j] = Random.Range(4,6);
+                             powerupBricks.Pop();
                         }
                         ++counter;
                     }

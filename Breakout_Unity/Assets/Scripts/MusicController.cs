@@ -44,6 +44,7 @@ public class MusicController : MonoBehaviour {
 	void Awake()
     {
         music = GetComponent<AudioSource>();
+		targetPitch = music.pitch;
 	}
 
 

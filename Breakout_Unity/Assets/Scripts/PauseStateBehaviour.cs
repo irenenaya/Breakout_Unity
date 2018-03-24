@@ -12,7 +12,7 @@ public class PauseStateBehaviour : GeneralStateBehaviour
     {
 		base.OnStateEnter(animator, stateInfo, layerIndex);
         backgroundMusic = GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<MusicController>();
-        originalPitch = backgroundMusic.preTransitionPitch;
+		originalPitch = backgroundMusic.targetPitch;
         backgroundMusic.PitchTransition(0.0f, 0.5f);
         Time.timeScale = 0.0f;
 		controller.activateObject ("PauseUI", true);
