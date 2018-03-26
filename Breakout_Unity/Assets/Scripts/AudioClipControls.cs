@@ -67,7 +67,7 @@ public class AudioClipControls : MonoBehaviour {
             StopCoroutine(pitchTransitionCoroutine);
         }
 
-        if (duration <= Mathf.Epsilon && duration > 0)
+        if (duration <= Mathf.Epsilon && duration >= -Mathf.Epsilon )
         {
             Pitch(target);
         }
