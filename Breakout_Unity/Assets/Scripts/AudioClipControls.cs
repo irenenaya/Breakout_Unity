@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicController : MonoBehaviour {
+public class AudioClipControls : MonoBehaviour {
     AudioSource music;
     IEnumerator pitchTransitionCoroutine;
     IEnumerator volumeTransitionCoroutine;
@@ -66,8 +66,16 @@ public class MusicController : MonoBehaviour {
         {
             StopCoroutine(pitchTransitionCoroutine);
         }
-        pitchTransitionCoroutine = PitchTransitionCoroutine(target, duration);
-        StartCoroutine(pitchTransitionCoroutine);
+
+        if (duration <= Mathf.Epsilon && duration > 0)
+        {
+            Pitch(target);
+        }
+        else
+        {
+            pitchTransitionCoroutine = PitchTransitionCoroutine(target, duration);
+            StartCoroutine(pitchTransitionCoroutine);
+        }
     }
 
     IEnumerator PitchTransitionCoroutine(float target, float duration)
@@ -92,8 +100,16 @@ public class MusicController : MonoBehaviour {
         {
             StopCoroutine(volumeTransitionCoroutine);
         }
-        volumeTransitionCoroutine = VolumeTransitionCoroutine(target, duration);
-        StartCoroutine(volumeTransitionCoroutine);
+
+        if (duration <= Mathf.Epsilon && duration > 0)
+        {
+            Volume(target);
+        }
+        else
+        {
+            volumeTransitionCoroutine = VolumeTransitionCoroutine(target, duration);
+            StartCoroutine(volumeTransitionCoroutine);
+        }
     }
 
     IEnumerator VolumeTransitionCoroutine(float target, float duration)

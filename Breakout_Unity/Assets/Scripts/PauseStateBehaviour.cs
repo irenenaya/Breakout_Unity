@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PauseStateBehaviour : GeneralStateBehaviour
 {
-    MusicController backgroundMusic;
+    AudioClipControls backgroundMusic;
     float originalPitch;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 		base.OnStateEnter(animator, stateInfo, layerIndex);
-        backgroundMusic = GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<MusicController>();
+        backgroundMusic = GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<AudioClipControls>();
 		originalPitch = backgroundMusic.targetPitch;
         backgroundMusic.PitchTransition(0.0f, 0.5f);
         Time.timeScale = 0.0f;

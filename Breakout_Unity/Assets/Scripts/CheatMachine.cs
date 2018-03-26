@@ -11,7 +11,7 @@ public class CheatMachine : MonoBehaviour
     public string silence;
     public string unsilence;
     public string softAndSlow;
-    public MusicController music;
+    public AudioClipControls music;
 
     float initialMusicVolume;
     
