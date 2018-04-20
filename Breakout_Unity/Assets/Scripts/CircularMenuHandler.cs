@@ -135,7 +135,7 @@ namespace MenuHandlers
 
             public Text get()
             {
-				Debug.Log ("INDEX: " + index);
+				// Debug.Log ("INDEX: " + index);
                 return array[index];
             }
         }

@@ -38,7 +38,7 @@ public static class LevelMapFactory  {
 		lm.completeMap (remainingPoints, maxTier);
 
 		lm.PlacePowerups (Mathf.Min(level * 2 , bricks));
-		Debug.Log (lm.powerups);
+		// Debug.Log (lm.powerups);
 		return lm;
 	}
 
@@ -178,7 +178,7 @@ public static class LevelMapFactory  {
                 indices.Remove(indices[x]);
             }
 
-            foreach (var i in ret) Debug.Log(i);
+            // foreach (var i in ret) Debug.Log(i);
             return ret;
         }
 

@@ -43,7 +43,7 @@ public class PowerUp : MonoBehaviour
 	}
 
 	public void setSprite (int type) {
-		Debug.Log ("Set Sprite: " + type);
+		// Debug.Log ("Set Sprite: " + type);
 		rend.sprite = sprites [type];
 		index = type;
 	}

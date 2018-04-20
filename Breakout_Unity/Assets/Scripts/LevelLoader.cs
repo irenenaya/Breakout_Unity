@@ -93,10 +93,10 @@ public class LevelLoader : MonoBehaviour
 					Brick br = CreateBrick (new Vector2 (x, y), map [i] [j]);
 					++numBricks;
 					if (powerups[i][j] != 0) {
-						Debug.Log ("ARE WE HERE? ");
+						// Debug.Log ("ARE WE HERE? ");
 						PowerUp p = Instantiate (powerup, new Vector2 (x, y), Quaternion.identity);
 						p.setSprite (powerups [i] [j] - 1);
-                        Debug.Log("Powerup: " + powerups[i][j]);
+                        // Debug.Log("Powerup: " + powerups[i][j]);
 						br.setPowerup (p);
 						if (powerups[i][j] - 1 == (int)PowerUpConstants.KEY) {
 							br.SetTier (21);
