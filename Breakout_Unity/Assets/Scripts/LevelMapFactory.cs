@@ -12,7 +12,7 @@ public static class LevelMapFactory  {
 	const int COLS = 11;
 
 	static public LevelMap Generate(int level) {
-		Debug.Log ("GENERATE");
+		// Debug.Log ("GENERATE");
 		// Sum of all Tiers == level * a mutuplajr
 		int soat = level * TIER_MULT;
 		// minimum Tier for this level. For now, level / 2
@@ -44,8 +44,8 @@ public static class LevelMapFactory  {
 
 	public class LevelMap
 	{
-		public int[][] bricks { get; private set;}
-        public int[][] powerups { get; private set; }
+		public int[,] bricks { get; private set;}
+        public int[,] powerups { get; private set; }
         int _rows;
 		int _cols;
 
@@ -53,13 +53,8 @@ public static class LevelMapFactory  {
 		{
 			_rows = rows;
 			_cols = cols;
-			bricks = new int[rows][];
-            powerups = new int[rows][];
-			for (int i = 0; i < rows; ++i)
-			{
-				bricks[i] = new int[cols];
-                powerups[i] = new int[cols];
-			}
+			bricks = new int[rows,cols];
+            powerups = new int[rows,cols];
 		}
 		// initialize map with minTier value at random locations. It initializes the map mirrored across the Y
 		// it returns the remaining soat points to be used in the next function
@@ -72,13 +67,13 @@ public static class LevelMapFactory  {
 				int col = Random.Range(0, _cols/2 +1);
 				// if this cell hasn't been initialized set the value to it and to its mirror (via a 
 				// very properly named function :p )
-				if (this.bricks[row][col] == 0){
-					this.bricks [row] [col] = value;
+				if (this.bricks[row,col] == 0){
+					this.bricks [row,col] = value;
 					--bricks;
 					soat -= value;
 					int col2 = Frodo(col);
 					if (col2 != col) {
-						this.bricks[row] [col2] = value;
+						this.bricks[row,col2] = value;
 						--bricks;
 						soat -= value;
 					}
@@ -92,9 +87,9 @@ public static class LevelMapFactory  {
 			while(soat > 0) {
 				int row = Random.Range(0, _rows);
 				int col = Random.Range(0, _cols/2 +1);
-				if (bricks[row][col] !=0 && bricks[row][col] < maxTier) {
-					++bricks [row] [col];
-					++bricks [row] [Frodo (col)];
+				if (bricks[row,col] !=0 && bricks[row,col] < maxTier) {
+					++bricks [row,col];
+					++bricks [row,Frodo(col)];
 					soat -= 2;
 				}
 			}
@@ -125,12 +120,12 @@ public static class LevelMapFactory  {
             {
                 for (int j = 0; j < _cols; ++j)
                 {
-                    if (bricks[i][j] != 0)
+                    if (bricks[i,j] != 0)
                     {
                         if (!powerupBricks.IsEmpty() && powerupBricks.Peek() == counter)
                         {
 							//powerups[i][j] = Random.Range(1, 6);
-							powerups[i][j] = Random.Range(4,6);
+							powerups[i,j] = Random.Range(4,6);
                              powerupBricks.Pop();
                         }
                         ++counter;
@@ -156,7 +151,7 @@ public static class LevelMapFactory  {
             {
                 for (int j = 0; j < _cols; ++j)
                 {
-                    if (bricks[i][j] != 0) ++ret;
+                    if (bricks[i,j] != 0) ++ret;
                 }
             }
             return ret;

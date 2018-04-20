@@ -57,11 +57,11 @@ public class LevelLoader : MonoBehaviour
 
    /*     numCols = numCols % 2 == 0 ? numCols + 1 : numCols;*/
 		LevelMapFactory.LevelMap levelMap = LevelMapFactory.Generate (GameParameters.level);
-		int[][] map = levelMap.bricks;
-        int[][] powerups = levelMap.powerups;
+		int[,] map = levelMap.bricks;
+        int[,] powerups = levelMap.powerups;
 
-		int numRows = map.Length;
-		int numCols = map[0].Length;
+		int numRows = map.GetLength(0);
+		int numCols = map.GetLength(1);
 
         // find the size of the grid
 		Vector2 gridSize = GridSize(brickSize, numRows, numCols);
@@ -86,23 +86,23 @@ public class LevelLoader : MonoBehaviour
             {
 				// added topLeft.x and topLeft.y to the equation. 
 				// subtracted for the Y because each brick is at a lower y 
-				if (map[i][j] != 0) {
+				if (map[i,j] != 0) {
 					float x = topLeft.x + offsetX + brickSize.x / 2 + brickSize.x * j;
 					float y = topLeft.y - offsetY - brickSize.y / 2 - brickSize.y * i;
 
-					Brick br = CreateBrick (new Vector2 (x, y), map [i] [j]);
+					Brick br = CreateBrick (new Vector2(x, y), map[i,j]);
 					++numBricks;
-					if (powerups[i][j] != 0) {
+					if (powerups[i,j] != 0) {
 						// Debug.Log ("ARE WE HERE? ");
-						PowerUp p = Instantiate (powerup, new Vector2 (x, y), Quaternion.identity);
-						p.setSprite (powerups [i] [j] - 1);
+						PowerUp p = Instantiate (powerup, new Vector2(x, y), Quaternion.identity);
+						p.setSprite (powerups[i,j] - 1);
                         // Debug.Log("Powerup: " + powerups[i][j]);
 						br.setPowerup (p);
-						if (powerups[i][j] - 1 == (int)PowerUpConstants.KEY) {
+						if (powerups[i,j] - 1 == (int)PowerUpConstants.KEY) {
 							br.SetTier (21);
 							p.setBrick (br.transform);
 						}
-						p.gameObject.SetActive (false);
+						p.gameObject.SetActive(false);
 					}
 				}
 
