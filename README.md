@@ -1,6 +1,8 @@
 # Breakout - Unity
 
-A Breakout implementation in Unity, based on Colton Ogden's Introduction to Game Development course's Lua/Löve2D version.
+A Breakout implementation in Unity, based on Colton Ogden's Introduction to Game Development course's (https://cs50.github.io/games) Lua/Löve2D version.
+
+All the graphical resources and sounds are taken from the course's GitHub project hosted here: https://github.com/games50/breakout
 
 After reading about the use of AnimatorController state machines as a general purpose state machine in Unity AI Game Programming, Second Edition by Ray Barrera, Aung Sithu Kyaw, Clifford Peters and Thet Naing Swe we decided to try out the concept and used it to control the game states.
 
@@ -17,6 +19,7 @@ We also added a class to manipulate the sound when pausing/unpausing the game or
 - A warning of "Unloading the last loaded scene Assets/_Scenes/PersistentScene.unity(build index: 0), is not supported. Please use SceneManager.LoadScene()/EditorSceneManager.OpenScene() to switch to another scene." is reported when SceneController attempts to unload the persistent scene. This doesn't crash the game but we should see if there's an elegant-ish fix to this.
 - Add sound controls to lower the volume. Currently the only way to silence the music is to hit tab while in game play and type "shutup" without the quotation marks. Other "cheats", all sound related, are tab "jolene" or tab "dollyparton", tab "runtothehills", tab "shout", tab "slowride". Check out the CheatMachine object in the persistent scene.
 - Balls will bounce off each other when there's more than one ball in play. This often causes one of the balls to slow down a lot and the other to speed up. Think of how we want to treat this.
+- Problem with a line at the bottom of one of the brick sprites and one of the paddle sizes sprites
 
 # Pseudorandom quote
 "I tried so hard and got so far, But in the end it doesn't even matter" - Linkin Park
