@@ -29,15 +29,10 @@ public class Ball : MonoBehaviour
 		sounds = GetComponent<AudioSource> ();
         renderer.sprite = sprites[Random.Range(0, sprites.Length)];
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator>();
-		//anim.SetInteger ("BallsCount", anim.GetInteger ("BallsCount") + 1);
 	}
 
 	void Start()
 	{
-		// behaviour = anim.GetBehaviour<ServeStateBehaviour> ();
-		// behaviour.ballController = this;
-		// victBehaviour = anim.GetBehaviour<VictoryStateBehaviour> ();
-		// victBehaviour.ballController = this;
         paddle = GameObject.FindGameObjectWithTag("Player").GetComponent<Paddle>();
 	}
 
@@ -139,8 +134,5 @@ public class Ball : MonoBehaviour
 	}
 
 	void Update () {
-		//if (InputHandle.Pause) {
-		//	SetVelocity (new Vector2 (0, 0));
-		//}
 	}
 }

@@ -15,8 +15,6 @@ public class SceneController : MonoBehaviour {
 		behaviour = anim.GetBehaviours<GeneralStateBehaviour>();
 		for (int i = 0 ; i < behaviour.Length; ++i)
 			behaviour[i].controller = this;
-	//	yield return StartCoroutine (LoadSceneAndSetActive ("StartScene"));
-
 	}
 
 	// Update is called once per frame

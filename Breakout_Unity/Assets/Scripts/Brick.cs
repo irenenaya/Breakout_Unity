@@ -13,9 +13,6 @@ public class Brick : MonoBehaviour {
 	PowerUp powerup;
 	Color[] particleColors = { Color.blue, Color.green, Color.red, Color.magenta, Color.yellow };
 
-    // AudioSource audio;
-
-    // Use this for initialization
     void Awake () {
 		renderer = GetComponent<SpriteRenderer> ();
 		anim = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
@@ -29,11 +26,7 @@ public class Brick : MonoBehaviour {
 		if (index == sprites.Length - 1)
 			breakable = false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 
 	public void changeBreakable() {
 		index = Mathf.Min(GameParameters.level + 1 , 19);
@@ -58,7 +51,6 @@ public class Brick : MonoBehaviour {
 		if (index > 0) {			
 			renderer.sprite = sprites [--index];
 			GameParameters.score += (index + 1) * 10;
-			//Debug.Log ("BRICK : PW " + powerup);
 			if (powerup != null) 
 				powerup.gameObject.SetActive (true);
         }

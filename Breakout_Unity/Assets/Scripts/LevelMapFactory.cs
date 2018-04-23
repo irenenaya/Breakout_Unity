@@ -12,7 +12,6 @@ public static class LevelMapFactory  {
 	const int COLS = 11;
 
 	static public LevelMap Generate(int level) {
-		// Debug.Log ("GENERATE");
 		// Sum of all Tiers == level * a mutuplajr
 		int soat = level * TIER_MULT;
 		// minimum Tier for this level. For now, level / 2
@@ -103,7 +102,6 @@ public static class LevelMapFactory  {
 
         public void PlacePowerups(int n)
         {
-            // int[] powerUps = CreatePowerups(n, 0, 5);
             int nrBricks = CountBricks();
 
             int[] brickIndices = new int[nrBricks];
@@ -124,7 +122,6 @@ public static class LevelMapFactory  {
                     {
                         if (!powerupBricks.IsEmpty() && powerupBricks.Peek() == counter)
                         {
-							//powerups[i][j] = Random.Range(1, 6);
 							powerups[i,j] = Random.Range(4,6);
                              powerupBricks.Pop();
                         }
@@ -173,7 +170,7 @@ public static class LevelMapFactory  {
                 indices.Remove(indices[x]);
             }
 
-            // foreach (var i in ret) Debug.Log(i);
+            
             return ret;
         }
 

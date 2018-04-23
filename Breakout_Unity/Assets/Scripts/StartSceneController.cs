@@ -9,7 +9,6 @@ using MenuHandlers;
  * StartStateBehaviour is the class that is attached to the StartState state in
  * the Animator Controller */
 
-
 public class StartSceneController : MonoBehaviour
 {
     // Variable to hold a reference to the animator controller and to the StateBehaviour
@@ -37,7 +36,6 @@ public class StartSceneController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-
         bool up = InputHandle.Up;
         bool down = InputHandle.Down;
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 /* Displays the Highscores
  * Display gets activated by HighscoreStateBehaviour
  */
@@ -11,10 +12,7 @@ public class ScoresDisplay : MonoBehaviour {
 	public GameObject parent;
 
 	HighScoreHandler handler;
-	// Use this for initialization
-	void Start () {
-		
-	}
+
 	// Start only gets called once per object's lifetime. Using OnEnable because it's the one called when
 	// object gets activated
 	void OnEnable() {
@@ -40,8 +38,5 @@ public class ScoresDisplay : MonoBehaviour {
 			Destroy (parent.transform.GetChild (i).gameObject);
 		}
 	}
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

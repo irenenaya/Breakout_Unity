@@ -14,17 +14,7 @@ public class PowerUp : MonoBehaviour
 	Rigidbody2D rigby;
 	UnityAction[] actions = new UnityAction[5];
 	int index;
-	/*string[] type = { PowerUpConstants.EXTRA_LIFE, PowerUpConstants.ENLARGE_PADDLE, PowerUpConstants.SHRINK_PADDLE,
-		PowerUpConstants.KEY
-	};*/
-	// Use this for initialization
-	void Awake () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 	public void setBrick(Transform br) {
 		brick = br.GetComponent<Brick> ();
 	}
@@ -43,7 +33,6 @@ public class PowerUp : MonoBehaviour
 	}
 
 	public void setSprite (int type) {
-		// Debug.Log ("Set Sprite: " + type);
 		rend.sprite = sprites [type];
 		index = type;
 	}
@@ -94,6 +83,4 @@ public class PowerUp : MonoBehaviour
 		b.SetPosition (paddle.transform.position);
 		b.Serve ();
 	}
-
-
 }

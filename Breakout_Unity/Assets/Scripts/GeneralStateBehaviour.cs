@@ -23,7 +23,4 @@ public class GeneralStateBehaviour : StateMachineBehaviour {
 			}
 		}
 	}
-/*	protected void cleanTriggers() {
-
-	}*/
 }

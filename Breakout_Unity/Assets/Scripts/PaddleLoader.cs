@@ -9,9 +9,5 @@ public class PaddleLoader : MonoBehaviour {
 	void Start () {
 		Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

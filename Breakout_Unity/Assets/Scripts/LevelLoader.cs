@@ -16,9 +16,6 @@ public class LevelLoader : MonoBehaviour
 	void Start()
     {
 		stateMachine = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Animator> ();
-
-		// Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
-		// Instantiate (ball, new Vector2 (0, SceneConstants.BALLY), Quaternion.identity);
 		CreateMap ();
 	}
     
@@ -51,11 +48,6 @@ public class LevelLoader : MonoBehaviour
     {
         Vector2 brickSize = ObjectSize(brick.gameObject);
 
-/*		int numRows = Random.Range(1, Mathf.Min(GameParameters.level + 1,  6));
-        int numCols = Random.Range(7, 14);*/
-		/*int keyBrick = Random.Range (0, numCols + numRows);*/
-
-   /*     numCols = numCols % 2 == 0 ? numCols + 1 : numCols;*/
 		LevelMapFactory.LevelMap levelMap = LevelMapFactory.Generate (GameParameters.level);
 		int[,] map = levelMap.bricks;
         int[,] powerups = levelMap.powerups;
@@ -105,30 +97,6 @@ public class LevelLoader : MonoBehaviour
 						p.gameObject.SetActive(false);
 					}
 				}
-
-/*				float x = topLeft.x + offsetX + brickSize.x / 2 + brickSize.x * j;
-				float y = topLeft.y - offsetY - brickSize.y / 2 - brickSize.y * i;
-				if (i + j == keyBrick) {
-					Brick br = CreateBrick (new Vector2 (x, y), 20);
-					PowerUp p = Instantiate (powerup, new Vector2 (x, y), Quaternion.identity);
-					p.setSprite ((int)PowerUpConstants.KEY);
-					p.setBrick (br.transform);
-					br.setPowerup (p);
-					p.gameObject.SetActive (false);
-				} else {
-					Brick br = CreateBrick (new Vector2 (x, y), brickColors * GameParameters.level + (j %2));
-					if (Random.Range(0, 4) == 0) {
-						PowerUp p = Instantiate (powerup, new Vector2 (x, y), Quaternion.identity);
-						int spriteInd = Random.Range (0, 4);
-						p.setSprite (3);
-						br.setPowerup (p);
-						p.gameObject.SetActive (false);
-
-						Debug.Log ("Powerup Added " + spriteInd);
-					}
-
-				}
-				++numBricks;*/
             }
         }
 

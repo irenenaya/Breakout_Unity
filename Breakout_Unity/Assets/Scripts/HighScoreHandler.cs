@@ -63,13 +63,6 @@ public class HighScoreHandler : MonoBehaviour
             Directory.CreateDirectory(localPath);
         }
 
-        /*
-        if (File.Exists(localPath + '/' + fileName))
-        {
-            File.Delete(localPath + '/' + fileName);
-        }
-        */
-        // File.Create(localPath + '/' + fileName);
 
         // TODO perhaps use PopAll instead?
         ScoreboardEntry[] scores = priorityQueue.PeekAll();

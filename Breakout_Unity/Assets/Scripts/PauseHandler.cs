@@ -20,7 +20,6 @@ public class PauseHandler : MonoBehaviour
         if (InputHandle.Pause)
         {
             paused = !paused;
-            // stateMachine.SetBool("Paused", paused);
         }
 
         if (paused) Time.timeScale = 0.0f;
