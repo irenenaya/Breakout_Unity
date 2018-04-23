@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PaddleLoader : MonoBehaviour {
 
-	public Paddle paddle;
-	// Use this for initialization
-	void Start () {
-		Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
-	}
+    public Paddle paddle;
+    // Use this for initialization
+    void Start () {
+        Instantiate (paddle, new Vector2 (0, -4), Quaternion.identity);
+    }
 
 }

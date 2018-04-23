@@ -24,12 +24,12 @@ public class AudioClipControls : MonoBehaviour {
     public float targetVolume { get; private set; }
 
 
-	void Awake()
+    void Awake()
     {
         music = GetComponent<AudioSource>();
-		targetPitch = music.pitch;
+        targetPitch = music.pitch;
         targetVolume = music.volume;
-	}
+    }
 
 
     public void Pitch(float pitch)

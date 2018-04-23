@@ -16,8 +16,8 @@ public class HighScoreHandler : MonoBehaviour
     BinaryHeap<ScoreboardEntry> priorityQueue = new BinaryHeap<ScoreboardEntry>();
 
 
-	// Use this for initialization
-	void Start()
+    // Use this for initialization
+    void Start()
     {
         LoadData();
         int displayAmount = priorityQueue.Size < 10 ? priorityQueue.Size : 10;
@@ -81,7 +81,7 @@ public class HighScoreHandler : MonoBehaviour
     {
         priorityQueue.Push(new ScoreboardEntry(name, score));
         int displayAmount = priorityQueue.Size < 10 ? priorityQueue.Size : 10;
-		// changed condition. Otherwise, it doesn't update DisplayData when size < 10
+        // changed condition. Otherwise, it doesn't update DisplayData when size < 10
         if (priorityQueue.Size <= 10 || score > DisplayData[9].score)
         {
             DisplayData = priorityQueue.Peek(displayAmount);
@@ -108,8 +108,8 @@ public class HighScoreHandler : MonoBehaviour
             if (other == null)
                 throw new ArgumentException("ScoreboardEntry.CompareTo - argument not ScoreboardEntry!");
             //return score.CompareTo(other.score);
-			// this is the way to get the pq sort highest to lowest
-			return other.score.CompareTo(score);
+            // this is the way to get the pq sort highest to lowest
+            return other.score.CompareTo(score);
         }
     }
 }

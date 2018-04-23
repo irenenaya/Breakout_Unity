@@ -8,14 +8,14 @@ public class PauseHandler : MonoBehaviour
 
     bool paused = false;
 
-	// Use this for initialization
-	void Awake()
+    // Use this for initialization
+    void Awake()
     {
         stateMachine = GameObject.FindGameObjectWithTag("GameController").GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update()
+    }
+    
+    // Update is called once per frame
+    void Update()
     {
         if (InputHandle.Pause)
         {

@@ -8,9 +8,9 @@ public class EffectSpawner : MonoBehaviour
     public GameObject effectObject;
 
     private Queue<EffectWrapper> queue = new Queue<EffectWrapper>();
-	
+    
     // Use this for initialization
-	void Start()
+    void Start()
     {
 
         for (int i = 0; i < queueSize; ++i)
@@ -18,10 +18,10 @@ public class EffectSpawner : MonoBehaviour
             EffectWrapper effect = new EffectWrapper(Instantiate(effectObject));
             queue.Enqueue(effect);
         }
-	}
+    }
 
 
-	public void RunEffectAt(Vector2 pos, Color col = default(Color))
+    public void RunEffectAt(Vector2 pos, Color col = default(Color))
     {
         EffectWrapper effect = queue.Dequeue();
         effect.Play(pos, col);
@@ -35,21 +35,21 @@ public class EffectSpawner : MonoBehaviour
         public GameObject gameObject;
         private AudioSource sound;
         private ParticleSystem particles;
-		private ParticleSystem.MainModule _main;
+        private ParticleSystem.MainModule _main;
 
         public EffectWrapper(GameObject obj)
         {
             gameObject = obj;
             sound = obj.GetComponent<AudioSource>();
             particles = obj.GetComponent<ParticleSystem>();
-			_main = particles.main;
+            _main = particles.main;
         }
 
-		public void Play(Vector2 pos, Color col = default(Color))
+        public void Play(Vector2 pos, Color col = default(Color))
         {
             gameObject.transform.SetPositionAndRotation(pos, Quaternion.identity);
             sound.Play();
-			_main.startColor = col;
+            _main.startColor = col;
             particles.Play();
         }
     }

@@ -10,13 +10,13 @@ public class PauseStateBehaviour : GeneralStateBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-		base.OnStateEnter(animator, stateInfo, layerIndex);
+        base.OnStateEnter(animator, stateInfo, layerIndex);
         backgroundMusic = GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<AudioClipControls>();
-		originalPitch = backgroundMusic.targetPitch;
+        originalPitch = backgroundMusic.targetPitch;
         backgroundMusic.PitchTransition(0.0f, 0.5f);
         Time.timeScale = 0.0f;
-		controller.activateObject ("PauseUI", true);
-		GameObject.Find ("CheatMachine").GetComponent<CheatMachine> ().enabled = false;
+        controller.activateObject ("PauseUI", true);
+        GameObject.Find ("CheatMachine").GetComponent<CheatMachine> ().enabled = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -31,6 +31,6 @@ public class PauseStateBehaviour : GeneralStateBehaviour
         Time.timeScale = 1.0f;
         backgroundMusic.PitchTransition(originalPitch, 0.5f);
         controller.activateObject ("PauseUI", false);
-		GameObject.Find ("CheatMachine").GetComponent<CheatMachine>().enabled = true;
+        GameObject.Find ("CheatMachine").GetComponent<CheatMachine>().enabled = true;
     } 
 }

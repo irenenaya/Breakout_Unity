@@ -3,34 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ServeStateBehaviour : GeneralStateBehaviour {
-	
+    
     public Ball ballPrefab;
 
-	Ball ball;
-	public PlayUI playUIController;
-	public Paddle paddleController;
+    Ball ball;
+    public PlayUI playUIController;
+    public Paddle paddleController;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		base.OnStateEnter (animator, stateInfo, layerIndex);
-		removePowerUps ();
+        base.OnStateEnter (animator, stateInfo, layerIndex);
+        removePowerUps ();
         ball = Instantiate(ballPrefab, new Vector2(0, SceneConstants.BALLY), Quaternion.identity);
         ball.SetPosition (paddleController.position);
-		ball.SetVelocity (new Vector2 (0, 0));
-		animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") + 1);
-	}
+        ball.SetVelocity (new Vector2 (0, 0));
+        animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") + 1);
+    }
 
-	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		ball.SetPosition (paddleController.position);
-	}
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        ball.SetPosition (paddleController.position);
+    }
 
-	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-		ball.Serve ();
-		playUIController.HideUI ();
+        ball.Serve ();
+        playUIController.HideUI ();
 
-	}
+    }
 }
