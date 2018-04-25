@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DataStructures;
-
+/*
+ * Factory class to procedurally generate levels. It determines the amount, tier and distribution of 
+ * bricks and powerups. Its Generate() method will take the current level as input and return a LevelMap object
+ * that has two 2D arrays, one for bricks and one for Powerups
+*/
 public static class LevelMapFactory  {
 
-    //Random rnd = new Random ();
     const int MAX_TIER = 20;
     const int TIER_MULT = 13;
     const int MAX_ROWS = 6;
     const int COLS = 11;
 
     static public LevelMap Generate(int level) {
-        // Sum of all Tiers == level * a mutuplajr
+        // Sum of all Tiers == level * a multiplier
         int soat = level * TIER_MULT;
         // minimum Tier for this level. For now, level / 2
         int minTier = Mathf.Min((int)Mathf.Ceil(level / 2.0f), MAX_TIER / 2);
@@ -37,7 +40,7 @@ public static class LevelMapFactory  {
         lm.completeMap (remainingPoints, maxTier);
 
         lm.PlacePowerups (Mathf.Min(level * 2 , bricks));
-        // Debug.Log (lm.powerups);
+
         return lm;
     }
 
@@ -122,7 +125,7 @@ public static class LevelMapFactory  {
                     {
                         if (!powerupBricks.IsEmpty() && powerupBricks.Peek() == counter)
                         {
-                            powerups[i,j] = Random.Range(4,6);
+                            powerups[i,j] = Random.Range(0,6);
                              powerupBricks.Pop();
                         }
                         ++counter;

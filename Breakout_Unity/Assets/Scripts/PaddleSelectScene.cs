@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
+ * Scene in which the player chooses which colour of paddle to play with
+ * This could have been done as a full UI element
+*/
 public class PaddleSelectScene : MonoBehaviour {
 
     Animator anim;

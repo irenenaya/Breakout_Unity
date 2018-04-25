@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using MenuHandlers;
-
+/*
+ * UI for entering initials when a High Score has been achieved. It uses the CircularMenuHandler to 
+ * traverse the UI. 
+*/
 public class EnterInitialsDisplay : MonoBehaviour {
 
     public Text[] initials;
@@ -28,7 +31,7 @@ public class EnterInitialsDisplay : MonoBehaviour {
         score.text = "Your Score: " + GameParameters.score;
     }
     
-    // Update is called once per frame
+    // Constantly listens to key input to either move to the next letter or to increase the letters. 
     void Update () {
         bool up = InputHandle.Up;
         bool down = InputHandle.Down;
@@ -60,6 +63,7 @@ public class EnterInitialsDisplay : MonoBehaviour {
             initials [menu.CurrentIndex ()].text = curr.ToString ();
         }
     }
+    // gets called when the state exits by EnterHighscoreStateBehaviour. 
     public Text[] getInitials() 
     {
         return initials;

@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
+ * Main UI that will be displayed during gamePlay. It has some elements (score, level, lives) that will 
+ * be present while we're playing, and others like the current Level, which only appear when the game is in
+ * some states. The corresponding StateMachineBehaviours handle which elements are shown or hidden.
+*/
 public class PlayUI : MonoBehaviour {
 
     public GameObject texts;

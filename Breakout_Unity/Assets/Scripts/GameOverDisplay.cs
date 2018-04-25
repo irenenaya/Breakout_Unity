@@ -16,9 +16,4 @@ public class GameOverDisplay : MonoBehaviour {
         text.text = "Final Score: " + GameParameters.score;
     }
 
-    
-    // Update is called once per frame
-    void Update () {
-        
-    }
 }

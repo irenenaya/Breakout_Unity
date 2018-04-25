@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+/*
+ * Handles the behaviour of all Powerups that are instantiated in the game. 
+ * They get instantiated from LevelLoader. Because different powerups will have
+ * behaviours that affect different aspects of the gameplay, we are using UnityAction objects, which
+ * work as function objects, to call specific functions for each powerup. 
+ * Powerups are placed in the scene as an array so that the index == action index == PowerupConstants enum value
+*/
 public class PowerUp : MonoBehaviour
 {
     public Sprite[] sprites;
@@ -15,10 +21,12 @@ public class PowerUp : MonoBehaviour
     UnityAction[] actions = new UnityAction[5];
     int index;
 
+    // called from the Brick class to pair the Powerup to its brick
     public void setBrick(Transform br) {
         brick = br.GetComponent<Brick> ();
     }
 
+    // Powerups are instantiated in LevelLoader and disabled, so we initialize them in OnEnable()
     public void OnEnable() {
         rend = GetComponent<SpriteRenderer> ();
         rigby = GetComponent<Rigidbody2D> ();
@@ -28,15 +36,16 @@ public class PowerUp : MonoBehaviour
         actions [0] = increaseLives;
         actions [1] = enlargePaddle;
         actions [2] = shrinkPaddle;
-        actions [4] = breakBrick;
         actions [3] = addBall;
+        actions [4] = breakBrick;
     }
 
     public void setSprite (int type) {
         rend.sprite = sprites [type];
         index = type;
     }
-
+    // When the Powerup collides with Paddle ("Player"), we call the corresponding function and destroy it.
+    // Otherwise we call cleanup() because it left the screen. 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {            
             actions[index]();
@@ -47,7 +56,7 @@ public class PowerUp : MonoBehaviour
         }
             
     }
-
+    // If the Powerup is the KEY, we send it back to its brick. Other Powerups we just destroy
     public void cleanUp() {
         if (index == (int)PowerUpConstants.KEY) {
             transform.SetPositionAndRotation (brick.transform.position, Quaternion.identity);
@@ -60,6 +69,7 @@ public class PowerUp : MonoBehaviour
  * Actions
  * ----------------------------------------------------------------------------------------------*/
 
+    // For KEY Powerup. It calls method on the Brick class
     void breakBrick() {
         brick.changeBreakable ();
     }

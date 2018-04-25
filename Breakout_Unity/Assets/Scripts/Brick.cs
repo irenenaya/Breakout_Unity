@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Handles Brick objects. It determines effects, sprites, powerups and particles associated with
+ * the brick
+*/
 public class Brick : MonoBehaviour {
 
     public Sprite[] sprites;
     SpriteRenderer renderer;
     int index;
     Animator anim;
+    // !breakable means KEY sprite is on. 
     bool breakable = true;
     EffectSpawner fxSpawner;
     PowerUp powerup;
@@ -19,7 +23,8 @@ public class Brick : MonoBehaviour {
         fxSpawner = GameObject.FindGameObjectWithTag("GameController").GetComponent<EffectSpawner>();		// audio = GetComponent<AudioSource> ();
 
     }
-
+    // sets the appropriate sprite from the sprites array in the inspector. The last sprite is the 
+    // KEY one, so we set the brick to not breakable
     public void SetTier (int tier) {
         index = tier-1;
         renderer.sprite = sprites [index];
@@ -27,7 +32,7 @@ public class Brick : MonoBehaviour {
             breakable = false;
     }
 
-
+    // Called by Powerup class when the KEY has been caught by the paddle. 
     public void changeBreakable() {
         index = Mathf.Min(GameParameters.level + 1 , 19);
         renderer.sprite = sprites [index];
@@ -37,8 +42,8 @@ public class Brick : MonoBehaviour {
     public void setPowerup(PowerUp p) {
         powerup = p;
     }
-    // On Collision, change sprite or remove brick. Also, increase score. 
-    // TODO: Make the Score Great Again :p
+    // On Collision, change sprite or remove brick. Also, increase score and run effects. 
+
     void OnCollisionEnter2D(Collision2D coll) {        
         int ind = index;
         fxSpawner.RunEffectAt(new Vector2(transform.position.x, transform.position.y), 

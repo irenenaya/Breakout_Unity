@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
+ * Handles the display of the UI in which the user enters their initials (UI class: EnterInitialsDisplay)
+ * Once the user is done and presses enter, the next state gets trigger and we get the initials (see comments 
+ * below)
+*/
 public class EnterHighscoreStateBehaviour : GeneralStateBehaviour {
     // reference to the display UI
     public EnterInitialsDisplay display;

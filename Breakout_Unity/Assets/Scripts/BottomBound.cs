@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Handles behaviour of objects that collide with the bottom of the screen. It plays audio and 
+ * decreases ball count, lives if necessary and destroy balls. 
+*/
 public class BottomBound : MonoBehaviour {
 
     Animator anim;

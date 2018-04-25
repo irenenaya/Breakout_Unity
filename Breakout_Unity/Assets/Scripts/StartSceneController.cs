@@ -3,15 +3,13 @@ using UnityEngine.UI;
 using MenuHandlers;
 
 
-/* Example of the controller for the individual scenes. For now, i attached it to the UI
- * element of the StartScene, but it could (should?) be a separate object. 
- * Just did this to remember how to interact with the SceneController and Behaviours
- * StartStateBehaviour is the class that is attached to the StartState state in
- * the Animator Controller */
+/* 
+ * Displays the initial screen of the game, showing the two options: Start / Highscores
+ */
 
 public class StartSceneController : MonoBehaviour
 {
-    // Variable to hold a reference to the animator controller and to the StateBehaviour
+    // Variable to hold a reference to the animator controller 
     Animator anim;
     public Text Highscore;
     public Text StartGame;

@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * State triggered every time the player will serve, either at the beginning of a level or when
+ * they just lost a life. It removes powerups (if any), and reinstantiates the ball and positions it
+*/
 public class ServeStateBehaviour : GeneralStateBehaviour {
     
     public Ball ballPrefab;
@@ -30,6 +33,7 @@ public class ServeStateBehaviour : GeneralStateBehaviour {
     {
 
         ball.Serve ();
+
         playUIController.HideUI ();
 
     }

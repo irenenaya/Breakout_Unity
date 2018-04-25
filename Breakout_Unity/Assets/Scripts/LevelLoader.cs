@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Main loader class for all levels. It uses LevelMapFactory to generate the distribution of bricks and Powerups
+ * in each level. 
+*/
 public class LevelLoader : MonoBehaviour
 {
     public Brick brick;
@@ -43,7 +46,7 @@ public class LevelLoader : MonoBehaviour
     }
 
     
-
+    // Main method that creates the bricks and Powerups
     void CreateMap()
     {
         Vector2 brickSize = ObjectSize(brick.gameObject);
@@ -69,11 +72,10 @@ public class LevelLoader : MonoBehaviour
         float offsetY = screenHeight / 9.0f;
         
         int numBricks = 0;
-        
+        // Iterates rows and columns generated in LevelMapFactory and instantiates Bricks in 
+        // the corresponding positions
         for (int i = 0; i < numRows; ++i)
         {
-            /*int skip = Random.Range (1, 3);
-            int brickColors = Random.Range (0, 4);*/
             for (int j = 0; j < numCols; j = ++j )
             {
                 // added topLeft.x and topLeft.y to the equation. 
@@ -84,22 +86,24 @@ public class LevelLoader : MonoBehaviour
 
                     Brick br = CreateBrick (new Vector2(x, y), map[i,j]);
                     ++numBricks;
+                    // If there's a Powerup, it will instantiate it. If the powerup is a KEY, it will
+                    // also call setTier, from Brick so that the Brick changes its sprite.
                     if (powerups[i,j] != 0) {
-                        // Debug.Log ("ARE WE HERE? ");
                         PowerUp p = Instantiate (powerup, new Vector2(x, y), Quaternion.identity);
                         p.setSprite (powerups[i,j] - 1);
-                        // Debug.Log("Powerup: " + powerups[i][j]);
                         br.setPowerup (p);
                         if (powerups[i,j] - 1 == (int)PowerUpConstants.KEY) {
                             br.SetTier (21);
                             p.setBrick (br.transform);
                         }
+                        // after instantiating it, the Powerup gets inactivated until the Brick gets
+                        // collided with.
                         p.gameObject.SetActive(false);
                     }
                 }
             }
         }
-
+        // Pass number of bricks to the State Machine, so it can count them back. 
         stateMachine.SetInteger ("Bricks", numBricks);
 
     }

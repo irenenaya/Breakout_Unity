@@ -1,7 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Base class for all StateMachineBehaviours
+ * It holds a reference to the SceneController, so that all derived classes can access it. 
+ * It also removes powerups that might stay behind when we finish a level, and resets all 
+ * triggers that might not have been used (mostly due to undesired user input)
+ */
 public class GeneralStateBehaviour : StateMachineBehaviour {
 
     public SceneController controller;

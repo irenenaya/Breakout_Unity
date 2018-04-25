@@ -1,6 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+ * State triggered when player has removed all bricks.
+ * It activates the PlayUI, and resets the state to start a new level
+ */
+
+
 
 public class VictoryStateBehaviour : GeneralStateBehaviour {
     
