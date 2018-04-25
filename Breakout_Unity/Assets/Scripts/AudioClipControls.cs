@@ -77,19 +77,24 @@ public class AudioClipControls : MonoBehaviour
     // change pitch to target frequency over duration seconds
     public void PitchTransition(float target, float duration)
     {
+        // set targetPitch variable to allow access to desired pitch to any object modifying it while coroutine is active
         targetPitch = target;
 
+        // stop any pitch transitions before setting a new one
         if (pitchCoroutine != null)
         {
             StopCoroutine(pitchCoroutine);
         }
 
+        // if duration is a very small number just set pitch directly
+        // avoids potential division by 0
         if (duration <= Mathf.Epsilon && duration >= -Mathf.Epsilon)
         {
             SetPitch(target);
         }
         else
         {
+            // assign transition to variable, then start the coroutine
             pitchCoroutine = PitchTransitionCoroutine(target, duration);
             StartCoroutine(pitchCoroutine);
         }
@@ -99,29 +104,37 @@ public class AudioClipControls : MonoBehaviour
     // change volume to target frequency over duration seconds
     public void VolumeTransition(float target, float duration)
     {
+        // set targetPitch variable to allow access to desired pitch to any object modifying it while coroutine is active
         targetVolume = target;
 
+        // stop any volume transitions before starting a new one
         if (volumeCoroutine != null)
         {
             StopCoroutine(volumeCoroutine);
         }
 
+        // if duration is a very small number just set volume directly
+        // avoids potential division by 0
         if (duration <= Mathf.Epsilon && duration > 0)
         {
             SetVolume(target);
         }
         else
         {
+            // assign transition to variable, then start the coroutine
             volumeCoroutine = VolumeTransitionCoroutine(target, duration);
             StartCoroutine(volumeCoroutine);
         }
     }
 
 
+    // Coroutine for transitioning the pitch, run by calling PitchTransition
     IEnumerator PitchTransitionCoroutine(float target, float duration)
     {
         float from = music.pitch;
         float invDuration = 1.0f / duration;
+
+        // the "counter" variable to track position within Lerp
         float currStep = Time.unscaledDeltaTime * invDuration;
 
         while (Mathf.Abs(music.pitch - target) > 0.0f)
@@ -133,10 +146,13 @@ public class AudioClipControls : MonoBehaviour
     }
 
 
+    // Coroutine for transitioning volume, run by calling VolumeTransition
     IEnumerator VolumeTransitionCoroutine(float target, float duration)
     {
         float from = music.volume;
         float invDuration = 1.0f / duration;
+
+        // the "counter" variable to track position within Lerp
         float currStep = Time.unscaledDeltaTime * invDuration;
 
         while (Mathf.Abs(music.volume - target) > 0.0f)
