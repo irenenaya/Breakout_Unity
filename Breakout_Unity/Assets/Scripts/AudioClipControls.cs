@@ -18,8 +18,8 @@ using UnityEngine;
 public class AudioClipControls : MonoBehaviour
 {
     AudioSource music;
-    IEnumerator pitchTransitionCoroutine;   // coroutines that transition pitch are handed to this variable
-    IEnumerator volumeTransitionCoroutine;  // coroutines transitioning volume are handed to this variable
+    IEnumerator pitchCoroutine;   // coroutines that transition pitch are handed to this variable
+    IEnumerator volumeCoroutine;  // coroutines transitioning volume are handed to this variable
 
     public float pitch
     {
@@ -51,9 +51,9 @@ public class AudioClipControls : MonoBehaviour
     {
         targetPitch = pitch;
 
-        if (pitchTransitionCoroutine != null)
+        if (pitchCoroutine != null)
         {
-            StopCoroutine(pitchTransitionCoroutine);
+            StopCoroutine(pitchCoroutine);
         }
 
         music.pitch = pitch;
@@ -65,9 +65,9 @@ public class AudioClipControls : MonoBehaviour
     {
         targetVolume = volume;
 
-        if (volumeTransitionCoroutine != null)
+        if (volumeCoroutine != null)
         {
-            StopCoroutine(volumeTransitionCoroutine);
+            StopCoroutine(volumeCoroutine);
         }
 
         music.volume = volume;
@@ -79,9 +79,9 @@ public class AudioClipControls : MonoBehaviour
     {
         targetPitch = target;
 
-        if (pitchTransitionCoroutine != null)
+        if (pitchCoroutine != null)
         {
-            StopCoroutine(pitchTransitionCoroutine);
+            StopCoroutine(pitchCoroutine);
         }
 
         if (duration <= Mathf.Epsilon && duration >= -Mathf.Epsilon)
@@ -90,8 +90,8 @@ public class AudioClipControls : MonoBehaviour
         }
         else
         {
-            pitchTransitionCoroutine = PitchTransitionCoroutine(target, duration);
-            StartCoroutine(pitchTransitionCoroutine);
+            pitchCoroutine = PitchTransitionCoroutine(target, duration);
+            StartCoroutine(pitchCoroutine);
         }
     }
 
@@ -101,9 +101,9 @@ public class AudioClipControls : MonoBehaviour
     {
         targetVolume = target;
 
-        if (volumeTransitionCoroutine != null)
+        if (volumeCoroutine != null)
         {
-            StopCoroutine(volumeTransitionCoroutine);
+            StopCoroutine(volumeCoroutine);
         }
 
         if (duration <= Mathf.Epsilon && duration > 0)
@@ -112,8 +112,8 @@ public class AudioClipControls : MonoBehaviour
         }
         else
         {
-            volumeTransitionCoroutine = VolumeTransitionCoroutine(target, duration);
-            StartCoroutine(volumeTransitionCoroutine);
+            volumeCoroutine = VolumeTransitionCoroutine(target, duration);
+            StartCoroutine(volumeCoroutine);
         }
     }
 
