@@ -1,11 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/**
+ * AudioClipControls.cs - control the sounds in the object and allow for smooth (linear) transitions
+ * in pitch and volume over time
+ * 
+ * The changes are done using coroutines, so that any kind of transition is "fire and forget," and 
+ * if there is already a transition happening it gets interrupted and a new transition starts.
+ * 
+ * This script is attached to the background music game object and is called from CheatMachine and
+ * from PauseStateBehaviour in the project
+ * 
+ * Note: changing pitch means modifying the speed, and consequentially the frequency, of the audio
+ * clip.
+ */
+
+using System.Collections;
 using UnityEngine;
 
-public class AudioClipControls : MonoBehaviour {
+public class AudioClipControls : MonoBehaviour
+{
     AudioSource music;
-    IEnumerator pitchTransitionCoroutine;
-    IEnumerator volumeTransitionCoroutine;
+    IEnumerator pitchTransitionCoroutine;   // coroutines that transition pitch are handed to this variable
+    IEnumerator volumeTransitionCoroutine;  // coroutines transitioning volume are handed to this variable
 
     public float pitch
     {
@@ -32,7 +46,8 @@ public class AudioClipControls : MonoBehaviour {
     }
 
 
-    public void Pitch(float pitch)
+    // call this function to set pitch directly, killing the pitch transition taking place first
+    public void SetPitch(float pitch)
     {
         targetPitch = pitch;
 
@@ -45,7 +60,8 @@ public class AudioClipControls : MonoBehaviour {
     }
 
 
-    public void Volume(float volume)
+    // call this function to set volume directly, killing the volume transition taking place first
+    public void SetVolume(float volume)
     {
         targetVolume = volume;
 
@@ -58,6 +74,7 @@ public class AudioClipControls : MonoBehaviour {
     }
 
 
+    // change pitch to target frequency over duration seconds
     public void PitchTransition(float target, float duration)
     {
         targetPitch = target;
@@ -67,9 +84,9 @@ public class AudioClipControls : MonoBehaviour {
             StopCoroutine(pitchTransitionCoroutine);
         }
 
-        if (duration <= Mathf.Epsilon && duration >= -Mathf.Epsilon )
+        if (duration <= Mathf.Epsilon && duration >= -Mathf.Epsilon)
         {
-            Pitch(target);
+            SetPitch(target);
         }
         else
         {
@@ -77,6 +94,29 @@ public class AudioClipControls : MonoBehaviour {
             StartCoroutine(pitchTransitionCoroutine);
         }
     }
+
+
+    // change volume to target frequency over duration seconds
+    public void VolumeTransition(float target, float duration)
+    {
+        targetVolume = target;
+
+        if (volumeTransitionCoroutine != null)
+        {
+            StopCoroutine(volumeTransitionCoroutine);
+        }
+
+        if (duration <= Mathf.Epsilon && duration > 0)
+        {
+            SetVolume(target);
+        }
+        else
+        {
+            volumeTransitionCoroutine = VolumeTransitionCoroutine(target, duration);
+            StartCoroutine(volumeTransitionCoroutine);
+        }
+    }
+
 
     IEnumerator PitchTransitionCoroutine(float target, float duration)
     {
@@ -92,25 +132,6 @@ public class AudioClipControls : MonoBehaviour {
         }
     }
 
-    public void VolumeTransition(float target, float duration)
-    {
-        targetVolume = target;
-
-        if (volumeTransitionCoroutine != null)
-        {
-            StopCoroutine(volumeTransitionCoroutine);
-        }
-
-        if (duration <= Mathf.Epsilon && duration > 0)
-        {
-            Volume(target);
-        }
-        else
-        {
-            volumeTransitionCoroutine = VolumeTransitionCoroutine(target, duration);
-            StartCoroutine(volumeTransitionCoroutine);
-        }
-    }
 
     IEnumerator VolumeTransitionCoroutine(float target, float duration)
     {
@@ -125,5 +146,4 @@ public class AudioClipControls : MonoBehaviour {
             yield return null;
         }
     }
-
 }
