@@ -17,19 +17,19 @@ using UnityEngine;
 
 public class AudioClipControls : MonoBehaviour
 {
-    AudioSource music;
+    new AudioSource audio;
     IEnumerator pitchCoroutine;   // coroutines that transition pitch are handed to this variable
     IEnumerator volumeCoroutine;  // coroutines transitioning volume are handed to this variable
 
     public float pitch
     {
-        get { return music.pitch; }
+        get { return audio.pitch; }
         private set { }
     }
 
     public float volume
     {
-        get { return music.volume; }
+        get { return audio.volume; }
         private set { }
     }
 
@@ -40,9 +40,9 @@ public class AudioClipControls : MonoBehaviour
 
     void Awake()
     {
-        music = GetComponent<AudioSource>();
-        targetPitch = music.pitch;
-        targetVolume = music.volume;
+        audio = GetComponent<AudioSource>();
+        targetPitch = audio.pitch;
+        targetVolume = audio.volume;
     }
 
 
@@ -56,7 +56,7 @@ public class AudioClipControls : MonoBehaviour
             StopCoroutine(pitchCoroutine);
         }
 
-        music.pitch = pitch;
+        audio.pitch = pitch;
     }
 
 
@@ -70,7 +70,7 @@ public class AudioClipControls : MonoBehaviour
             StopCoroutine(volumeCoroutine);
         }
 
-        music.volume = volume;
+        audio.volume = volume;
     }
 
 
@@ -131,15 +131,15 @@ public class AudioClipControls : MonoBehaviour
     // Coroutine for transitioning the pitch, run by calling PitchTransition
     IEnumerator PitchTransitionCoroutine(float target, float duration)
     {
-        float from = music.pitch;
+        float from = audio.pitch;
         float invDuration = 1.0f / duration;
 
         // the "counter" variable to track position within Lerp
         float currStep = Time.unscaledDeltaTime * invDuration;
 
-        while (Mathf.Abs(music.pitch - target) > 0.0f)
+        while (Mathf.Abs(audio.pitch - target) > 0.0f)
         {
-            music.pitch = Mathf.Lerp(from, target, currStep);
+            audio.pitch = Mathf.Lerp(from, target, currStep);
             currStep += Time.unscaledDeltaTime * invDuration;
             yield return null;
         }
@@ -149,15 +149,15 @@ public class AudioClipControls : MonoBehaviour
     // Coroutine for transitioning volume, run by calling VolumeTransition
     IEnumerator VolumeTransitionCoroutine(float target, float duration)
     {
-        float from = music.volume;
+        float from = audio.volume;
         float invDuration = 1.0f / duration;
 
         // the "counter" variable to track position within Lerp
         float currStep = Time.unscaledDeltaTime * invDuration;
 
-        while (Mathf.Abs(music.volume - target) > 0.0f)
+        while (Mathf.Abs(audio.volume - target) > 0.0f)
         {
-            music.volume = Mathf.Lerp(from, target, currStep);
+            audio.volume = Mathf.Lerp(from, target, currStep);
             currStep += Time.unscaledDeltaTime * invDuration;
             yield return null;
         }
