@@ -17,12 +17,18 @@ public class ServeStateBehaviour : GeneralStateBehaviour {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         base.OnStateEnter (animator, stateInfo, layerIndex);
         removePowerUps ();
+
+        // remove any existing balls if we get here because we lost the level
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+        foreach (var ball in balls) Destroy(ball);
+        
+
         ball = Instantiate(ballPrefab, new Vector2(0, SceneConstants.BALLY), Quaternion.identity);
+        animator.SetInteger("BallsCount", 1);
         ball.SetPosition (paddleController.position);
         ball.SetVelocity (new Vector2 (0, 0));
         // Why did we need this again? Can't we just set to 1?
         // animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") + 1);
-        animator.SetInteger("BallsCount", 1);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

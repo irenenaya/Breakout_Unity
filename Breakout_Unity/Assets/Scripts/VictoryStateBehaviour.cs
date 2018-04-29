@@ -19,13 +19,16 @@ public class VictoryStateBehaviour : GeneralStateBehaviour {
         playUIController.showUI ();
         playUIController.setVictoryText ();
 
+ 
         // remove all balls in level
         GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
         foreach (var ball in balls) Destroy(ball);
+        animator.SetInteger("BallsCount", 0);
+
         removePowerUps ();
         // Why did we need this again? Don't we just set to 1?
         // animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") - 1);
-        animator.SetInteger("BallsCount", 1);
+        
         GameParameters.level++;
     }
 
