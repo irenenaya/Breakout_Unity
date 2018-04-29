@@ -135,12 +135,12 @@ public class AudioClipControls : MonoBehaviour
         float invDuration = 1.0f / duration;
 
         // the "counter" variable to track position within Lerp
-        float currStep = Time.unscaledDeltaTime * invDuration;
+        float progress = Time.unscaledDeltaTime * invDuration;
 
         while (Mathf.Abs(audio.pitch - target) > 0.0f)
         {
-            audio.pitch = Mathf.Lerp(from, target, currStep);
-            currStep += Time.unscaledDeltaTime * invDuration;
+            audio.pitch = Mathf.Lerp(from, target, progress);
+            progress += Time.unscaledDeltaTime * invDuration;
             yield return null;
         }
     }
@@ -153,12 +153,12 @@ public class AudioClipControls : MonoBehaviour
         float invDuration = 1.0f / duration;
 
         // the "counter" variable to track position within Lerp
-        float currStep = Time.unscaledDeltaTime * invDuration;
+        float progress = Time.unscaledDeltaTime * invDuration;
 
         while (Mathf.Abs(audio.volume - target) > 0.0f)
         {
-            audio.volume = Mathf.Lerp(from, target, currStep);
-            currStep += Time.unscaledDeltaTime * invDuration;
+            audio.volume = Mathf.Lerp(from, target, progress);
+            progress += Time.unscaledDeltaTime * invDuration;
             yield return null;
         }
     }

@@ -20,7 +20,9 @@ public class ServeStateBehaviour : GeneralStateBehaviour {
         ball = Instantiate(ballPrefab, new Vector2(0, SceneConstants.BALLY), Quaternion.identity);
         ball.SetPosition (paddleController.position);
         ball.SetVelocity (new Vector2 (0, 0));
-        animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") + 1);
+        // Why did we need this again? Can't we just set to 1?
+        // animator.SetInteger ("BallsCount", animator.GetInteger ("BallsCount") + 1);
+        animator.SetInteger("BallsCount", 1);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
